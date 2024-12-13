@@ -1,0 +1,18 @@
+version: '2.1'
+networks:
+  mynetwork.com:
+    name: fabric_test
+    external: true
+services:
+  ipfs: 
+    image: ipfs/kubo:latest
+    volumes:
+      - ./ipfs/ipfs_staging/:/export
+      - ./ipfs/ipfs_data/:/data/ipfs
+    ports:
+      - 4001:4001
+      - 4001:4001/udp
+      - 8090:8080
+      - 6001:5001
+    networks:
+      - mynetwork.com
