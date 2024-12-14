@@ -18,6 +18,13 @@ MielLink：基于 Hyperledger Fabric 的蜂蜜产品供应链溯源系统。
 | 姓名 | 学号 |
 | :---: | :---: |
 | 林继申 | 2250758 |
+| 陈语妍 | 2251306 |
+| 杜天乐 | 2251310 |
+| 刘淑仪 | 2251730 |
+| 吴婉宁 | 2252443 |
+| 赵思源 | 2252444 |
+| 徐俊逸 | 2252551 |
+| 吴昊泽 | 2254269 |
 
 ```
 git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done
