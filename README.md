@@ -327,7 +327,7 @@ go run main.go
 
 ```bash
 cd application/frontend
-npm install
+npm install # or `pnpm install`
 npm run dev
 ```
 

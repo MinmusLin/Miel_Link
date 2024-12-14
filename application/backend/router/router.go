@@ -14,7 +14,7 @@ func SetupRouter() *gin.Engine {
 	r.Use(gin.Recovery())
     r.Use(cors.New(cors.Config{
         AllowOrigins:     []string{"*"},
-        AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+        AllowMethods:     []string{"*"},
         AllowHeaders:     []string{"Origin", "Authorization", "Content-Type"},
         ExposeHeaders:    []string{"Content-Length"},
         AllowCredentials: true,
