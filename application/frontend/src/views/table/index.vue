@@ -1,3 +1,4 @@
+<!--suppress HtmlUnknownTag-->
 <template>
   <div class="app-container">
     <el-table

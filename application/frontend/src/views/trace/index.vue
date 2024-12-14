@@ -1,3 +1,4 @@
+<!--suppress HtmlUnknownTag-->
 <template>
   <div class="trace-container">
     <el-input v-model="input" placeholder="请输入溯源码查询" style="width: 300px;margin-right: 15px;" />
@@ -156,7 +157,6 @@ export default {
   methods: {
     GetIPFSFile(cid, filename) {
       var formData = new FormData()
-      // 获取点击链接所在行的CID
       formData.append('cid', cid)
       formData.append('filename', filename)
       ipfsDownload(formData).then(res => {
@@ -168,20 +168,13 @@ export default {
         this.tracedata = JSON.parse(res.data).filter(item => item.traceability_code !== '')
       })
     },
-    FruitHistory() {
-      getFruitHistory().then(res => {
-        console.log(res)
-      })
-    },
     FruitInfo() {
       var formData = new FormData()
       formData.append('traceability_code', this.input)
       getFruitInfo(formData).then(res => {
         if (res.code === 200) {
-          console.log(res)
           this.tracedata = []
           this.tracedata[0] = JSON.parse(res.data)
-          return
         } else {
           this.$message.error('查询失败')
         }
