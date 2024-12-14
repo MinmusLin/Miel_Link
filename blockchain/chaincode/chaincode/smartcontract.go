@@ -110,7 +110,6 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 	err = s.AddFruit(ctx, userID, &fruit)
 	if err != nil {
 		return "", fmt.Errorf("Failed to add fruit to user: %v", err)
-
 	}
 	return txid, nil
 }
