@@ -239,7 +239,7 @@ Miel_Link/blockchain/network/install-fabric.sh
 
 ## 启动程序
 
-进入项目根目录：
+进入项目目录：
 
 ```bash
 cd Miel_Link
@@ -262,7 +262,8 @@ cd blockchain/network
 启动后端应用程序：
 
 ```bash
-go run backend/main.go
+cd backend
+go run main.go
 ```
 
 启动前端应用程序：
