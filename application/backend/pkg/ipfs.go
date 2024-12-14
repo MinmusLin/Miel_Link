@@ -16,7 +16,7 @@ func IpfsAdd(filename string) (string, error) {
     }(ipfsfile)
     cid, err := sh.Add(ipfsfile)
     if err != nil {
-        return "", fmt.Errorf("ipfs add file faile,err:%v", err)
+        return "", fmt.Errorf("ipfs add file failed, err:%v", err)
     }
     return cid, nil
 }
@@ -25,7 +25,7 @@ func IpfsGet(cid string, filename string) error {
     err := sh.Get(cid, fmt.Sprintf("./files/downloadfiles/%v", filename))
     if err != nil {
         fmt.Printf("err:%v", err)
-        return fmt.Errorf("ipfs get file faile,err:%v", err)
+        return fmt.Errorf("ipfs get file failed, err:%v", err)
     }
     return nil
 }
