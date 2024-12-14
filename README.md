@@ -49,6 +49,9 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 
 ## 环境配置
 
+<details>
+<summary>点击展开 / 收起环境配置</summary>
+
 查看 Ubuntu 版本：
 
 ```bash
@@ -231,6 +234,8 @@ Miel_Link/blockchain/network/install-fabric.sh
 ```
 
 ![](assets/2024-12-13_23-26-21.png)
+
+</details>
 
 ## 启动程序
 
