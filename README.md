@@ -252,12 +252,16 @@ cd blockchain/network
 ./start.sh
 ```
 
+![](assets/2024-12-14_22-54-04.png)
+
 关闭区块链网络：
 
 ```bash
 cd blockchain/network
 ./stop.sh
 ```
+
+![](assets/2024-12-14_22-54-46.png)
 
 启动后端应用程序：
 
@@ -266,6 +270,8 @@ cd backend
 go run main.go
 ```
 
+![](assets/2024-12-14_22-55-50.png)
+
 启动前端应用程序：
 
 ```bash
@@ -273,6 +279,8 @@ cd frontend
 npm install
 npm run dev
 ```
+
+![](assets/2024-12-14_23-07-38.png)
 
 ## 免责声明
 
