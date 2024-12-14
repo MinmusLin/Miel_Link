@@ -7,10 +7,10 @@
     </div>
     <div>
       <el-form ref="form" :model="tracedata" label-width="80px" size="mini" style="">
-        <el-form-item v-show="userType!=='种植户'&userType!=='消费者'" label="溯源码:" style="width: 300px" label-width="120px">
+        <el-form-item v-show="userType!=='养蜂场'&userType!=='消费者'" label="溯源码:" style="width: 300px" label-width="120px">
           <el-input v-model="tracedata.traceabilityCode" />
         </el-form-item>
-        <div v-show="userType==='种植户'">
+        <div v-show="userType==='养蜂场'">
           <el-form-item label="农产品名称:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.BeeFarmInput.BeeFarmName" />
           </el-form-item>
@@ -23,58 +23,58 @@
           <el-form-item label="采摘时间:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.BeeFarmInput.HoneyVariety" />
           </el-form-item>
-          <el-form-item label="种植户名称:" style="width: 300px" label-width="120px">
+          <el-form-item label="养蜂场名称:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.BeeFarmInput.FlowerVariety" />
           </el-form-item>
         </div>
-        <div v-show="userType==='工厂'">
-          <el-form-item label="商品名称:" style="width: 300px" label-width="120px">
+        <div v-show="userType==='加工厂'">
+          <el-form-item label="加工厂名称:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.ProcessingPlantInput.ProcessingPlantName" />
           </el-form-item>
-          <el-form-item label="生产批次:" style="width: 300px" label-width="120px">
+          <el-form-item label="加工厂地点:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.ProcessingPlantInput.ProcessingPlantLocation" />
           </el-form-item>
-          <el-form-item label="生产时间:" style="width: 300px" label-width="120px">
+          <el-form-item label="加工批次:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.ProcessingPlantInput.ProcessingBatchId" />
           </el-form-item>
-          <el-form-item label="工厂名称与厂址:" style="width: 300px" label-width="120px">
+          <el-form-item label="包装规格:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.ProcessingPlantInput.PackagingSpecification" />
           </el-form-item>
-          <el-form-item label="联系电话:" style="width: 300px" label-width="120px">
+          <el-form-item label="保质期:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.ProcessingPlantInput.ShelfLife" />
           </el-form-item>
         </div>
-        <div v-show="userType==='运输司机'">
-          <el-form-item label="姓名:" style="width: 300px" label-width="120px">
+        <div v-show="userType==='批发商'">
+          <el-form-item label="仓库名称:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.WholesalerInput.WarehouseName" />
           </el-form-item>
-          <el-form-item label="年龄:" style="width: 300px" label-width="120px">
+          <el-form-item label="仓库地点:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.WholesalerInput.WarehouseLocation" />
           </el-form-item>
-          <el-form-item label="联系电话:" style="width: 300px" label-width="120px">
+          <el-form-item label="进货批次:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.WholesalerInput.WholesalerBatchId" />
           </el-form-item>
-          <el-form-item label="车牌号:" style="width: 300px" label-width="120px">
+          <el-form-item label="运输方式:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.WholesalerInput.TransportationMethod" />
           </el-form-item>
-          <el-form-item label="运输工具:" style="width: 300px" label-width="120px">
+          <el-form-item label="交通方式:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.WholesalerInput.TransportMode" />
           </el-form-item>
         </div>
-        <div v-show="userType==='商店'">
-          <el-form-item label="存入时间:" style="width: 300px" label-width="120px">
+        <div v-show="userType==='零售商'">
+          <el-form-item label="商店名称:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.RetailerInput.StoreName" />
           </el-form-item>
-          <el-form-item label="销售时间:" style="width: 300px" label-width="120px">
+          <el-form-item label="商店地点:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.RetailerInput.StoreLocation" />
           </el-form-item>
-          <el-form-item label="商店名称:" style="width: 300px" label-width="120px">
+          <el-form-item label="采购批次:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.RetailerInput.RetailerBatchId" />
           </el-form-item>
-          <el-form-item label="商店位置:" style="width: 300px" label-width="120px">
+          <el-form-item label="销售渠道:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.RetailerInput.SalesChannel" />
           </el-form-item>
-          <el-form-item label="商店电话:" style="width: 300px" label-width="120px">
+          <el-form-item label="销售价格:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.RetailerInput.SalesPrice" />
           </el-form-item>
         </div>
@@ -186,28 +186,28 @@ export default {
           formData.append('traceabilityCode', this.tracedata.traceabilityCode)
           // 根据不同的用户给arg1、arg2、arg3..赋值,
           switch (this.userType) {
-            case '种植户':
+            case '养蜂场':
               formData.append('arg1', this.tracedata.BeeFarmInput.BeeFarmName)
               formData.append('arg2', this.tracedata.BeeFarmInput.BeeFarmLocation)
               formData.append('arg3', this.tracedata.BeeFarmInput.BeeBoxId)
               formData.append('arg4', this.tracedata.BeeFarmInput.HoneyVariety)
               formData.append('arg5', this.tracedata.BeeFarmInput.FlowerVariety)
               break
-            case '工厂':
+            case '加工厂':
               formData.append('arg1', this.tracedata.ProcessingPlantInput.ProcessingPlantName)
               formData.append('arg2', this.tracedata.ProcessingPlantInput.ProcessingPlantLocation)
               formData.append('arg3', this.tracedata.ProcessingPlantInput.ProcessingBatchId)
               formData.append('arg4', this.tracedata.ProcessingPlantInput.PackagingSpecification)
               formData.append('arg5', this.tracedata.ProcessingPlantInput.ShelfLife)
               break
-            case '运输司机':
+            case '批发商':
               formData.append('arg1', this.tracedata.WholesalerInput.WarehouseName)
               formData.append('arg2', this.tracedata.WholesalerInput.WarehouseLocation)
               formData.append('arg3', this.tracedata.WholesalerInput.WholesalerBatchId)
               formData.append('arg4', this.tracedata.WholesalerInput.TransportationMethod)
               formData.append('arg5', this.tracedata.WholesalerInput.TransportMode)
               break
-            case '商店':
+            case '零售商':
               formData.append('arg1', this.tracedata.RetailerInput.StoreName)
               formData.append('arg2', this.tracedata.RetailerInput.StoreLocation)
               formData.append('arg3', this.tracedata.RetailerInput.RetailerBatchId)

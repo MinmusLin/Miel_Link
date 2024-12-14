@@ -58,7 +58,7 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 	txid := ctx.GetStub().GetTxID()
 	product.TraceabilityCode = traceabilityCode
 	switch userType {
-	case "种植户":
+	case "养蜂场":
 		product.BeeFarmInput.BeeFarmName = arg1
 		product.BeeFarmInput.BeeFarmLocation = arg2
 		product.BeeFarmInput.BeeBoxId = arg3
@@ -68,7 +68,7 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		product.BeeFarmInput.Fa_IPFSFileName = arg7
 		product.BeeFarmInput.BeeFarmTxid = txid
 		product.BeeFarmInput.BeeFarmTimestamp = format
-	case "工厂":
+	case "加工厂":
 		product.ProcessingPlantInput.ProcessingPlantName = arg1
 		product.ProcessingPlantInput.ProcessingPlantLocation = arg2
 		product.ProcessingPlantInput.ProcessingBatchId = arg3
@@ -78,7 +78,7 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		product.ProcessingPlantInput.Fac_IPFSFileName = arg7
 		product.ProcessingPlantInput.ProcessingPlantTxid = txid
 		product.ProcessingPlantInput.ProcessingPlantTimestamp = format
-	case "运输司机":
+	case "批发商":
 		product.WholesalerInput.WarehouseName = arg1
 		product.WholesalerInput.WarehouseLocation = arg2
 		product.WholesalerInput.WholesalerBatchId = arg3
@@ -88,7 +88,7 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		product.WholesalerInput.Dr_IPFSFileName = arg7
 		product.WholesalerInput.WholesalerTxid = txid
 		product.WholesalerInput.WholesalerTimestamp = format
-	case "商店":
+	case "零售商":
 		product.RetailerInput.StoreName = arg1
 		product.RetailerInput.StoreLocation = arg2
 		product.RetailerInput.RetailerBatchId = arg3

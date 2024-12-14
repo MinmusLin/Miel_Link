@@ -88,7 +88,7 @@ func BuildArgs(c *gin.Context, farmerTraceabilityCode string) []string {
 	userType, _ := pkg.ChaincodeQuery("GetUserType", userID.(string))
 	args = append(args, userID.(string))
 	fmt.Print(userID)
-	if userType == "种植户" {
+	if userType == "养蜂场" {
 		args = append(args, farmerTraceabilityCode)
 	} else {
 		args = append(args, c.PostForm("traceabilityCode"))

@@ -94,17 +94,17 @@ export default {
         }]
       },
       options: [{
-        value: '种植户',
-        label: '种植户'
+        value: '养蜂场',
+        label: '养蜂场'
       }, {
-        value: '工厂',
-        label: '工厂'
+        value: '加工厂',
+        label: '加工厂'
       }, {
-        value: '运输司机',
-        label: '运输司机'
+        value: '批发商',
+        label: '批发商'
       }, {
-        value: '商店',
-        label: '商店'
+        value: '零售商',
+        label: '零售商'
       }, {
         value: '消费者',
         label: '消费者'

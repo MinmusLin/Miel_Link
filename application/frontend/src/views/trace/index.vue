@@ -24,7 +24,7 @@
             <el-form-item label="采摘时间：">
               <span>{{ props.row.beeFarmInput.honeyVariety }}</span>
             </el-form-item>
-            <el-form-item label="种植户名称：">
+            <el-form-item label="养蜂场名称：">
               <span>{{ props.row.beeFarmInput.flowerVariety }}</span>
             </el-form-item>
             <el-form-item v-show="props.row.beeFarmInput.fa_ipfscid" label="附件IPFSCID：">
@@ -36,20 +36,20 @@
             <el-form-item label="区块链交易时间：">
               <span>{{ props.row.beeFarmInput.beeFarmTimestamp }}</span>
             </el-form-item>
-            <div><span class="trace-text" style="color: #409EFF;">工厂信息</span></div>
-            <el-form-item label="商品名称：">
+            <div><span class="trace-text" style="color: #409EFF;">加工厂信息</span></div>
+            <el-form-item label="加工厂名称：">
               <span>{{ props.row.processingPlantInput.processingPlantName }}</span>
             </el-form-item>
-            <el-form-item label="生产批次：">
+            <el-form-item label="加工厂地点：">
               <span>{{ props.row.processingPlantInput.processingPlantLocation }}</span>
             </el-form-item>
-            <el-form-item label="生产时间：">
+            <el-form-item label="加工批次：">
               <span>{{ props.row.processingPlantInput.processingBatchId }}</span>
             </el-form-item>
-            <el-form-item label="工厂名称与厂址：">
+            <el-form-item label="包装规格：">
               <span>{{ props.row.processingPlantInput.packagingSpecification }}</span>
             </el-form-item>
-            <el-form-item label="联系电话：">
+            <el-form-item label="保质期：">
               <span>{{ props.row.processingPlantInput.shelfLife }}</span>
             </el-form-item>
             <el-form-item v-show="props.row.processingPlantInput.fac_ipfscid" label="附件IPFSCID：">
@@ -62,19 +62,19 @@
               <span>{{ props.row.processingPlantInput.processingPlantTimestamp }}</span>
             </el-form-item>
             <div><span class="trace-text" style="color: #E6A23C;">物流轨迹信息</span></div>
-            <el-form-item label="姓名：">
+            <el-form-item label="仓库名称：">
               <span>{{ props.row.wholesalerInput.warehouseName }}</span>
             </el-form-item>
-            <el-form-item label="年龄：">
+            <el-form-item label="仓库地点：">
               <span>{{ props.row.wholesalerInput.warehouseLocation }}</span>
             </el-form-item>
-            <el-form-item label="联系电话：">
+            <el-form-item label="进货批次：">
               <span>{{ props.row.wholesalerInput.wholesalerBatchId }}</span>
             </el-form-item>
-            <el-form-item label="车牌号：">
+            <el-form-item label="运输方式：">
               <span>{{ props.row.wholesalerInput.transportationMethod }}</span>
             </el-form-item>
-            <el-form-item label="运输记录：">
+            <el-form-item label="交通方式：">
               <span>{{ props.row.wholesalerInput.transportMode }}</span>
             </el-form-item>
             <el-form-item v-show="props.row.wholesalerInput.dr_ipfscid" label="附件IPFSCID：">
@@ -86,20 +86,20 @@
             <el-form-item label="区块链交易时间：">
               <span>{{ props.row.wholesalerInput.wholesalerTimestamp }}</span>
             </el-form-item>
-            <div><span class="trace-text" style="color: #909399;">商店信息</span></div>
-            <el-form-item label="入库时间：">
+            <div><span class="trace-text" style="color: #909399;">零售商信息</span></div>
+            <el-form-item label="商店名称：">
               <span>{{ props.row.retailerInput.storeName }}</span>
             </el-form-item>
-            <el-form-item label="销售时间：">
+            <el-form-item label="商店地点：">
               <span>{{ props.row.retailerInput.storeLocation }}</span>
             </el-form-item>
-            <el-form-item label="商店名称：">
+            <el-form-item label="采购批次：">
               <span>{{ props.row.retailerInput.retailerBatchId }}</span>
             </el-form-item>
-            <el-form-item label="商店位置：">
+            <el-form-item label="销售渠道：">
               <span>{{ props.row.retailerInput.salesChannel }}</span>
             </el-form-item>
-            <el-form-item label="商店电话：">
+            <el-form-item label="销售价格：">
               <span>{{ props.row.retailerInput.salesPrice }}</span>
             </el-form-item>
             <el-form-item v-show="props.row.retailerInput.sh_ipfscid" label="附件IPFSCID：">
