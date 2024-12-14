@@ -32,9 +32,6 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 
 ## 项目组成
 
-* `/assets`
-存放 `README.md` 文件所需的相关图片资源
-
 * `/application`
 应用程序
 
@@ -43,6 +40,9 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 
   * `/frontend`
   前端应用程序
+
+* `/assets`
+存放 `README.md` 文件所需的相关图片资源
 
 * `/blockchain`
 区块链网络
@@ -286,9 +286,9 @@ sudo systemctl restart nginx
 
 ## 启动程序
 
-服务器开放端口 22、80、9090：
+服务器开放端口 22、80、8080、9090：
 
-![](assets/2024-12-14_23-15-12.png)
+![](assets/2024-12-15_02-03-26.png)
 
 进入项目目录：
 
