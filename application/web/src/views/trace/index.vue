@@ -160,7 +160,7 @@ export default {
       formData.append('cid', cid)
       formData.append('filename', filename)
       ipfsDownload(formData).then(res => {
-        window.open('http://119.45.247.29:9090/download?filename=' + res.data)
+        window.open('http://43.156.142.179:9090/download?filename=' + res.data)
       })
     },
     AllFruitInfo() {
