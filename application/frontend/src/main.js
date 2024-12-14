@@ -11,11 +11,11 @@ import '@/icons'
 import '@/permission'
 
 if (process.env.NODE_ENV === 'production') {
-    const { mockXHR } = require('../mock')
+    const {mockXHR} = require('../mock')
     mockXHR()
 }
 
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI, {locale})
 
 Vue.config.productionTip = false
 

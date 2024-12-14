@@ -56,9 +56,10 @@ export const constantRoutes = [
     }
 ]
 
+// noinspection JSCheckFunctionSignatures
 const createRouter = () => new Router({
     mode: 'history',
-    scrollBehavior: () => ({ y: 0 }),
+    scrollBehavior: () => ({y: 0}),
     routes: constantRoutes
 })
 
@@ -66,6 +67,7 @@ const router = createRouter()
 
 export function resetRouter() {
     const newRouter = createRouter()
+    // noinspection JSUnresolvedReference
     router.matcher = newRouter.matcher
 }
 

@@ -7,7 +7,7 @@ const mockDir = path.join(process.cwd(), 'mock')
 
 function registerRoutes(app) {
     let mockLastIndex
-    const { mocks } = require('./index.js')
+    const {mocks} = require('./index.js')
     const mocksForServer = mocks.map(route => {
         return responseFake(route.url, route.type, route.response)
     })
@@ -47,8 +47,8 @@ module.exports = app => {
         extended: true
     }))
     const mockRoutes = registerRoutes(app)
-    var mockRoutesLength = mockRoutes.mockRoutesLength
-    var mockStartIndex = mockRoutes.mockStartIndex
+    let mockRoutesLength = mockRoutes.mockRoutesLength;
+    let mockStartIndex = mockRoutes.mockStartIndex;
     chokidar.watch(mockDir, {
         ignored: /mock-server/,
         ignoreInitial: true

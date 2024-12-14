@@ -10,6 +10,7 @@ function resolve(dir) {
 const name = defaultSettings.title || 'UserInterface'
 const port = process.env.port || process.env.npm_config_port || 3000
 
+// noinspection JSUnusedGlobalSymbols
 module.exports = {
     publicPath: '/',
     outputDir: 'dist',

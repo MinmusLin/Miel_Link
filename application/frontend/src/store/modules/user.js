@@ -1,6 +1,6 @@
-import { login, logout, getInfo, register } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
+import {login, logout, getInfo, register} from '@/api/user'
+import {getToken, setToken, removeToken} from '@/utils/auth'
+import {resetRouter} from '@/router'
 
 const getDefaultState = () => {
     return {
@@ -26,20 +26,19 @@ const mutations = {
     SET_USERTYPE: (state, userType) => {
         state.userType = userType
     },
-    SET_AVATAR: (state, avatar) => {
-        state.avatar = avatar
-    }
 }
 
 const actions = {
-    login({ commit }, userInfo) {
-        const { username, password } = userInfo
+    login({commit}, userInfo) {
+        const {username, password} = userInfo
         const formData = new FormData()
         formData.append('username', username.trim())
         formData.append('password', password)
         return new Promise((resolve, reject) => {
             login(formData).then(response => {
+                // noinspection JSUnresolvedReference
                 commit('SET_TOKEN', response.jwt)
+                // noinspection JSUnresolvedReference
                 setToken(response.jwt)
                 resolve()
             }).catch(error => {
@@ -47,8 +46,8 @@ const actions = {
             })
         })
     },
-    register({ commit }, userInfo) {
-        const { username, password, userType } = userInfo
+    register({commit}, userInfo) {
+        const {username, password, userType} = userInfo
         const formData = new FormData()
         formData.append('username', username.trim())
         formData.append('password', password)
@@ -61,11 +60,11 @@ const actions = {
             })
         })
     },
-    getInfo({ commit, state }) {
+    getInfo({commit, state}) {
         return new Promise((resolve, reject) => {
             getInfo(state.token).then(response => {
-                const { username } = response
-                const { userType } = response
+                const {username} = response
+                const {userType} = response
                 if (!username) {
                     return reject('Verification failed, please Login again.')
                 }
@@ -77,7 +76,7 @@ const actions = {
             })
         })
     },
-    logout({ commit, state }) {
+    logout({commit, state}) {
         return new Promise((resolve, reject) => {
             logout(state.token).then(() => {
                 removeToken()
@@ -89,7 +88,7 @@ const actions = {
             })
         })
     },
-    resetToken({ commit }) {
+    resetToken({commit}) {
         return new Promise(resolve => {
             removeToken()
             commit('RESET_STATE')

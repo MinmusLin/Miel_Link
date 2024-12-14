@@ -1,13 +1,14 @@
 import store from '@/store'
 
-const { body } = document
+const {body} = document
 const WIDTH = 992
 
 export default {
     watch: {
-        $route(route) {
+        $route() {
             if (this.device === 'mobile' && this.sidebar.opened) {
-                store.dispatch('app/closeSideBar', { withoutAnimation: false })
+                // noinspection JSIgnoredPromiseFromCall
+                store.dispatch('app/closeSideBar', {withoutAnimation: false})
             }
         }
     },
@@ -20,8 +21,10 @@ export default {
     mounted() {
         const isMobile = this.$_isMobile()
         if (isMobile) {
+            // noinspection JSIgnoredPromiseFromCall
             store.dispatch('app/toggleDevice', 'mobile')
-            store.dispatch('app/closeSideBar', { withoutAnimation: true })
+            // noinspection JSIgnoredPromiseFromCall
+            store.dispatch('app/closeSideBar', {withoutAnimation: true})
         }
     },
     methods: {
@@ -32,9 +35,11 @@ export default {
         $_resizeHandler() {
             if (!document.hidden) {
                 const isMobile = this.$_isMobile()
+                // noinspection JSIgnoredPromiseFromCall
                 store.dispatch('app/toggleDevice', isMobile ? 'mobile' : 'desktop')
                 if (isMobile) {
-                    store.dispatch('app/closeSideBar', { withoutAnimation: true })
+                    // noinspection JSIgnoredPromiseFromCall
+                    store.dispatch('app/closeSideBar', {withoutAnimation: true})
                 }
             }
         }

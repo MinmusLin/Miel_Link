@@ -1,5 +1,5 @@
 const Mock = require('mockjs')
-const { param2Obj } = require('./utils')
+const {param2Obj} = require('./utils')
 const user = require('./user')
 const table = require('./table')
 const mocks = [...user, ...table]
@@ -8,8 +8,10 @@ function mockXHR() {
     Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
     Mock.XHR.prototype.send = function () {
         if (this.custom.xhr) {
+            // noinspection JSPrimitiveTypeWrapperUsage
             this.custom.xhr.withCredentials = this.withCredentials || false
             if (this.responseType) {
+                // noinspection JSPrimitiveTypeWrapperUsage
                 this.custom.xhr.responseType = this.responseType
             }
         }
@@ -18,9 +20,9 @@ function mockXHR() {
 
     function XHR2ExpressReqWrap(respond) {
         return function (options) {
-            let result = null
+            let result
             if (respond instanceof Function) {
-                const { body, type, url } = options
+                const {body, type, url} = options
                 result = respond({
                     method: type,
                     body: JSON.parse(body),
