@@ -17,7 +17,7 @@ MielLink：基于 Hyperledger Fabric 的蜂蜜产品供应链溯源系统。
 
 | 姓名 | 学号 |
 | :---: | :---: |
-| 林继申 | 2250758 |
+| 林继申 (组长) | 2250758 |
 | 陈语妍 | 2251306 |
 | 杜天乐 | 2251310 |
 | 刘淑仪 | 2251730 |
@@ -46,6 +46,191 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 
 * `/scripts`
 脚本文件
+
+## 环境配置
+
+查看 Ubuntu 版本：
+
+```bash
+cat /etc/os-release
+```
+
+![](assets/2024-12-13_23-14-27.png)
+
+查看 Git 版本：
+
+```bash
+git --version
+```
+
+![](assets/2024-12-13_23-14-44.png)
+
+查看 Python 版本：
+
+```bash
+python --version
+```
+
+![](assets/2024-12-13_23-15-00.png)
+
+克隆 GitHub 仓库：
+
+```bash
+git clone MinmusLin/Miel_Link
+```
+
+配置 Docker：
+
+```bash
+chmod +x Miel_Link/scripts/docker_install.sh
+Miel_Link/scripts/docker_install.sh
+```
+
+![](assets/2024-12-13_23-10-49.png)
+
+配置 Docker 用户组：
+
+```bash
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+启动 Docker 服务：
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+sudo systemctl status docker
+```
+
+![](assets/2024-12-13_23-16-57.png)
+
+配置 Golang：
+
+```bash
+wget https://golang.google.cn/dl/go1.19.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
+rm go1.19.linux-amd64.tar.gz
+mkdir $HOME/go
+```
+
+编辑 `~/.bashrc` 文件：
+
+```bash
+nano ~/.bashrc
+```
+
+在 `~/.bashrc` 文件末尾添加：
+
+```
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
+export PATH=$GOROOT/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
+```
+
+更新环境变量：
+
+```bash
+source  ~/.bashrc
+```
+
+查看 Golang 版本：
+
+```bash
+go version
+```
+
+![](assets/2024-12-13_23-18-42.png)
+
+启用 Go 的模块支持：
+
+```bash
+go env -w GO111MODULE=on
+```
+
+配置 NVM：
+
+```bash
+chmod +x Miel_Link/scripts/nvm_install.sh
+Miel_Link/scripts/nvm_install.sh
+```
+
+更新环境变量：
+
+```bash
+source  ~/.bashrc
+```
+
+查看 NVM 版本：
+
+```bash
+nvm --version
+```
+
+![](assets/2024-12-13_23-21-03.png)
+
+配置 Node.js：
+
+```bash
+nvm install 16
+```
+
+查看 Node.js 版本：
+
+```bash
+node -v
+```
+
+![](assets/2024-12-13_23-22-22.png)
+
+查看 npm 版本：
+
+```bash
+npm -v
+```
+
+![](assets/2024-12-13_23-22-37.png)
+
+配置 Jq：
+
+```bash
+sudo apt install jq
+```
+
+编辑 `/etc/sysctl.conf` 文件：
+
+```bash
+sudo nano /etc/sysctl.conf
+```
+
+在 `/etc/sysctl.conf` 文件末尾添加：
+
+```
+fs.inotify.max_user_watches=524288
+```
+
+应用更改：
+
+```bash
+sudo sysctl -p
+```
+
+检查当前文件监视器数量：
+
+```bash
+cat /proc/sys/fs/inotify/max_user_watches
+```
+
+![](assets/2024-12-14_00-02-41.png)
+
+下载 Hyperledger Fabric 镜像：
+
+```bash
+Miel_Link/blockchain/network/install-fabric.sh
+```
+
+![](assets/2024-12-13_23-26-21.png)
 
 ## 免责声明
 
