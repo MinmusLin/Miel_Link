@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# This script uses the logspout and http stream tools to let you watch the docker containers
+# in action.
+#
+# More information at https://github.com/gliderlabs/logspout/tree/master/httpstream
+
 if [ -z "$1" ]; then
    DOCKER_NETWORK=fabric_test
 else
@@ -24,7 +29,5 @@ docker run -d --rm --name="logspout" \
 	--publish=127.0.0.1:${PORT}:80 \
 	--network  ${DOCKER_NETWORK} \
 	gliderlabs/logspout
-
 sleep 3
-
 curl http://127.0.0.1:${PORT}/logs

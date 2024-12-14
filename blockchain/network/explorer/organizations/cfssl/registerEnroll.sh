@@ -1,7 +1,9 @@
 #!/bin/bash
+# Copyright 2023 Aditya Joshi, All rights reserved
 
 function peer_cert() {
-    TYPE=$1
+
+    TYPE=$1 #peer user
     USER=$2
     ORG=$3
 
@@ -36,7 +38,7 @@ function peer_cert() {
         OrganizationalUnitIdentifier: admin
     OrdererOUIdentifier:
         Certificate: cacerts/ca.pem
-        OrganizationalUnitIdentifier: orderer' > "$CERT_DIR/msp/config.yaml"
+        OrganizationalUnitIdentifier: orderer' >"$CERT_DIR/msp/config.yaml"
 
     fi
 
@@ -48,11 +50,12 @@ function peer_cert() {
     fi
 
     find . -name "*.csr" -print0 | xargs -0 rm
+
 }
 
 function orderer_cert() {
-    TYPE=$1
-    USER=$2
+    TYPE=$1 #orderer user
+    USER=$2 #orderer.example.com
 
     mkdir -p organizations/ordererOrganizations/example.com/ca
     mkdir -p organizations/ordererOrganizations/example.com/msp/cacerts
@@ -84,7 +87,7 @@ function orderer_cert() {
         OrganizationalUnitIdentifier: admin
     OrdererOUIdentifier:
         Certificate: cacerts/ca.pem
-        OrganizationalUnitIdentifier: orderer' > "$CERT_DIR/msp/config.yaml"
+        OrganizationalUnitIdentifier: orderer' >"$CERT_DIR/msp/config.yaml"
 
     fi
 
@@ -97,9 +100,11 @@ function orderer_cert() {
     fi
 
     find . -name "*.csr" -print0 | xargs -0 rm
+
 }
 
 function generate_user_certs() {
+
     CERT_DIR=$1
     USER=$2
     TYPE=$3
@@ -110,7 +115,7 @@ function generate_user_certs() {
         mkdir -p $CERT_DIR/users/$USER/msp/$DIR
     done
 
-    sed -e "s/{USER}/$USER/g" < "$PWD/organizations/cfssl/${TYPE}-csr-template.json" > $PWD/organizations/cfssl/${TYPE}-${USER}-csr.json
+    sed -e "s/{USER}/$USER/g" <"$PWD/organizations/cfssl/${TYPE}-csr-template.json" >$PWD/organizations/cfssl/${TYPE}-${USER}-csr.json
 
     cfssl gencert \
         -ca=$CERT_DIR/ca/ca.pem \
@@ -138,7 +143,7 @@ function generate_user_certs() {
       OrganizationalUnitIdentifier: admin
     OrdererOUIdentifier:
       Certificate: cacerts/ca.pem
-      OrganizationalUnitIdentifier: orderer' > $CERT_DIR/users/$USER/msp/config.yaml
+      OrganizationalUnitIdentifier: orderer' >$CERT_DIR/users/$USER/msp/config.yaml
 
     cfssl gencert \
         -ca=$CERT_DIR/ca/ca.pem \
@@ -154,6 +159,7 @@ function generate_user_certs() {
     mv $CERT_DIR/users/$USER/tls/client.pem $CERT_DIR/users/$USER/tls/client.crt
 
     rm $PWD/organizations/cfssl/${TYPE}-${USER}-csr.json
+
 }
 
 function generate_peer_certs() {
@@ -165,7 +171,7 @@ function generate_peer_certs() {
     done
 
     mkdir -p "$CERT_DIR/peers/$USER/tls"
-    sed -e "s/{USER}/$USER/g" < "$PWD/organizations/cfssl/peer-csr-template.json" > "$PWD/organizations/cfssl/peer-${USER}.json"
+    sed -e "s/{USER}/$USER/g" <"$PWD/organizations/cfssl/peer-csr-template.json" >"$PWD/organizations/cfssl/peer-${USER}.json"
 
     cfssl gencert \
         -ca="$CERT_DIR/ca/ca.pem" \
@@ -194,7 +200,7 @@ function generate_peer_certs() {
         OrganizationalUnitIdentifier: admin
     OrdererOUIdentifier:
         Certificate: cacerts/ca.pem
-        OrganizationalUnitIdentifier: orderer' > "$CERT_DIR/peers/$USER/msp/config.yaml"
+        OrganizationalUnitIdentifier: orderer' >"$CERT_DIR/peers/$USER/msp/config.yaml"
 
     cfssl gencert \
         -ca="$CERT_DIR/ca/ca.pem" \
@@ -213,6 +219,7 @@ function generate_peer_certs() {
 }
 
 function generate_orderer_certs() {
+
     CERT_DIR=$1
     USER=$2
 
@@ -222,7 +229,7 @@ function generate_orderer_certs() {
 
     mkdir -p "organizations/ordererOrganizations/example.com/orderers/$USER/tls"
 
-    sed -e "s/{USER}/$USER/g" < "$PWD/organizations/cfssl/orderer-csr-template.json" > "$PWD/organizations/cfssl/orderer-${USER}.json"
+    sed -e "s/{USER}/$USER/g" <"$PWD/organizations/cfssl/orderer-csr-template.json" >"$PWD/organizations/cfssl/orderer-${USER}.json"
 
     cfssl gencert \
         -ca="$CERT_DIR/ca/ca.pem" \
@@ -251,7 +258,7 @@ function generate_orderer_certs() {
         OrganizationalUnitIdentifier: admin
     OrdererOUIdentifier:
         Certificate: cacerts/ca.pem
-        OrganizationalUnitIdentifier: orderer' > "$CERT_DIR/orderers/$USER/msp/config.yaml"
+        OrganizationalUnitIdentifier: orderer' >"$CERT_DIR/orderers/$USER/msp/config.yaml"
 
     cfssl gencert \
         -ca="$CERT_DIR/ca/ca.pem" \

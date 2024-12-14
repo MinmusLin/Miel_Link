@@ -1,7 +1,9 @@
 #!/bin/bash
+# Copyright 2023 Aditya Joshi, All rights reserved
 
 function peer_cert() {
-    TYPE=$1
+
+    TYPE=$1 #peer user
     USER=$2
     ORG=$3
 
@@ -48,11 +50,12 @@ function peer_cert() {
     fi
 
     find . -name "*.csr" -print0 | xargs -0 rm
+
 }
 
 function orderer_cert() {
-    TYPE=$1
-    USER=$2
+    TYPE=$1 #orderer user
+    USER=$2 #orderer.example.com
 
     mkdir -p organizations/ordererOrganizations/example.com/ca
     mkdir -p organizations/ordererOrganizations/example.com/msp/cacerts
@@ -97,9 +100,11 @@ function orderer_cert() {
     fi
 
     find . -name "*.csr" -print0 | xargs -0 rm
+
 }
 
 function generate_user_certs() {
+
     CERT_DIR=$1
     USER=$2
     TYPE=$3
@@ -154,6 +159,7 @@ function generate_user_certs() {
     mv $CERT_DIR/users/$USER/tls/client.pem $CERT_DIR/users/$USER/tls/client.crt
 
     rm $PWD/organizations/cfssl/${TYPE}-${USER}-csr.json
+
 }
 
 function generate_peer_certs() {
@@ -213,6 +219,7 @@ function generate_peer_certs() {
 }
 
 function generate_orderer_certs() {
+
     CERT_DIR=$1
     USER=$2
 
