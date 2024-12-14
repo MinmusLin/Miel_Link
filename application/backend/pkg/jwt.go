@@ -30,7 +30,6 @@ func GenToken(userID string, userType string) (string, error) {
 	return token.SignedString(MySecret)
 }
 
-// 解析token
 func ParseToken(tokenString string) (*Myclaims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &Myclaims{}, func(token *jwt.Token) (i interface{}, err error) {
 		return MySecret, nil

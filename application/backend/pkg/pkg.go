@@ -7,10 +7,8 @@ import (
 	"github.com/bwmarrin/snowflake"
 )
 
-// 本文件包含雪花ID、MD5函数
 func GenerateID() string {
 	node, _ := snowflake.NewNode(1)
-
 	id := node.Generate()
 	return id.String()
 }
