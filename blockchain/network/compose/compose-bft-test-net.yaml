@@ -13,7 +13,6 @@ networks:
     name: fabric_test
 
 services:
-
   orderer.example.com:
     container_name: orderer.example.com
     image: hyperledger/fabric-orderer:latest
@@ -25,7 +24,6 @@ services:
       - ORDERER_GENERAL_LISTENPORT=7050
       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      # enabled TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
@@ -50,9 +48,9 @@ services:
       - ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/:/var/hyperledger/orderer/tls
       - orderer.example.com:/var/hyperledger/production/orderer
     ports:
-      - 7050:7050
-      - 7053:7053
-      - 9443:9443
+      - "7050:7050"
+      - "7053:7053"
+      - "9443:9443"
     networks:
       - test
 
@@ -67,7 +65,6 @@ services:
       - ORDERER_GENERAL_LISTENPORT=7052
       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      # enabled TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
@@ -92,9 +89,9 @@ services:
       - ../organizations/ordererOrganizations/example.com/orderers/orderer2.example.com/tls/:/var/hyperledger/orderer/tls
       - orderer2.example.com:/var/hyperledger/production/orderer
     ports:
-      - 7052:7052
-      - 7055:7055
-      - 9446:9446
+      - "7052:7052"
+      - "7055:7055"
+      - "9446:9446"
     networks:
       - test
 
@@ -109,7 +106,6 @@ services:
       - ORDERER_GENERAL_LISTENPORT=7056
       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      # enabled TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
@@ -134,9 +130,9 @@ services:
       - ../organizations/ordererOrganizations/example.com/orderers/orderer3.example.com/tls/:/var/hyperledger/orderer/tls
       - orderer3.example.com:/var/hyperledger/production/orderer
     ports:
-      - 7056:7056
-      - 7057:7057
-      - 9447:9447
+      - "7056:7056"
+      - "7057:7057"
+      - "9447:9447"
     networks:
       - test
 
@@ -151,7 +147,6 @@ services:
       - ORDERER_GENERAL_LISTENPORT=7058
       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      # enabled TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
@@ -176,14 +171,11 @@ services:
       - ../organizations/ordererOrganizations/example.com/orderers/orderer4.example.com/tls/:/var/hyperledger/orderer/tls
       - orderer4.example.com:/var/hyperledger/production/orderer
     ports:
-      - 7058:7058
-      - 7059:7059
-      - 9448:9448
+      - "7058:7058"
+      - "7059:7059"
+      - "9448:9448"
     networks:
       - test
-
-
-
 
   peer0.org1.example.com:
     container_name: peer0.org1.example.com
@@ -193,13 +185,11 @@ services:
     environment:
       - FABRIC_CFG_PATH=/etc/hyperledger/peercfg
       - FABRIC_LOGGING_SPEC=INFO
-      #- FABRIC_LOGGING_SPEC=DEBUG
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_PROFILE_ENABLED=false
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-      # Peer specific variables
       - CORE_PEER_ID=peer0.org1.example.com
       - CORE_PEER_ADDRESS=peer0.org1.example.com:7051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
@@ -219,8 +209,8 @@ services:
     working_dir: /root
     command: peer node start
     ports:
-      - 7051:7051
-      - 9444:9444
+      - "7051:7051"
+      - "9444:9444"
     networks:
       - test
 
@@ -232,13 +222,11 @@ services:
     environment:
       - FABRIC_CFG_PATH=/etc/hyperledger/peercfg
       - FABRIC_LOGGING_SPEC=INFO
-      #- FABRIC_LOGGING_SPEC=DEBUG
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_PROFILE_ENABLED=false
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-      # Peer specific variables
       - CORE_PEER_ID=peer0.org2.example.com
       - CORE_PEER_ADDRESS=peer0.org2.example.com:9051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
@@ -258,8 +246,8 @@ services:
     working_dir: /root
     command: peer node start
     ports:
-      - 9051:9051
-      - 9445:9445
+      - "9051:9051"
+      - "9445:9445"
     networks:
       - test
 
@@ -274,7 +262,6 @@ services:
       - GOPATH=/opt/gopath
       - FABRIC_LOGGING_SPEC=INFO
       - FABRIC_CFG_PATH=/etc/hyperledger/peercfg
-      #- FABRIC_LOGGING_SPEC=DEBUG
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: /bin/bash
     volumes:

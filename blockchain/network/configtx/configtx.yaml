@@ -84,6 +84,7 @@ Organizations:
       Endorsement:
         Type: Signature
         Rule: "OR('Org2MSP.peer')"
+
 ################################################################################
 #
 #   SECTION: Capabilities
@@ -135,6 +136,7 @@ Capabilities:
     # Prior to enabling V2.5 application capabilities, ensure that all
     # peers on a channel are at v2.5.0 or later.
     V2_5: true
+
 ################################################################################
 #
 #   SECTION: Application
@@ -168,6 +170,7 @@ Application: &ApplicationDefaults
       Rule: "MAJORITY Endorsement"
   Capabilities:
     <<: *ApplicationCapabilities
+
 ################################################################################
 #
 #   SECTION: Orderer
@@ -218,6 +221,7 @@ Orderer: &OrdererDefaults
     BlockValidation:
       Type: ImplicitMeta
       Rule: "ANY Writers"
+
 ################################################################################
 #
 #   CHANNEL
@@ -248,6 +252,7 @@ Channel: &ChannelDefaults
   # description
   Capabilities:
     <<: *ChannelCapabilities
+
 ################################################################################
 #
 #   Profile
