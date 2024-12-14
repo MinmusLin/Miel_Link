@@ -232,6 +232,40 @@ Miel_Link/blockchain/network/install-fabric.sh
 
 ![](assets/2024-12-13_23-26-21.png)
 
+## 启动程序
+
+进入项目根目录：
+
+```bash
+cd Miel_Link
+```
+
+启动区块链网络：
+
+```bash
+blockchain/network/start.sh
+```
+
+关闭区块链网络：
+
+```bash
+blockchain/network/stop.sh
+```
+
+启动后端应用程序：
+
+```bash
+go run backend/main.go
+```
+
+启动前端应用程序：
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
 ## 免责声明
 
 The code and materials contained in this repository are intended for personal learning and research purposes only and may not be used for any commercial purposes. Other users who download or refer to the content of this repository must strictly adhere to the **principles of academic integrity** and must not use these materials for any form of homework submission or other actions that may violate academic honesty. I am not responsible for any direct or indirect consequences arising from the improper use of the contents of this repository. Please ensure that your actions comply with the regulations of your school or institution, as well as applicable laws and regulations, before using this content. If you have any questions, please contact me via [email](mailto:minmuslin@outlook.com).
