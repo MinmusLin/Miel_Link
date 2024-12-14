@@ -35,14 +35,17 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 * `/assets`
 存放 `README.md` 文件所需的相关图片资源
 
-* `/backend`
-后端应用程序
+* `/application`
+应用程序
+
+  * `/backend`
+  后端应用程序
+
+  * `/frontend`
+  前端应用程序
 
 * `/blockchain`
 区块链网络
-
-* `/frontend`
-前端应用程序
 
 * `/scripts`
 脚本文件
