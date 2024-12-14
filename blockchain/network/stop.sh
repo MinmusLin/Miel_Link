@@ -8,6 +8,8 @@ rm -rf explorer/organizations
 
 sudo rm -rf ipfs
 
+sudo rm -rf ../../application/backend/files
+
 docker rm -f fabrictrace-mysql > /dev/null 2>&1
 
 docker compose -f ipfs.yaml down -v
