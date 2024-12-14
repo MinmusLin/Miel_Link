@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 channel_name=$1
 
 export PATH=${PWD}/bin:$PATH

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#
-# SPDX-License-Identifier: Apache-2.0
-#
-
 function usage() {
     echo "Usage: pkgcc.sh -l <label> -a <address> [-m <META-INF directory>]"
 }
@@ -34,7 +30,7 @@ while getopts "hl:a:m:" opt; do
             ;;
     esac
 done
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
 type=ccaas
 
@@ -44,6 +40,7 @@ if [ -z "$label" ] || [ -z "$address" ]; then
 fi
 
 metadir=$(basename "$metainf")
+
 if [ -n "$metainf" ]; then
     if [ "META-INF" != "$metadir" ]; then
         error_exit "Invalid chaincode META-INF directory $metadir: directory name must be 'META-INF'"
@@ -54,10 +51,9 @@ fi
 
 prefix=$(basename "$0")
 tempdir=$(mktemp -d -t "$prefix.XXXXXXXX") || error_exit "Error creating temporary directory"
-
 file=${tempdir}/connection.json
 
-cat > "${file}" <<CONN_EOF
+cat > "${file}" << CONN_EOF
 {
   "address": "${address}",
   "dial_timeout": "10s",
@@ -73,8 +69,8 @@ if [ -n "$DEBUG" ]; then
     echo "metainf = $metainf"
 fi
 
-
 mkdir -p "$tempdir/src"
+
 if [ -d "$file" ]; then
     cp -a "$file/"* "$tempdir/src/"
 elif [ -f "$file" ]; then
@@ -96,7 +92,7 @@ METADATA-EOF
 if [ "$type" = "ccaas" ]; then
     tar -C "$tempdir/src" -czf "$tempdir/pkg/code.tar.gz" .
 else
-    tar -C "$tempdir" -czf "$tempdir/pkg/code.tar.gz" src 
+    tar -C "$tempdir" -czf "$tempdir/pkg/code.tar.gz" src
 fi
 
 tar -C "$tempdir/pkg" -czf "$label.tgz" metadata.json code.tar.gz
