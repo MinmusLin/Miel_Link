@@ -28,6 +28,18 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 * `/assets`
 存放 `README.md` 文件所需的相关图片资源
 
+* `/backend`
+后端应用程序
+
+* `/blockchain`
+区块链网络
+
+* `/frontend`
+前端应用程序
+
+* `/scripts`
+脚本文件
+
 ## 免责声明
 
 The code and materials contained in this repository are intended for personal learning and research purposes only and may not be used for any commercial purposes. Other users who download or refer to the content of this repository must strictly adhere to the **principles of academic integrity** and must not use these materials for any form of homework submission or other actions that may violate academic honesty. I am not responsible for any direct or indirect consequences arising from the improper use of the contents of this repository. Please ensure that your actions comply with the regulations of your school or institution, as well as applicable laws and regulations, before using this content. If you have any questions, please contact me via [email](mailto:minmuslin@outlook.com).
