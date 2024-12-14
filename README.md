@@ -235,9 +235,57 @@ Miel_Link/blockchain/network/install-fabric.sh
 
 ![](assets/2024-12-13_23-26-21.png)
 
+配置 Ngnix：
+
+```bash
+sudo apt update
+sudo apt install nginx
+sudo systemctl start nginx
+sudo systemctl enable nginx
+```
+
+编辑 `/etc/nginx/sites-available/default` 文件：
+
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+
+```
+server {
+    listen 80;
+    server_name {server_ip};
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+测试 Nginx 配置：
+
+```bash
+sudo nginx -t
+```
+
+![](assets/2024-12-14_23-21-38.png)
+
+重启 Nginx 服务：
+
+```bash
+sudo systemctl restart nginx
+```
+
 </details>
 
 ## 启动程序
+
+服务器开放端口 22、80、9090：
+
+![](assets/2024-12-14_23-15-12.png)
 
 进入项目目录：
 
@@ -280,7 +328,7 @@ npm install
 npm run dev
 ```
 
-![](assets/2024-12-14_23-07-38.png)
+![](assets/2024-12-14_23-11-33.png)
 
 ## 免责声明
 
