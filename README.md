@@ -303,7 +303,7 @@ cd blockchain/network
 ./start.sh
 ```
 
-![](assets/2024-12-14_22-54-04.png)
+![](assets/2024-12-15_05-55-05.png)
 
 关闭区块链网络：
 
@@ -312,7 +312,7 @@ cd blockchain/network
 ./stop.sh
 ```
 
-![](assets/2024-12-14_22-54-46.png)
+![](assets/2024-12-15_05-55-18.png)
 
 启动后端应用程序：
 
