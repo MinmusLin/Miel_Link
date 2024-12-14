@@ -248,13 +248,15 @@ cd Miel_Link
 启动区块链网络：
 
 ```bash
-blockchain/network/start.sh
+cd blockchain/network
+./start.sh
 ```
 
 关闭区块链网络：
 
 ```bash
-blockchain/network/stop.sh
+cd blockchain/network
+./stop.sh
 ```
 
 启动后端应用程序：
