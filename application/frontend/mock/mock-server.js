@@ -32,7 +32,7 @@ function unregisterRoutes() {
 
 const responseFake = (url, type, respond) => {
     return {
-        url: new RegExp(`${process.env.VUE_APP_BASE_API}${url}`),
+        url: new RegExp(`http://43.156.142.179:9090${url}`),
         type: type || 'get',
         response(req, res) {
             console.log('Request invoke: ' + req.path)
