@@ -64,8 +64,8 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		product.BeeFarmInput.BeeBoxId = arg3
 		product.BeeFarmInput.HoneyVariety = arg4
 		product.BeeFarmInput.FlowerVariety = arg5
-		product.BeeFarmInput.Fa_IPFSCID = arg6
-		product.BeeFarmInput.Fa_IPFSFileName = arg7
+		product.BeeFarmInput.BeeFarmIPFSCID = arg6
+		product.BeeFarmInput.BeeFarmIPFSFileName = arg7
 		product.BeeFarmInput.BeeFarmTxid = txid
 		product.BeeFarmInput.BeeFarmTimestamp = format
 	case "加工厂":
@@ -74,8 +74,8 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		product.ProcessingPlantInput.ProcessingBatchId = arg3
 		product.ProcessingPlantInput.PackagingSpecification = arg4
 		product.ProcessingPlantInput.ShelfLife = arg5
-		product.ProcessingPlantInput.Fac_IPFSCID = arg6
-		product.ProcessingPlantInput.Fac_IPFSFileName = arg7
+		product.ProcessingPlantInput.ProcessingPlantIPFSCID = arg6
+		product.ProcessingPlantInput.ProcessingPlantIPFSFileName = arg7
 		product.ProcessingPlantInput.ProcessingPlantTxid = txid
 		product.ProcessingPlantInput.ProcessingPlantTimestamp = format
 	case "批发商":
@@ -84,8 +84,8 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		product.WholesalerInput.WholesalerBatchId = arg3
 		product.WholesalerInput.TransportationMethod = arg4
 		product.WholesalerInput.TransportMode = arg5
-		product.WholesalerInput.Dr_IPFSCID = arg6
-		product.WholesalerInput.Dr_IPFSFileName = arg7
+		product.WholesalerInput.WholesalerIPFSCID = arg6
+		product.WholesalerInput.WholesalerIPFSFileName = arg7
 		product.WholesalerInput.WholesalerTxid = txid
 		product.WholesalerInput.WholesalerTimestamp = format
 	case "零售商":
@@ -94,8 +94,8 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		product.RetailerInput.RetailerBatchId = arg3
 		product.RetailerInput.SalesChannel = arg4
 		product.RetailerInput.SalesPrice = arg5
-		product.RetailerInput.Sh_IPFSCID = arg6
-		product.RetailerInput.Sh_IPFSFileName = arg7
+		product.RetailerInput.RetailerIPFSCID = arg6
+		product.RetailerInput.RetailerIPFSFileName = arg7
 		product.RetailerInput.RetailerTxid = txid
 		product.RetailerInput.RetailerTimestamp = format
 	}

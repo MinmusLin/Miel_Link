@@ -27,8 +27,8 @@
             <el-form-item label="养蜂场名称：">
               <span>{{ props.row.beeFarmInput.flowerVariety }}</span>
             </el-form-item>
-            <el-form-item v-show="props.row.beeFarmInput.fa_ipfscid" label="附件IPFSCID：">
-              <el-link type="success" @click="GetIPFSFile(props.row.beeFarmInput.fa_ipfscid,props.row.beeFarmInput.fa_ipfsfilename)">{{ props.row.beeFarmInput.fa_ipfscid }}</el-link>
+            <el-form-item v-show="props.row.beeFarmInput.beeFarmIPFSCID" label="附件IPFSCID：">
+              <el-link type="success" @click="GetIPFSFile(props.row.beeFarmInput.beeFarmIPFSCID,props.row.beeFarmInput.beeFarmIPFSFileName)">{{ props.row.beeFarmInput.beeFarmIPFSCID }}</el-link>
             </el-form-item>
             <el-form-item label="区块链交易ID：">
               <span>{{ props.row.beeFarmInput.beeFarmTxid }}</span>
@@ -52,8 +52,8 @@
             <el-form-item label="保质期：">
               <span>{{ props.row.processingPlantInput.shelfLife }}</span>
             </el-form-item>
-            <el-form-item v-show="props.row.processingPlantInput.fac_ipfscid" label="附件IPFSCID：">
-              <el-link type="success" @click="GetIPFSFile(props.row.processingPlantInput.fac_ipfscid,props.row.processingPlantInput.fac_ipfsfilename)">{{ props.row.beeFarmInput.fac_ipfscid }}</el-link>
+            <el-form-item v-show="props.row.processingPlantInput.processingPlantIPFSCID" label="附件IPFSCID：">
+              <el-link type="success" @click="GetIPFSFile(props.row.processingPlantInput.processingPlantIPFSCID,props.row.processingPlantInput.processingPlantIPFSFileName)">{{ props.row.beeFarmInput.processingPlantIPFSCID }}</el-link>
             </el-form-item>
             <el-form-item label="区块链交易ID：">
               <span>{{ props.row.processingPlantInput.processingPlantTxid }}</span>
@@ -77,8 +77,8 @@
             <el-form-item label="交通方式：">
               <span>{{ props.row.wholesalerInput.transportMode }}</span>
             </el-form-item>
-            <el-form-item v-show="props.row.wholesalerInput.dr_ipfscid" label="附件IPFSCID：">
-              <el-link type="success" @click="GetIPFSFile(props.row.wholesalerInput.dr_ipfscid,props.row.wholesalerInput.dr_ipfsfilename)">{{ props.row.wholesalerInput.dr_ipfscid }}</el-link>
+            <el-form-item v-show="props.row.wholesalerInput.wholesalerIPFSCID" label="附件IPFSCID：">
+              <el-link type="success" @click="GetIPFSFile(props.row.wholesalerInput.wholesalerIPFSCID,props.row.wholesalerInput.wholesalerIPFSFileName)">{{ props.row.wholesalerInput.wholesalerIPFSCID }}</el-link>
             </el-form-item>
             <el-form-item label="区块链交易ID：">
               <span>{{ props.row.wholesalerInput.wholesalerTxid }}</span>
@@ -102,8 +102,8 @@
             <el-form-item label="销售价格：">
               <span>{{ props.row.retailerInput.salesPrice }}</span>
             </el-form-item>
-            <el-form-item v-show="props.row.retailerInput.sh_ipfscid" label="附件IPFSCID：">
-              <el-link type="success" @click="GetIPFSFile(props.row.retailerInput.sh_ipfscid,props.row.retailerInput.sh_ipfsfilename)">{{ props.row.retailerInput.sh_ipfscid }}</el-link>
+            <el-form-item v-show="props.row.retailerInput.retailerIPFSCID" label="附件IPFSCID：">
+              <el-link type="success" @click="GetIPFSFile(props.row.retailerInput.retailerIPFSCID,props.row.retailerInput.retailerIPFSFileName)">{{ props.row.retailerInput.retailerIPFSCID }}</el-link>
             </el-form-item>
             <el-form-item label="区块链交易ID：">
               <span>{{ props.row.retailerInput.retailerTxid }}</span>
