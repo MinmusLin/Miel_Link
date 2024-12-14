@@ -1,5 +1,5 @@
 module.exports = {
-    title: '基于 Hyperledger Fabric 的蜂蜜产品供应链溯源系统',
+    title: 'MielLink',
     fixedHeader: false,
     sidebarLogo: false
 }
