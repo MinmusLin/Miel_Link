@@ -1,16 +1,5 @@
 module.exports = {
-
-  title: '农产品溯源系统',
-
-  /**
-   * @type {boolean} true | false
-   * @description Whether fix the header
-   */
-  fixedHeader: false,
-
-  /**
-   * @type {boolean} true | false
-   * @description Whether show the logo in sidebar
-   */
-  sidebarLogo: false
+    title: '基于 Hyperledger Fabric 的蜂蜜产品供应链溯源系统',
+    fixedHeader: false,
+    sidebarLogo: false
 }
