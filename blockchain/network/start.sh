@@ -25,4 +25,6 @@ cp -r organizations explorer/
 
 docker compose -f explorer/docker-compose.yaml up -d
 
+docker compose -f ipfs.yaml up -d
+
 echo "The blockchain network is now running."

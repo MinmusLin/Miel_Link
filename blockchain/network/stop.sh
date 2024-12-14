@@ -8,4 +8,6 @@ rm -rf explorer/organizations
 
 docker rm -f fabrictrace-mysql > /dev/null 2>&1
 
+docker compose -f ipfs.yaml down -v
+
 echo "The blockchain network has been shut down."

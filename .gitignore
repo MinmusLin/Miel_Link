@@ -1,8 +1,9 @@
-blockchain/network/channel-artifacts/
-blockchain/network/explorer/organizations/
+blockchain/network/channel-artifacts
+blockchain/network/explorer/organizations
+blockchain/network/ipfs
 blockchain/network/log.txt
-blockchain/network/organizations/ordererOrganizations/
-blockchain/network/organizations/peerOrganizations/
+blockchain/network/organizations/ordererOrganizations
+blockchain/network/organizations/peerOrganizations
 blockchain/network/trace.tar.gz
 application/frontend/.idea
 application/frontend/node_modules
