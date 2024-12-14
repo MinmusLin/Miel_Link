@@ -1,4 +1,3 @@
-# SPDX-License-Identifier: Apache-2.0
 version: '2.1'
 
 volumes:
@@ -11,7 +10,6 @@ networks:
     external: true
 
 services:
-
   explorerdb.mynetwork.com:
     image: ghcr.io/hyperledger-labs/explorer-db:latest
     container_name: explorerdb.mynetwork.com
