@@ -33,30 +33,30 @@ func (s *SmartContract) RegisterUser(ctx contractapi.TransactionContextInterface
 	return nil
 }
 
-func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, userID string, traceability_code string, arg1 string, arg2 string, arg3 string, arg4 string, arg5 string, arg6 string, arg7 string) (string, error) {
+func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, userID string, traceabilityCode string, arg1 string, arg2 string, arg3 string, arg4 string, arg5 string, arg6 string, arg7 string) (string, error) {
 	userType, err := s.GetUserType(ctx, userID)
 	if err != nil {
-		return "", fmt.Errorf("Failed to get user type: %v", err)
+		return "", fmt.Errorf("failed to get user type: %v", err)
 	}
-	FruitAsBytes, err := ctx.GetStub().GetState(traceability_code)
+	FruitAsBytes, err := ctx.GetStub().GetState(traceabilityCode)
 	if err != nil {
-		return "", fmt.Errorf("Failed to read from world state: %v", err)
+		return "", fmt.Errorf("failed to read from world state: %v", err)
 	}
 	var fruit Fruit
 	if FruitAsBytes != nil {
 		err = json.Unmarshal(FruitAsBytes, &fruit)
 		if err != nil {
-			return "", fmt.Errorf("Failed to unmarshal fruit: %v", err)
+			return "", fmt.Errorf("failed to unmarshal fruit: %v", err)
 		}
 	}
 	txtime, err := ctx.GetStub().GetTxTimestamp()
 	if err != nil {
-		return "", fmt.Errorf("Failed to read TxTimestamp: %v", err)
+		return "", fmt.Errorf("failed to read TxTimestamp: %v", err)
 	}
 	timeLocation, _ := time.LoadLocation("Asia/Shanghai")
-	time := time.Unix(txtime.Seconds, 0).In(timeLocation).Format("2006-01-02 15:04:05")
+	format := time.Unix(txtime.Seconds, 0).In(timeLocation).Format("2006-01-02 15:04:05")
 	txid := ctx.GetStub().GetTxID()
-	fruit.Traceability_code = traceability_code
+	fruit.Traceability_code = traceabilityCode
 	switch userType {
 	case "种植户":
 		fruit.Farmer_input.Fa_fruitName = arg1
@@ -67,7 +67,7 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		fruit.Farmer_input.Fa_IPFSCID = arg6
 		fruit.Farmer_input.Fa_IPFSFileName = arg7
 		fruit.Farmer_input.Fa_Txid = txid
-		fruit.Farmer_input.Fa_Timestamp = time
+		fruit.Farmer_input.Fa_Timestamp = format
 	case "工厂":
 		fruit.Factory_input.Fac_productName = arg1
 		fruit.Factory_input.Fac_productionbatch = arg2
@@ -77,7 +77,7 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		fruit.Factory_input.Fac_IPFSCID = arg6
 		fruit.Factory_input.Fac_IPFSFileName = arg7
 		fruit.Factory_input.Fac_Txid = txid
-		fruit.Factory_input.Fac_Timestamp = time
+		fruit.Factory_input.Fac_Timestamp = format
 	case "运输司机":
 		fruit.Driver_input.Dr_name = arg1
 		fruit.Driver_input.Dr_age = arg2
@@ -87,7 +87,7 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		fruit.Driver_input.Dr_IPFSCID = arg6
 		fruit.Driver_input.Dr_IPFSFileName = arg7
 		fruit.Driver_input.Dr_Txid = txid
-		fruit.Driver_input.Dr_Timestamp = time
+		fruit.Driver_input.Dr_Timestamp = format
 	case "商店":
 		fruit.Shop_input.Sh_storeTime = arg1
 		fruit.Shop_input.Sh_sellTime = arg2
@@ -97,19 +97,19 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 		fruit.Shop_input.Sh_IPFSCID = arg6
 		fruit.Shop_input.Sh_IPFSFileName = arg7
 		fruit.Shop_input.Sh_Txid = txid
-		fruit.Shop_input.Sh_Timestamp = time
+		fruit.Shop_input.Sh_Timestamp = format
 	}
 	fruitAsBytes, err := json.Marshal(fruit)
 	if err != nil {
-		return "", fmt.Errorf("Failed to marshal fruit: %v", err)
+		return "", fmt.Errorf("failed to marshal fruit: %v", err)
 	}
-	err = ctx.GetStub().PutState(traceability_code, fruitAsBytes)
+	err = ctx.GetStub().PutState(traceabilityCode, fruitAsBytes)
 	if err != nil {
-		return "", fmt.Errorf("Failed to put fruit: %v", err)
+		return "", fmt.Errorf("failed to put fruit: %v", err)
 	}
 	err = s.AddFruit(ctx, userID, &fruit)
 	if err != nil {
-		return "", fmt.Errorf("Failed to add fruit to user: %v", err)
+		return "", fmt.Errorf("failed to add fruit to user: %v", err)
 	}
 	return txid, nil
 }
@@ -117,10 +117,10 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
 func (s *SmartContract) AddFruit(ctx contractapi.TransactionContextInterface, userID string, fruit *Fruit) error {
 	userBytes, err := ctx.GetStub().GetState(userID)
 	if err != nil {
-		return fmt.Errorf("Failed to read from world state: %v", err)
+		return fmt.Errorf("failed to read from world state: %v", err)
 	}
 	if userBytes == nil {
-		return fmt.Errorf("The user %s does not exist", userID)
+		return fmt.Errorf("the user %s does not exist", userID)
 	}
 	var user User
 	err = json.Unmarshal(userBytes, &user)
@@ -142,10 +142,10 @@ func (s *SmartContract) AddFruit(ctx contractapi.TransactionContextInterface, us
 func (s *SmartContract) GetUserType(ctx contractapi.TransactionContextInterface, userID string) (string, error) {
 	userBytes, err := ctx.GetStub().GetState(userID)
 	if err != nil {
-		return "", fmt.Errorf("Failed to read from world state: %v", err)
+		return "", fmt.Errorf("failed to read from world state: %v", err)
 	}
 	if userBytes == nil {
-		return "", fmt.Errorf("The user %s does not exist", userID)
+		return "", fmt.Errorf("the user %s does not exist", userID)
 	}
 	var user User
 	err = json.Unmarshal(userBytes, &user)
@@ -158,10 +158,10 @@ func (s *SmartContract) GetUserType(ctx contractapi.TransactionContextInterface,
 func (s *SmartContract) GetUserInfo(ctx contractapi.TransactionContextInterface, userID string) (*User, error) {
 	userBytes, err := ctx.GetStub().GetState(userID)
 	if err != nil {
-		return &User{}, fmt.Errorf("Failed to read from world state: %v", err)
+		return &User{}, fmt.Errorf("failed to read from world state: %v", err)
 	}
 	if userBytes == nil {
-		return &User{}, fmt.Errorf("The user %s does not exist", userID)
+		return &User{}, fmt.Errorf("the user %s does not exist", userID)
 	}
 	var user User
 	err = json.Unmarshal(userBytes, &user)
@@ -171,16 +171,16 @@ func (s *SmartContract) GetUserInfo(ctx contractapi.TransactionContextInterface,
 	return &user, nil
 }
 
-func (s *SmartContract) GetFruitInfo(ctx contractapi.TransactionContextInterface, traceability_code string) (*Fruit, error) {
-	FruitAsBytes, err := ctx.GetStub().GetState(traceability_code)
+func (s *SmartContract) GetFruitInfo(ctx contractapi.TransactionContextInterface, traceabilityCode string) (*Fruit, error) {
+	FruitAsBytes, err := ctx.GetStub().GetState(traceabilityCode)
 	if err != nil {
-		return &Fruit{}, fmt.Errorf("Failed to read from world state: %v", err)
+		return &Fruit{}, fmt.Errorf("failed to read from world state: %v", err)
 	}
 	var fruit Fruit
 	if FruitAsBytes != nil {
 		err = json.Unmarshal(FruitAsBytes, &fruit)
 		if err != nil {
-			return &Fruit{}, fmt.Errorf("Failed to unmarshal fruit: %v", err)
+			return &Fruit{}, fmt.Errorf("failed to unmarshal fruit: %v", err)
 		}
 	}
 	return &fruit, nil
@@ -189,10 +189,10 @@ func (s *SmartContract) GetFruitInfo(ctx contractapi.TransactionContextInterface
 func (s *SmartContract) GetFruitList(ctx contractapi.TransactionContextInterface, userID string) ([]*Fruit, error) {
 	userBytes, err := ctx.GetStub().GetState(userID)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to read from world state: %v", err)
+		return nil, fmt.Errorf("failed to read from world state: %v", err)
 	}
 	if userBytes == nil {
-		return nil, fmt.Errorf("The user %s does not exist", userID)
+		return nil, fmt.Errorf("the user %s does not exist", userID)
 	}
 	var user User
 	err = json.Unmarshal(userBytes, &user)
@@ -205,7 +205,7 @@ func (s *SmartContract) GetFruitList(ctx contractapi.TransactionContextInterface
 func (s *SmartContract) GetAllFruitInfo(ctx contractapi.TransactionContextInterface) ([]Fruit, error) {
 	fruitListAsBytes, err := ctx.GetStub().GetStateByRange("", "")
 	if err != nil {
-		return nil, fmt.Errorf("Failed to read from world state: %v", err)
+		return nil, fmt.Errorf("failed to read from world state: %v", err)
 	}
 	defer func(fruitListAsBytes shim.StateQueryIteratorInterface) {
 		_ = fruitListAsBytes.Close()
@@ -226,9 +226,9 @@ func (s *SmartContract) GetAllFruitInfo(ctx contractapi.TransactionContextInterf
 	return fruits, nil
 }
 
-func (s *SmartContract) GetFruitHistory(ctx contractapi.TransactionContextInterface, traceability_code string) ([]HistoryQueryResult, error) {
-	log.Printf("Get Asset History: ID %v", traceability_code)
-	resultsIterator, err := ctx.GetStub().GetHistoryForKey(traceability_code)
+func (s *SmartContract) GetFruitHistory(ctx contractapi.TransactionContextInterface, traceabilityCode string) ([]HistoryQueryResult, error) {
+	log.Printf("Get Asset History: ID %v", traceabilityCode)
+	resultsIterator, err := ctx.GetStub().GetHistoryForKey(traceabilityCode)
 	if err != nil {
 		return nil, err
 	}
@@ -249,9 +249,10 @@ func (s *SmartContract) GetFruitHistory(ctx contractapi.TransactionContextInterf
 			}
 		} else {
 			fruit = Fruit{
-				Traceability_code: traceability_code,
+				Traceability_code: traceabilityCode,
 			}
 		}
+		//goland:noinspection GoDeprecation
 		timestamp, err := ptypes.Timestamp(response.Timestamp)
 		if err != nil {
 			return nil, err

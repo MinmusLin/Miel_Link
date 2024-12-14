@@ -28,6 +28,7 @@ commitThreshold: 2
 orderer: *orderer1
 
 channel: mychannel
+
 chaincode: trace
 
 args:
@@ -41,8 +42,11 @@ args:
   - randomString8
 
 mspid: Org1MSP
+
 private_key: ../network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
+
 sign_cert: ../network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
 
 num_of_conn: 10
+
 client_per_conn: 10
