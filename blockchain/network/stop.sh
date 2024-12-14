@@ -6,7 +6,7 @@ docker compose -f explorer/docker-compose.yaml down -v > /dev/null 2>&1
 
 rm -rf explorer/organizations
 
-rm -rf ipfs
+sudo rm -rf ipfs
 
 docker rm -f fabrictrace-mysql > /dev/null 2>&1
 
