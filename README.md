@@ -314,7 +314,7 @@ cd blockchain/network
 启动后端应用程序：
 
 ```bash
-cd backend
+cd application/backend
 go run main.go
 ```
 
@@ -323,7 +323,7 @@ go run main.go
 启动前端应用程序：
 
 ```bash
-cd frontend
+cd application/frontend
 npm install
 npm run dev
 ```

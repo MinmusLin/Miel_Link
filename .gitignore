@@ -5,4 +5,4 @@ blockchain/network/log.txt
 blockchain/network/organizations/ordererOrganizations/
 blockchain/network/organizations/peerOrganizations/
 blockchain/network/trace.tar.gz
-frontend/node_modules
+application/frontend/node_modules
