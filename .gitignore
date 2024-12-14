@@ -1,6 +1,5 @@
 blockchain/network/channel-artifacts/
-blockchain/network/explorer/organizations/ordererOrganizations/
-blockchain/network/explorer/organizations/peerOrganizations/
+blockchain/network/explorer/organizations/
 blockchain/network/log.txt
 blockchain/network/organizations/ordererOrganizations/
 blockchain/network/organizations/peerOrganizations/
