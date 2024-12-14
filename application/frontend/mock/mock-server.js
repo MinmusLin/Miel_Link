@@ -35,7 +35,6 @@ const responseFake = (url, type, respond) => {
         url: new RegExp(`http://43.156.142.179:9090${url}`),
         type: type || 'get',
         response(req, res) {
-            console.log('Request invoke: ' + req.path)
             res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
         }
     }
@@ -60,9 +59,7 @@ module.exports = app => {
                 const mockRoutes = registerRoutes(app)
                 mockRoutesLength = mockRoutes.mockRoutesLength
                 mockStartIndex = mockRoutes.mockStartIndex
-                console.log(chalk.magentaBright(`Mock Server hot reload success! Changed ${path}`))
             } catch (error) {
-                console.log(chalk.redBright(error))
             }
         }
     })

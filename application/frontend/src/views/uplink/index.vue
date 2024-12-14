@@ -1,3 +1,4 @@
+<!--suppress HtmlUnknownTag-->
 <template>
   <div class="uplink-container">
     <div style="color:#909399;margin-bottom: 30px">
@@ -6,11 +7,10 @@
     </div>
     <div>
       <el-form ref="form" :model="tracedata" label-width="80px" size="mini" style="">
-        <el-form-item v-show="userType!='种植户'&userType!='消费者'" label="溯源码:" style="width: 300px" label-width="120px">
+        <el-form-item v-show="userType!=='种植户'&userType!=='消费者'" label="溯源码:" style="width: 300px" label-width="120px">
           <el-input v-model="tracedata.traceability_code" />
         </el-form-item>
-
-        <div v-show="userType=='种植户'">
+        <div v-show="userType==='种植户'">
           <el-form-item label="农产品名称:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.Farmer_input.Fa_fruitName" />
           </el-form-item>
@@ -27,7 +27,7 @@
             <el-input v-model="tracedata.Farmer_input.Fa_farmerName" />
           </el-form-item>
         </div>
-        <div v-show="userType=='工厂'">
+        <div v-show="userType==='工厂'">
           <el-form-item label="商品名称:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.Factory_input.Fac_productName" />
           </el-form-item>
@@ -44,7 +44,7 @@
             <el-input v-model="tracedata.Factory_input.Fac_contactNumber" />
           </el-form-item>
         </div>
-        <div v-show="userType=='运输司机'">
+        <div v-show="userType==='运输司机'">
           <el-form-item label="姓名:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.Driver_input.Dr_name" />
           </el-form-item>
@@ -61,7 +61,7 @@
             <el-input v-model="tracedata.Driver_input.Dr_transport" />
           </el-form-item>
         </div>
-        <div v-show="userType=='商店'">
+        <div v-show="userType==='商店'">
           <el-form-item label="存入时间:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.Shop_input.Sh_storeTime" />
           </el-form-item>
@@ -93,9 +93,9 @@
         </el-form-item>
       </el-form>
       <span slot="footer" style="color: gray;" class="dialog-footer">
-        <el-button v-show="userType != '消费者'" type="primary" plain style="margin-left: 220px;" @click="submittracedata()">提 交</el-button>
+        <el-button v-show="userType !== '消费者'" type="primary" plain style="margin-left: 220px;" @click="submittracedata()">提 交</el-button>
       </span>
-      <span v-show="userType == '消费者'" slot="footer" style="color: gray;" class="dialog-footer">
+      <span v-show="userType === '消费者'" slot="footer" style="color: gray;" class="dialog-footer">
         消费者没有权限录入！请使用溯源功能!
       </span>
     </div>
@@ -158,7 +158,6 @@ export default {
         var formData = new FormData()
         formData.append('file', this.$refs.upload._data.uploadFiles[0].raw)
         ipfsUpload(formData).then(res => {
-          console.log(res)
           if (res.code === 200) {
             this.tracedata.ipfsFileCID = res.cid
             resolve()
@@ -166,7 +165,6 @@ export default {
             reject('IPFS文件上传失败')
           }
         }).catch(err => {
-          console.log(err)
           reject('IPFS文件上传失败')
         })
       })
@@ -175,7 +173,6 @@ export default {
     submittracedata() {
       if (this.$refs.upload._data.uploadFiles.length !== 0) {
         this.uploadIPFSFile().then(() => {
-          console.log(this.tracedata.ipfsFileCID)
           this.tracedata.ipfsFileName = this.$refs.upload._data.uploadFiles[0].name
 
           const loading = this.$loading({
@@ -236,8 +233,7 @@ export default {
                 type: 'error'
               })
             }
-          }).catch(err => {
-            console.log(err)
+          }).catch(() => {
           })
         }).catch(error => {
           this.$message({

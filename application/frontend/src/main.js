@@ -7,7 +7,6 @@ import '@/styles/index.scss'
 import App from './App'
 import store from './store'
 import router from './router'
-import '@/icons'
 import '@/permission'
 
 if (process.env.NODE_ENV === 'production') {

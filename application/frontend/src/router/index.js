@@ -7,6 +7,27 @@ import Layout from '@/layout'
 
 export const constantRoutes = [
     {
+        path: '/',
+        redirect: '/home',
+        hidden: true
+    },
+    {
+        path: '/home',
+        component: () => import('@/views/home/index'),
+        meta: {
+            title: '主页',
+            icon: 'el-icon-s-home'
+        }
+    },
+    {
+        path: '/login',
+        component: () => import('@/views/login/index'),
+        hidden: true,
+        meta: {
+            title: '登录'
+        }
+    },
+    {
         path: '/uplink',
         component: Layout,
         children: [{
@@ -31,7 +52,7 @@ export const constantRoutes = [
         }]
     },
     {
-        path: 'external-link',
+        path: 'hyperledger-explorer',
         component: Layout,
         children: [{
             path: 'http://43.156.142.179:8080',
@@ -42,16 +63,8 @@ export const constantRoutes = [
         }]
     },
     {
-        path: '/login',
-        component: () => import('@/views/login/index'),
-        hidden: true,
-        meta: {
-            title: '登录',
-        }
-    },
-    {
         path: '*',
-        redirect: '/uplink',
+        redirect: '/home',
         hidden: true
     }
 ]

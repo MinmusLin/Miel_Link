@@ -14,11 +14,15 @@ const whiteList = ['/login']
 router.beforeEach(async (to, from, next) => {
     // noinspection JSUnresolvedReference
     NProgress.start()
+    if (to.path === '/home') {
+        next()
+        return
+    }
     document.title = getPageTitle(to.meta.title)
     const hasToken = getToken()
     if (hasToken) {
         if (to.path === '/login') {
-            next({path: '/'})
+            next({path: '/home'})
             // noinspection JSUnresolvedReference
             NProgress.done()
         } else {
