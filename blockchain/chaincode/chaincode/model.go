@@ -1,12 +1,5 @@
 package chaincode
 
-/*
-定义用户结构体
-用户ID
-用户类型
-实名认证信息哈希,包括用户注册的姓名、身份证号、手机号、注册平台同意协议签名的哈希
-农产品列表
-*/
 type User struct {
 	UserID       string   `json:"userID"`
 	UserType     string   `json:"userType"`
@@ -14,14 +7,6 @@ type User struct {
 	FruitList    []*Fruit `json:"fruitList"`
 }
 
-/*
-定义农产品结构体
-溯源码
-种植户输入
-工厂输入
-运输司机输入
-商店输入
-*/
 type Fruit struct {
 	Traceability_code string        `json:"traceability_code"`
 	Farmer_input      Farmer_input  `json:"farmer_input"`
@@ -30,7 +15,6 @@ type Fruit struct {
 	Shop_input        Shop_input    `json:"shop_input"`
 }
 
-// HistoryQueryResult structure used for handling result of history query
 type HistoryQueryResult struct {
 	Record    *Fruit `json:"record"`
 	TxId      string `json:"txId"`
@@ -38,15 +22,6 @@ type HistoryQueryResult struct {
 	IsDelete  bool   `json:"isDelete"`
 }
 
-/*
-种植户
-农产品的溯源码，一物一码，主打高端市场（自动生成）
-农产品名称
-产地
-种植时间
-采摘时间
-种植户名称
-*/
 type Farmer_input struct {
 	Fa_fruitName    string `json:"fa_fruitName"`
 	Fa_origin       string `json:"fa_origin"`
@@ -59,14 +34,6 @@ type Farmer_input struct {
 	Fa_IPFSFileName string `json:"fa_ipfsfilename"`
 }
 
-/*
-工厂
-商品名称
-生产批次
-出厂时间（可以防止黑心商家修改时间）
-工厂名称与厂址
-联系电话
-*/
 type Factory_input struct {
 	Fac_productName     string `json:"fac_productName"`
 	Fac_productionbatch string `json:"fac_productionbatch"`
@@ -79,14 +46,6 @@ type Factory_input struct {
 	Fac_IPFSFileName    string `json:"fac_ipfsfilename"`
 }
 
-/*
-运输司机
-姓名
-年龄
-电话
-车牌号
-运输记录
-*/
 type Driver_input struct {
 	Dr_name         string `json:"dr_name"`
 	Dr_age          string `json:"dr_age"`
@@ -99,14 +58,6 @@ type Driver_input struct {
 	Dr_IPFSFileName string `json:"dr_ipfsfilename"`
 }
 
-/*
-商店
-存入时间
-销售时间
-商店名称
-商店位置
-商店电话
-*/
 type Shop_input struct {
 	Sh_storeTime    string `json:"sh_storeTime"`
 	Sh_sellTime     string `json:"sh_sellTime"`

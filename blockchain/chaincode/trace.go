@@ -1,7 +1,3 @@
-/*
-SPDX-License-Identifier: Apache-2.0
-*/
-
 package main
 
 import (
@@ -16,7 +12,6 @@ func main() {
 	if err != nil {
 		log.Panicf("Error creating trace chaincode: %v", err)
 	}
-
 	if err := assetChaincode.Start(); err != nil {
 		log.Panicf("Error starting trace chaincode: %v", err)
 	}

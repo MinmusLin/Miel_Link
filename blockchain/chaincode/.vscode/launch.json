@@ -1,10 +1,10 @@
 {
-    "configurations": [
-        {
-            "name": "Debug Chaincode",
-            "type": "hlf-go",
-            "request": "launch",
-            "isCaas": false
-        }
-    ]
+  "configurations": [
+    {
+      "name": "Debug Chaincode",
+      "type": "hlf-go",
+      "request": "launch",
+      "isCaas": false
+    }
+  ]
 }
