@@ -8,74 +8,74 @@
     <div>
       <el-form ref="form" :model="tracedata" label-width="80px" size="mini" style="">
         <el-form-item v-show="userType!=='种植户'&userType!=='消费者'" label="溯源码:" style="width: 300px" label-width="120px">
-          <el-input v-model="tracedata.traceability_code" />
+          <el-input v-model="tracedata.traceabilityCode" />
         </el-form-item>
         <div v-show="userType==='种植户'">
           <el-form-item label="农产品名称:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Farmer_input.Fa_fruitName" />
+            <el-input v-model="tracedata.BeeFarmInput.BeeFarmName" />
           </el-form-item>
           <el-form-item label="产地:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Farmer_input.Fa_origin" />
+            <el-input v-model="tracedata.BeeFarmInput.BeeFarmLocation" />
           </el-form-item>
           <el-form-item label="种植时间:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Farmer_input.Fa_plantTime" />
+            <el-input v-model="tracedata.BeeFarmInput.BeeBoxId" />
           </el-form-item>
           <el-form-item label="采摘时间:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Farmer_input.Fa_pickingTime" />
+            <el-input v-model="tracedata.BeeFarmInput.HoneyVariety" />
           </el-form-item>
           <el-form-item label="种植户名称:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Farmer_input.Fa_farmerName" />
+            <el-input v-model="tracedata.BeeFarmInput.FlowerVariety" />
           </el-form-item>
         </div>
         <div v-show="userType==='工厂'">
           <el-form-item label="商品名称:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Factory_input.Fac_productName" />
+            <el-input v-model="tracedata.ProcessingPlantInput.ProcessingPlantName" />
           </el-form-item>
           <el-form-item label="生产批次:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Factory_input.Fac_productionbatch" />
+            <el-input v-model="tracedata.ProcessingPlantInput.ProcessingPlantLocation" />
           </el-form-item>
           <el-form-item label="生产时间:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Factory_input.Fac_productionTime" />
+            <el-input v-model="tracedata.ProcessingPlantInput.ProcessingBatchId" />
           </el-form-item>
           <el-form-item label="工厂名称与厂址:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Factory_input.Fac_factoryName" />
+            <el-input v-model="tracedata.ProcessingPlantInput.PackagingSpecification" />
           </el-form-item>
           <el-form-item label="联系电话:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Factory_input.Fac_contactNumber" />
+            <el-input v-model="tracedata.ProcessingPlantInput.ShelfLife" />
           </el-form-item>
         </div>
         <div v-show="userType==='运输司机'">
           <el-form-item label="姓名:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Driver_input.Dr_name" />
+            <el-input v-model="tracedata.WholesalerInput.WarehouseName" />
           </el-form-item>
           <el-form-item label="年龄:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Driver_input.Dr_age" />
+            <el-input v-model="tracedata.WholesalerInput.WarehouseLocation" />
           </el-form-item>
           <el-form-item label="联系电话:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Driver_input.Dr_phone" />
+            <el-input v-model="tracedata.WholesalerInput.WholesalerBatchId" />
           </el-form-item>
           <el-form-item label="车牌号:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Driver_input.Dr_carNumber" />
+            <el-input v-model="tracedata.WholesalerInput.TransportationMethod" />
           </el-form-item>
           <el-form-item label="运输工具:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Driver_input.Dr_transport" />
+            <el-input v-model="tracedata.WholesalerInput.TransportMode" />
           </el-form-item>
         </div>
         <div v-show="userType==='商店'">
           <el-form-item label="存入时间:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Shop_input.Sh_storeTime" />
+            <el-input v-model="tracedata.RetailerInput.StoreName" />
           </el-form-item>
           <el-form-item label="销售时间:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Shop_input.Sh_sellTime" />
+            <el-input v-model="tracedata.RetailerInput.StoreLocation" />
           </el-form-item>
           <el-form-item label="商店名称:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Shop_input.Sh_shopName" />
+            <el-input v-model="tracedata.RetailerInput.RetailerBatchId" />
           </el-form-item>
           <el-form-item label="商店位置:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Shop_input.Sh_shopAddress" />
+            <el-input v-model="tracedata.RetailerInput.SalesChannel" />
           </el-form-item>
           <el-form-item label="商店电话:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.Shop_input.Sh_shopPhone" />
+            <el-input v-model="tracedata.RetailerInput.SalesPrice" />
           </el-form-item>
         </div>
       </el-form>
@@ -111,36 +111,36 @@ export default {
   data() {
     return {
       tracedata: {
-        traceability_code: '',
+        traceabilityCode: '',
         ipfsFileCID: '',
         ipfsFileName: '',
-        Farmer_input: {
-          Fa_fruitName: '',
-          Fa_origin: '',
-          Fa_plantTime: '',
-          Fa_pickingTime: '',
-          Fa_farmerName: ''
+        BeeFarmInput: {
+          BeeFarmName: '',
+          BeeFarmLocation: '',
+          BeeBoxId: '',
+          HoneyVariety: '',
+          FlowerVariety: ''
         },
-        Factory_input: {
-          Fac_productName: '',
-          Fac_productionbatch: '',
-          Fac_productionTime: '',
-          Fac_factoryName: '',
-          Fac_contactNumber: ''
+        ProcessingPlantInput: {
+          ProcessingPlantName: '',
+          ProcessingPlantLocation: '',
+          ProcessingBatchId: '',
+          PackagingSpecification: '',
+          ShelfLife: ''
         },
-        Driver_input: {
-          Dr_name: '',
-          Dr_age: '',
-          Dr_phone: '',
-          Dr_carNumber: '',
-          Dr_transport: ''
+        WholesalerInput: {
+          WarehouseName: '',
+          WarehouseLocation: '',
+          WholesalerBatchId: '',
+          TransportationMethod: '',
+          TransportMode: ''
         },
-        Shop_input: {
-          Sh_storeTime: '',
-          Sh_sellTime: '',
-          Sh_shopName: '',
-          Sh_shopAddress: '',
-          Sh_shopPhone: ''
+        RetailerInput: {
+          StoreName: '',
+          StoreLocation: '',
+          RetailerBatchId: '',
+          SalesChannel: '',
+          SalesPrice: ''
         }
       },
       loading: false
@@ -183,36 +183,36 @@ export default {
           })
 
           var formData = new FormData()
-          formData.append('traceability_code', this.tracedata.traceability_code)
+          formData.append('traceabilityCode', this.tracedata.traceabilityCode)
           // 根据不同的用户给arg1、arg2、arg3..赋值,
           switch (this.userType) {
             case '种植户':
-              formData.append('arg1', this.tracedata.Farmer_input.Fa_fruitName)
-              formData.append('arg2', this.tracedata.Farmer_input.Fa_origin)
-              formData.append('arg3', this.tracedata.Farmer_input.Fa_plantTime)
-              formData.append('arg4', this.tracedata.Farmer_input.Fa_pickingTime)
-              formData.append('arg5', this.tracedata.Farmer_input.Fa_farmerName)
+              formData.append('arg1', this.tracedata.BeeFarmInput.BeeFarmName)
+              formData.append('arg2', this.tracedata.BeeFarmInput.BeeFarmLocation)
+              formData.append('arg3', this.tracedata.BeeFarmInput.BeeBoxId)
+              formData.append('arg4', this.tracedata.BeeFarmInput.HoneyVariety)
+              formData.append('arg5', this.tracedata.BeeFarmInput.FlowerVariety)
               break
             case '工厂':
-              formData.append('arg1', this.tracedata.Factory_input.Fac_productName)
-              formData.append('arg2', this.tracedata.Factory_input.Fac_productionbatch)
-              formData.append('arg3', this.tracedata.Factory_input.Fac_productionTime)
-              formData.append('arg4', this.tracedata.Factory_input.Fac_factoryName)
-              formData.append('arg5', this.tracedata.Factory_input.Fac_contactNumber)
+              formData.append('arg1', this.tracedata.ProcessingPlantInput.ProcessingPlantName)
+              formData.append('arg2', this.tracedata.ProcessingPlantInput.ProcessingPlantLocation)
+              formData.append('arg3', this.tracedata.ProcessingPlantInput.ProcessingBatchId)
+              formData.append('arg4', this.tracedata.ProcessingPlantInput.PackagingSpecification)
+              formData.append('arg5', this.tracedata.ProcessingPlantInput.ShelfLife)
               break
             case '运输司机':
-              formData.append('arg1', this.tracedata.Driver_input.Dr_name)
-              formData.append('arg2', this.tracedata.Driver_input.Dr_age)
-              formData.append('arg3', this.tracedata.Driver_input.Dr_phone)
-              formData.append('arg4', this.tracedata.Driver_input.Dr_carNumber)
-              formData.append('arg5', this.tracedata.Driver_input.Dr_transport)
+              formData.append('arg1', this.tracedata.WholesalerInput.WarehouseName)
+              formData.append('arg2', this.tracedata.WholesalerInput.WarehouseLocation)
+              formData.append('arg3', this.tracedata.WholesalerInput.WholesalerBatchId)
+              formData.append('arg4', this.tracedata.WholesalerInput.TransportationMethod)
+              formData.append('arg5', this.tracedata.WholesalerInput.TransportMode)
               break
             case '商店':
-              formData.append('arg1', this.tracedata.Shop_input.Sh_storeTime)
-              formData.append('arg2', this.tracedata.Shop_input.Sh_sellTime)
-              formData.append('arg3', this.tracedata.Shop_input.Sh_shopName)
-              formData.append('arg4', this.tracedata.Shop_input.Sh_shopAddress)
-              formData.append('arg5', this.tracedata.Shop_input.Sh_shopPhone)
+              formData.append('arg1', this.tracedata.RetailerInput.StoreName)
+              formData.append('arg2', this.tracedata.RetailerInput.StoreLocation)
+              formData.append('arg3', this.tracedata.RetailerInput.RetailerBatchId)
+              formData.append('arg4', this.tracedata.RetailerInput.SalesChannel)
+              formData.append('arg5', this.tracedata.RetailerInput.SalesPrice)
               break
           }
 
@@ -223,7 +223,7 @@ export default {
             if (res.code === 200) {
               loading.close()
               this.$message({
-                message: '上链成功，交易ID：' + res.txid + '\n溯源码：' + res.traceability_code,
+                message: '上链成功，交易ID：' + res.txid + '\n溯源码：' + res.traceabilityCode,
                 type: 'success'
               })
             } else {

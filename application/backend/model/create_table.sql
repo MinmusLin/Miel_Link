@@ -1,8 +1,8 @@
 CREATE
-DATABASE fabrictrace
+DATABASE miellink
 CREATE TABLE users
 (
-    user_id    INT PRIMARY KEY,
+    userID     INT PRIMARY KEY,
     username   VARCHAR(50) UNIQUE NOT NULL,
     `password` VARCHAR(50)        NOT NULL,
     realInfo   VARCHAR(100)

@@ -1,70 +1,70 @@
 package model
 
 type MysqlUser struct {
-    UserID   string `json:"user_id"`
+    UserID   string `json:"userID"`
     Username string `json:"username"`
     Password string `json:"password"`
-    RealInfo string `json:"real_info"`
+    RealInfo string `json:"realInfo"`
 }
 
 type User struct {
-    UserID       string   `json:"userID"`
-    UserType     string   `json:"userType"`
-    RealInfoHash string   `json:"realInfoHash"`
-    FruitList    []*Fruit `json:"fruitList"`
+    UserID       string     `json:"userID"`
+    UserType     string     `json:"userType"`
+    RealInfoHash string     `json:"realInfoHash"`
+    ProductList  []*Product `json:"productList"`
 }
 
-type Fruit struct {
-    Traceability_code string        `json:"traceability_code"`
-    Farmer_input      Farmer_input  `json:"farmer_input"`
-    Factory_input     Factory_input `json:"factory_input"`
-    Driver_input      Driver_input  `json:"driver_input"`
-    Shop_input        Shop_input    `json:"shop_input"`
+type Product struct {
+    TraceabilityCode     string               `json:"traceabilityCode"`
+    BeeFarmInput         BeeFarmInput         `json:"beeFarmInput"`
+    ProcessingPlantInput ProcessingPlantInput `json:"processingPlantInput"`
+    WholesalerInput      WholesalerInput      `json:"wholesalerInput"`
+    RetailerInput        RetailerInput        `json:"retailerInput"`
 }
 
 type HistoryQueryResult struct {
-    Record    *Fruit `json:"record"`
-    TxId      string `json:"txId"`
-    Timestamp string `json:"timestamp"`
-    IsDelete  bool   `json:"isDelete"`
+    Record    *Product `json:"record"`
+    TxId      string   `json:"txId"`
+    Timestamp string   `json:"timestamp"`
+    IsDelete  bool     `json:"isDelete"`
 }
 
-type Farmer_input struct {
-    Fa_fruitName   string `json:"fa_fruitName"`
-    Fa_origin      string `json:"fa_origin"`
-    Fa_plantTime   string `json:"fa_plantTime"`
-    Fa_pickingTime string `json:"fa_pickingTime"`
-    Fa_farmerName  string `json:"fa_farmerName"`
-    Fa_Txid        string `json:"fa_txid"`
-    Fa_Timestamp   string `json:"fa_timestamp"`
+type BeeFarmInput struct {
+    BeeFarmName      string `json:"beeFarmName"`
+    BeeFarmLocation  string `json:"beeFarmLocation"`
+    BeeBoxId         string `json:"beeBoxId"`
+    HoneyVariety     string `json:"honeyVariety"`
+    FlowerVariety    string `json:"flowerVariety"`
+    BeeFarmTxid      string `json:"beeFarmTxid"`
+    BeeFarmTimestamp string `json:"beeFarmTimestamp"`
 }
 
-type Factory_input struct {
-    Fac_productName     string `json:"fac_productName"`
-    Fac_productionbatch string `json:"fac_productionbatch"`
-    Fac_productionTime  string `json:"fac_productionTime"`
-    Fac_factoryName     string `json:"fac_factoryName"`
-    Fac_contactNumber   string `json:"fac_contactNumber"`
-    Fac_Txid            string `json:"fac_txid"`
-    Fac_Timestamp       string `json:"fac_timestamp"`
+type ProcessingPlantInput struct {
+    ProcessingPlantName      string `json:"processingPlantName"`
+    ProcessingPlantLocation  string `json:"processingPlantLocation"`
+    ProcessingBatchId        string `json:"processingBatchId"`
+    PackagingSpecification   string `json:"packagingSpecification"`
+    ShelfLife                string `json:"shelfLife"`
+    ProcessingPlantTxid      string `json:"processingPlantTxid"`
+    ProcessingPlantTimestamp string `json:"processingPlantTimestamp"`
 }
 
-type Driver_input struct {
-    Dr_name      string `json:"dr_name"`
-    Dr_age       string `json:"dr_age"`
-    Dr_phone     string `json:"dr_phone"`
-    Dr_carNumber string `json:"dr_carNumber"`
-    Dr_transport string `json:"dr_transport"`
-    Dr_Txid      string `json:"dr_txid"`
-    Dr_Timestamp string `json:"dr_timestamp"`
+type WholesalerInput struct {
+    WarehouseName        string `json:"warehouseName"`
+    WarehouseLocation    string `json:"warehouseLocation"`
+    WholesalerBatchId    string `json:"wholesalerBatchId"`
+    TransportationMethod string `json:"transportationMethod"`
+    TransportMode        string `json:"transportMode"`
+    WholesalerTxid       string `json:"wholesalerTxid"`
+    WholesalerTimestamp  string `json:"wholesalerTimestamp"`
 }
 
-type Shop_input struct {
-    Sh_storeTime   string `json:"sh_storeTime"`
-    Sh_sellTime    string `json:"sh_sellTime"`
-    Sh_shopName    string `json:"sh_shopName"`
-    Sh_shopAddress string `json:"sh_shopAddress"`
-    Sh_shopPhone   string `json:"sh_shopPhone"`
-    Sh_Txid        string `json:"sh_txid"`
-    Sh_Timestamp   string `json:"sh_timestamp"`
+type RetailerInput struct {
+    StoreName         string `json:"storeName"`
+    StoreLocation     string `json:"storeLocation"`
+    RetailerBatchId   string `json:"retailerBatchId"`
+    SalesChannel      string `json:"salesChannel"`
+    SalesPrice        string `json:"salesPrice"`
+    RetailerTxid      string `json:"retailerTxid"`
+    RetailerTimestamp string `json:"retailerTimestamp"`
 }

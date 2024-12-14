@@ -20,7 +20,7 @@ func (s *SmartContract) RegisterUser(ctx contractapi.TransactionContextInterface
         UserID:       userID,
         UserType:     userType,
         RealInfoHash: realInfoHash,
-        FruitList:    []*Fruit{},
+        ProductList:    []*Product{},
     }
     userAsBytes, err := json.Marshal(user)
     if err != nil {
@@ -38,15 +38,15 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
     if err != nil {
         return "", fmt.Errorf("failed to get user type: %v", err)
     }
-    FruitAsBytes, err := ctx.GetStub().GetState(traceabilityCode)
+    ProductAsBytes, err := ctx.GetStub().GetState(traceabilityCode)
     if err != nil {
         return "", fmt.Errorf("failed to read from world state: %v", err)
     }
-    var fruit Fruit
-    if FruitAsBytes != nil {
-        err = json.Unmarshal(FruitAsBytes, &fruit)
+    var product Product
+    if ProductAsBytes != nil {
+        err = json.Unmarshal(ProductAsBytes, &product)
         if err != nil {
-            return "", fmt.Errorf("failed to unmarshal fruit: %v", err)
+            return "", fmt.Errorf("failed to unmarshal product: %v", err)
         }
     }
     txtime, err := ctx.GetStub().GetTxTimestamp()
@@ -56,65 +56,65 @@ func (s *SmartContract) Uplink(ctx contractapi.TransactionContextInterface, user
     timeLocation, _ := time.LoadLocation("Asia/Shanghai")
     format := time.Unix(txtime.Seconds, 0).In(timeLocation).Format("2006-01-02 15:04:05")
     txid := ctx.GetStub().GetTxID()
-    fruit.Traceability_code = traceabilityCode
+    product.TraceabilityCode = traceabilityCode
     switch userType {
     case "种植户":
-        fruit.Farmer_input.Fa_fruitName = arg1
-        fruit.Farmer_input.Fa_origin = arg2
-        fruit.Farmer_input.Fa_plantTime = arg3
-        fruit.Farmer_input.Fa_pickingTime = arg4
-        fruit.Farmer_input.Fa_farmerName = arg5
-        fruit.Farmer_input.Fa_IPFSCID = arg6
-        fruit.Farmer_input.Fa_IPFSFileName = arg7
-        fruit.Farmer_input.Fa_Txid = txid
-        fruit.Farmer_input.Fa_Timestamp = format
+        product.BeeFarmInput.BeeFarmName = arg1
+        product.BeeFarmInput.BeeFarmLocation = arg2
+        product.BeeFarmInput.BeeBoxId = arg3
+        product.BeeFarmInput.HoneyVariety = arg4
+        product.BeeFarmInput.FlowerVariety = arg5
+        product.BeeFarmInput.Fa_IPFSCID = arg6
+        product.BeeFarmInput.Fa_IPFSFileName = arg7
+        product.BeeFarmInput.BeeFarmTxid = txid
+        product.BeeFarmInput.BeeFarmTimestamp = format
     case "工厂":
-        fruit.Factory_input.Fac_productName = arg1
-        fruit.Factory_input.Fac_productionbatch = arg2
-        fruit.Factory_input.Fac_productionTime = arg3
-        fruit.Factory_input.Fac_factoryName = arg4
-        fruit.Factory_input.Fac_contactNumber = arg5
-        fruit.Factory_input.Fac_IPFSCID = arg6
-        fruit.Factory_input.Fac_IPFSFileName = arg7
-        fruit.Factory_input.Fac_Txid = txid
-        fruit.Factory_input.Fac_Timestamp = format
+        product.ProcessingPlantInput.ProcessingPlantName = arg1
+        product.ProcessingPlantInput.ProcessingPlantLocation = arg2
+        product.ProcessingPlantInput.ProcessingBatchId = arg3
+        product.ProcessingPlantInput.PackagingSpecification = arg4
+        product.ProcessingPlantInput.ShelfLife = arg5
+        product.ProcessingPlantInput.Fac_IPFSCID = arg6
+        product.ProcessingPlantInput.Fac_IPFSFileName = arg7
+        product.ProcessingPlantInput.ProcessingPlantTxid = txid
+        product.ProcessingPlantInput.ProcessingPlantTimestamp = format
     case "运输司机":
-        fruit.Driver_input.Dr_name = arg1
-        fruit.Driver_input.Dr_age = arg2
-        fruit.Driver_input.Dr_phone = arg3
-        fruit.Driver_input.Dr_carNumber = arg4
-        fruit.Driver_input.Dr_transport = arg5
-        fruit.Driver_input.Dr_IPFSCID = arg6
-        fruit.Driver_input.Dr_IPFSFileName = arg7
-        fruit.Driver_input.Dr_Txid = txid
-        fruit.Driver_input.Dr_Timestamp = format
+        product.WholesalerInput.WarehouseName = arg1
+        product.WholesalerInput.WarehouseLocation = arg2
+        product.WholesalerInput.WholesalerBatchId = arg3
+        product.WholesalerInput.TransportationMethod = arg4
+        product.WholesalerInput.TransportMode = arg5
+        product.WholesalerInput.Dr_IPFSCID = arg6
+        product.WholesalerInput.Dr_IPFSFileName = arg7
+        product.WholesalerInput.WholesalerTxid = txid
+        product.WholesalerInput.WholesalerTimestamp = format
     case "商店":
-        fruit.Shop_input.Sh_storeTime = arg1
-        fruit.Shop_input.Sh_sellTime = arg2
-        fruit.Shop_input.Sh_shopName = arg3
-        fruit.Shop_input.Sh_shopAddress = arg4
-        fruit.Shop_input.Sh_shopPhone = arg5
-        fruit.Shop_input.Sh_IPFSCID = arg6
-        fruit.Shop_input.Sh_IPFSFileName = arg7
-        fruit.Shop_input.Sh_Txid = txid
-        fruit.Shop_input.Sh_Timestamp = format
+        product.RetailerInput.StoreName = arg1
+        product.RetailerInput.StoreLocation = arg2
+        product.RetailerInput.RetailerBatchId = arg3
+        product.RetailerInput.SalesChannel = arg4
+        product.RetailerInput.SalesPrice = arg5
+        product.RetailerInput.Sh_IPFSCID = arg6
+        product.RetailerInput.Sh_IPFSFileName = arg7
+        product.RetailerInput.RetailerTxid = txid
+        product.RetailerInput.RetailerTimestamp = format
     }
-    fruitAsBytes, err := json.Marshal(fruit)
+    productAsBytes, err := json.Marshal(product)
     if err != nil {
-        return "", fmt.Errorf("failed to marshal fruit: %v", err)
+        return "", fmt.Errorf("failed to marshal product: %v", err)
     }
-    err = ctx.GetStub().PutState(traceabilityCode, fruitAsBytes)
+    err = ctx.GetStub().PutState(traceabilityCode, productAsBytes)
     if err != nil {
-        return "", fmt.Errorf("failed to put fruit: %v", err)
+        return "", fmt.Errorf("failed to put product: %v", err)
     }
-    err = s.AddFruit(ctx, userID, &fruit)
+    err = s.AddProduct(ctx, userID, &product)
     if err != nil {
-        return "", fmt.Errorf("failed to add fruit to user: %v", err)
+        return "", fmt.Errorf("failed to add product to user: %v", err)
     }
     return txid, nil
 }
 
-func (s *SmartContract) AddFruit(ctx contractapi.TransactionContextInterface, userID string, fruit *Fruit) error {
+func (s *SmartContract) AddProduct(ctx contractapi.TransactionContextInterface, userID string, product *Product) error {
     userBytes, err := ctx.GetStub().GetState(userID)
     if err != nil {
         return fmt.Errorf("failed to read from world state: %v", err)
@@ -127,7 +127,7 @@ func (s *SmartContract) AddFruit(ctx contractapi.TransactionContextInterface, us
     if err != nil {
         return err
     }
-    user.FruitList = append(user.FruitList, fruit)
+    user.ProductList = append(user.ProductList, product)
     userAsBytes, err := json.Marshal(user)
     if err != nil {
         return err
@@ -171,22 +171,22 @@ func (s *SmartContract) GetUserInfo(ctx contractapi.TransactionContextInterface,
     return &user, nil
 }
 
-func (s *SmartContract) GetFruitInfo(ctx contractapi.TransactionContextInterface, traceabilityCode string) (*Fruit, error) {
-    FruitAsBytes, err := ctx.GetStub().GetState(traceabilityCode)
+func (s *SmartContract) GetProductInfo(ctx contractapi.TransactionContextInterface, traceabilityCode string) (*Product, error) {
+    ProductAsBytes, err := ctx.GetStub().GetState(traceabilityCode)
     if err != nil {
-        return &Fruit{}, fmt.Errorf("failed to read from world state: %v", err)
+        return &Product{}, fmt.Errorf("failed to read from world state: %v", err)
     }
-    var fruit Fruit
-    if FruitAsBytes != nil {
-        err = json.Unmarshal(FruitAsBytes, &fruit)
+    var product Product
+    if ProductAsBytes != nil {
+        err = json.Unmarshal(ProductAsBytes, &product)
         if err != nil {
-            return &Fruit{}, fmt.Errorf("failed to unmarshal fruit: %v", err)
+            return &Product{}, fmt.Errorf("failed to unmarshal product: %v", err)
         }
     }
-    return &fruit, nil
+    return &product, nil
 }
 
-func (s *SmartContract) GetFruitList(ctx contractapi.TransactionContextInterface, userID string) ([]*Fruit, error) {
+func (s *SmartContract) GetProductList(ctx contractapi.TransactionContextInterface, userID string) ([]*Product, error) {
     userBytes, err := ctx.GetStub().GetState(userID)
     if err != nil {
         return nil, fmt.Errorf("failed to read from world state: %v", err)
@@ -199,34 +199,34 @@ func (s *SmartContract) GetFruitList(ctx contractapi.TransactionContextInterface
     if err != nil {
         return nil, err
     }
-    return user.FruitList, nil
+    return user.ProductList, nil
 }
 
-func (s *SmartContract) GetAllFruitInfo(ctx contractapi.TransactionContextInterface) ([]Fruit, error) {
-    fruitListAsBytes, err := ctx.GetStub().GetStateByRange("", "")
+func (s *SmartContract) GetAllProductInfo(ctx contractapi.TransactionContextInterface) ([]Product, error) {
+    productListAsBytes, err := ctx.GetStub().GetStateByRange("", "")
     if err != nil {
         return nil, fmt.Errorf("failed to read from world state: %v", err)
     }
-    defer func(fruitListAsBytes shim.StateQueryIteratorInterface) {
-        _ = fruitListAsBytes.Close()
-    }(fruitListAsBytes)
-    var fruits []Fruit
-    for fruitListAsBytes.HasNext() {
-        queryResponse, err := fruitListAsBytes.Next()
+    defer func(productListAsBytes shim.StateQueryIteratorInterface) {
+        _ = productListAsBytes.Close()
+    }(productListAsBytes)
+    var products []Product
+    for productListAsBytes.HasNext() {
+        queryResponse, err := productListAsBytes.Next()
         if err != nil {
             return nil, err
         }
-        var fruit Fruit
-        err = json.Unmarshal(queryResponse.Value, &fruit)
+        var product Product
+        err = json.Unmarshal(queryResponse.Value, &product)
         if err != nil {
             return nil, err
         }
-        fruits = append(fruits, fruit)
+        products = append(products, product)
     }
-    return fruits, nil
+    return products, nil
 }
 
-func (s *SmartContract) GetFruitHistory(ctx contractapi.TransactionContextInterface, traceabilityCode string) ([]HistoryQueryResult, error) {
+func (s *SmartContract) GetProductHistory(ctx contractapi.TransactionContextInterface, traceabilityCode string) ([]HistoryQueryResult, error) {
     log.Printf("Get Asset History: ID %v", traceabilityCode)
     resultsIterator, err := ctx.GetStub().GetHistoryForKey(traceabilityCode)
     if err != nil {
@@ -241,15 +241,15 @@ func (s *SmartContract) GetFruitHistory(ctx contractapi.TransactionContextInterf
         if err != nil {
             return nil, err
         }
-        var fruit Fruit
+        var product Product
         if len(response.Value) > 0 {
-            err = json.Unmarshal(response.Value, &fruit)
+            err = json.Unmarshal(response.Value, &product)
             if err != nil {
                 return nil, err
             }
         } else {
-            fruit = Fruit{
-                Traceability_code: traceabilityCode,
+            product = Product{
+                TraceabilityCode: traceabilityCode,
             }
         }
         //goland:noinspection GoDeprecation
@@ -266,7 +266,7 @@ func (s *SmartContract) GetFruitHistory(ctx contractapi.TransactionContextInterf
         record := HistoryQueryResult{
             TxId:      response.TxId,
             Timestamp: formattedTime,
-            Record:    &fruit,
+            Record:    &product,
             IsDelete:  response.IsDelete,
         }
         records = append(records, record)

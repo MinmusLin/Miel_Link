@@ -1,6 +1,6 @@
 [     
     { 
-        // userID string, traceability_code string, arg1 string, arg2 string, arg3 string, arg4 string, arg5 string
+        // userID string, traceabilityCode string, arg1 string, arg2 string, arg3 string, arg4 string, arg5 string
         "invoke": "Uplink",
         "args": ["2","tracecode3","3apple","Shanxi","2018-01-01","2018-10-01","Tom"]
     },
@@ -17,15 +17,15 @@
         "args" :["2"]
     },
     {
-        "invoke":"GetFruitList",
+        "invoke":"GetProductList",
         "args" :["2"]
     },
     {
-        "invoke":"GetFruitInfo",
+        "invoke":"GetProductInfo",
         "args" :["tracecode3"]
     },
     {
-        "invoke":"GetFruitHistory",
+        "invoke":"GetProductHistory",
         "args" :["tracecode3"]
     }
 ]

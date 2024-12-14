@@ -33,9 +33,9 @@ export function ipfsUpload(data) {
     })
 }
 
-export function getFruitInfo(data) {
+export function getProductInfo(data) {
     return request({
-        url: '/getFruitInfo',
+        url: '/getProductInfo',
         method: 'post',
         headers: {
             'Content-Type': 'multipart/form-data'
@@ -44,9 +44,9 @@ export function getFruitInfo(data) {
     })
 }
 
-export function getFruitList(data) {
+export function getProductList(data) {
     return request({
-        url: '/getFruitList',
+        url: '/getProductList',
         method: 'post',
         headers: {
             'Content-Type': 'multipart/form-data'
@@ -55,9 +55,9 @@ export function getFruitList(data) {
     })
 }
 
-export function getAllFruitInfo(data) {
+export function getAllProductInfo(data) {
     return request({
-        url: '/getAllFruitInfo',
+        url: '/getAllProductInfo',
         method: 'post',
         headers: {
             'Content-Type': 'multipart/form-data'
@@ -66,9 +66,9 @@ export function getAllFruitInfo(data) {
     })
 }
 
-export function getFruitHistory(data) {
+export function getProductHistory(data) {
     return request({
-        url: '/getFruitHistory',
+        url: '/getProductHistory',
         method: 'post',
         headers: {
             'Content-Type': 'multipart/form-data'

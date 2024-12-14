@@ -21,12 +21,12 @@ func Uplink(c *gin.Context) {
         "code":              200,
         "message":           "Uplink successfully",
         "txid":              res,
-        "traceability_code": farmerTraceabilityCode,
+        "traceabilityCode": farmerTraceabilityCode,
     })
 }
 
-func GetFruitInfo(c *gin.Context) {
-    res, err := pkg.ChaincodeQuery("GetFruitInfo", c.PostForm("traceability_code"))
+func GetProductInfo(c *gin.Context) {
+    res, err := pkg.ChaincodeQuery("GetProductInfo", c.PostForm("traceabilityCode"))
     if err != nil {
         c.JSON(200, gin.H{
             "message": "Query failed: " + err.Error(),
@@ -39,9 +39,9 @@ func GetFruitInfo(c *gin.Context) {
     })
 }
 
-func GetFruitList(c *gin.Context) {
+func GetProductList(c *gin.Context) {
     userID, _ := c.Get("userID")
-    res, err := pkg.ChaincodeQuery("GetFruitList", userID.(string))
+    res, err := pkg.ChaincodeQuery("GetProductList", userID.(string))
     if err != nil {
         c.JSON(200, gin.H{
             "message": "Query failed: " + err.Error(),
@@ -54,8 +54,8 @@ func GetFruitList(c *gin.Context) {
     })
 }
 
-func GetAllFruitInfo(c *gin.Context) {
-    res, err := pkg.ChaincodeQuery("GetAllFruitInfo", c.PostForm("arg"))
+func GetAllProductInfo(c *gin.Context) {
+    res, err := pkg.ChaincodeQuery("GetAllProductInfo", c.PostForm("arg"))
     if err != nil {
         c.JSON(200, gin.H{
             "message": "Query failed: " + err.Error(),
@@ -68,8 +68,8 @@ func GetAllFruitInfo(c *gin.Context) {
     })
 }
 
-func GetFruitHistory(c *gin.Context) {
-    res, err := pkg.ChaincodeQuery("GetFruitHistory", c.PostForm("traceability_code"))
+func GetProductHistory(c *gin.Context) {
+    res, err := pkg.ChaincodeQuery("GetProductHistory", c.PostForm("traceabilityCode"))
     if err != nil {
         c.JSON(200, gin.H{
             "message": "Query failed: " + err.Error(),
@@ -91,7 +91,7 @@ func BuildArgs(c *gin.Context, farmerTraceabilityCode string) []string {
     if userType == "种植户" {
         args = append(args, farmerTraceabilityCode)
     } else {
-        args = append(args, c.PostForm("traceability_code"))
+        args = append(args, c.PostForm("traceabilityCode"))
     }
     args = append(args, c.PostForm("arg1"))
     args = append(args, c.PostForm("arg2"))

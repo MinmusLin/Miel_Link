@@ -23,7 +23,7 @@ func MysqlInit() (err error) {
     _, _ = db.Exec("CREATE DATABASE IF NOT EXISTS " + viper.GetString("mysql.db"))
     _, _ = db.Exec("USE " + viper.GetString("mysql.db"))
     //goland:noinspection SqlNoDataSourceInspection
-    _, err = db.Exec("CREATE TABLE IF NOT EXISTS users (user_id VARCHAR(50) PRIMARY KEY, username VARCHAR(50) UNIQUE NOT NULL, password VARCHAR(50) NOT NULL, realInfo VARCHAR(100))")
+    _, err = db.Exec("CREATE TABLE IF NOT EXISTS users (userID VARCHAR(50) PRIMARY KEY, username VARCHAR(50) UNIQUE NOT NULL, password VARCHAR(50) NOT NULL, realInfo VARCHAR(100))")
     if err != nil {
         panic(err.Error())
     }
@@ -41,7 +41,7 @@ func MysqlInit() (err error) {
 
 func InsertUser(user *model.MysqlUser) (err error) {
     //goland:noinspection SqlNoDataSourceInspection
-    sqlStr := "select count(user_id) from users where username = ?"
+    sqlStr := "select count(userID) from users where username = ?"
     var count int64
     err = db.QueryRow(sqlStr, user.Username).Scan(&count)
     if err != nil {
@@ -51,7 +51,7 @@ func InsertUser(user *model.MysqlUser) (err error) {
         return errors.New("用户名已存在")
     }
     //goland:noinspection SqlNoDataSourceInspection
-    sqlStr = "insert into users(user_id,username,password,realInfo) values(?,?,?,?)"
+    sqlStr = "insert into users(userID,username,password,realInfo) values(?,?,?,?)"
     _, err = db.Exec(sqlStr, user.UserID, user.Username, EncryptByMD5(user.Password), EncryptByMD5(user.RealInfo))
     if err != nil {
         return err
@@ -75,7 +75,7 @@ func Login(user *model.MysqlUser) (err error) {
 
 func GetUserID(username string) (userID string, err error) {
     //goland:noinspection SqlNoDataSourceInspection
-    sqlStr := "select user_id from users where username = ?"
+    sqlStr := "select userID from users where username = ?"
     err = db.QueryRow(sqlStr, username).Scan(&userID)
     if err != nil {
         return "", err
@@ -85,7 +85,7 @@ func GetUserID(username string) (userID string, err error) {
 
 func GetUsername(userID string) (username string, err error) {
     //goland:noinspection SqlNoDataSourceInspection
-    sqlStr := "select username from users where user_id = ?"
+    sqlStr := "select username from users where userID = ?"
     err = db.QueryRow(sqlStr, userID).Scan(&username)
     if err != nil {
         return "", err

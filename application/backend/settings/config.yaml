@@ -1,17 +1,17 @@
 app:
-  name: "fabricTraceServer"
+  name: "mielLinkServer"
   mode: "dev"
   port: 9090
   salt: "testsalt"
 
 jwt:
   secret: "testsecret"
-  issuer: "fabricTraceServer"
+  issuer: "mielLinkServer"
 
 mysql:
   host: "127.0.0.1"
   port: 3337
   user: "root"
-  password: "fabrictrace"
+  password: "miellink"
   charset: "utf8mb4"
-  db: "fabrictrace"
+  db: "miellink"

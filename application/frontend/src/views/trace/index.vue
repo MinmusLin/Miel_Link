@@ -2,8 +2,8 @@
 <template>
   <div class="trace-container">
     <el-input v-model="input" placeholder="请输入溯源码查询" style="width: 300px;margin-right: 15px;" />
-    <el-button type="primary" plain @click="FruitInfo"> 查询 </el-button>
-    <el-button type="success" plain @click="AllFruitInfo"> 获取所有农产品信息 </el-button>
+    <el-button type="primary" plain @click="ProductInfo"> 查询 </el-button>
+    <el-button type="success" plain @click="AllProductInfo"> 获取所有农产品信息 </el-button>
     <el-table
       :data="tracedata"
       style="width: 100%"
@@ -13,118 +13,118 @@
           <el-form label-position="left" inline class="demo-table-expand">
             <div><span class="trace-text" style="color: #67C23A;">农产品信息</span></div>
             <el-form-item label="农产品名称：">
-              <span>{{ props.row.farmer_input.fa_fruitName }}</span>
+              <span>{{ props.row.beeFarmInput.beeFarmName }}</span>
             </el-form-item>
             <el-form-item label="产地：">
-              <span>{{ props.row.farmer_input.fa_origin }}</span>
+              <span>{{ props.row.beeFarmInput.beeFarmLocation }}</span>
             </el-form-item>
             <el-form-item label="种植时间：">
-              <span>{{ props.row.farmer_input.fa_plantTime }}</span>
+              <span>{{ props.row.beeFarmInput.beeBoxId }}</span>
             </el-form-item>
             <el-form-item label="采摘时间：">
-              <span>{{ props.row.farmer_input.fa_pickingTime }}</span>
+              <span>{{ props.row.beeFarmInput.honeyVariety }}</span>
             </el-form-item>
             <el-form-item label="种植户名称：">
-              <span>{{ props.row.farmer_input.fa_farmerName }}</span>
+              <span>{{ props.row.beeFarmInput.flowerVariety }}</span>
             </el-form-item>
-            <el-form-item v-show="props.row.farmer_input.fa_ipfscid" label="附件IPFSCID：">
-              <el-link type="success" @click="GetIPFSFile(props.row.farmer_input.fa_ipfscid,props.row.farmer_input.fa_ipfsfilename)">{{ props.row.farmer_input.fa_ipfscid }}</el-link>
+            <el-form-item v-show="props.row.beeFarmInput.fa_ipfscid" label="附件IPFSCID：">
+              <el-link type="success" @click="GetIPFSFile(props.row.beeFarmInput.fa_ipfscid,props.row.beeFarmInput.fa_ipfsfilename)">{{ props.row.beeFarmInput.fa_ipfscid }}</el-link>
             </el-form-item>
             <el-form-item label="区块链交易ID：">
-              <span>{{ props.row.farmer_input.fa_txid }}</span>
+              <span>{{ props.row.beeFarmInput.beeFarmTxid }}</span>
             </el-form-item>
             <el-form-item label="区块链交易时间：">
-              <span>{{ props.row.farmer_input.fa_timestamp }}</span>
+              <span>{{ props.row.beeFarmInput.beeFarmTimestamp }}</span>
             </el-form-item>
             <div><span class="trace-text" style="color: #409EFF;">工厂信息</span></div>
             <el-form-item label="商品名称：">
-              <span>{{ props.row.factory_input.fac_productName }}</span>
+              <span>{{ props.row.processingPlantInput.processingPlantName }}</span>
             </el-form-item>
             <el-form-item label="生产批次：">
-              <span>{{ props.row.factory_input.fac_productionbatch }}</span>
+              <span>{{ props.row.processingPlantInput.processingPlantLocation }}</span>
             </el-form-item>
             <el-form-item label="生产时间：">
-              <span>{{ props.row.factory_input.fac_productionTime }}</span>
+              <span>{{ props.row.processingPlantInput.processingBatchId }}</span>
             </el-form-item>
             <el-form-item label="工厂名称与厂址：">
-              <span>{{ props.row.factory_input.fac_factoryName }}</span>
+              <span>{{ props.row.processingPlantInput.packagingSpecification }}</span>
             </el-form-item>
             <el-form-item label="联系电话：">
-              <span>{{ props.row.factory_input.fac_contactNumber }}</span>
+              <span>{{ props.row.processingPlantInput.shelfLife }}</span>
             </el-form-item>
-            <el-form-item v-show="props.row.factory_input.fac_ipfscid" label="附件IPFSCID：">
-              <el-link type="success" @click="GetIPFSFile(props.row.factory_input.fac_ipfscid,props.row.factory_input.fac_ipfsfilename)">{{ props.row.farmer_input.fac_ipfscid }}</el-link>
+            <el-form-item v-show="props.row.processingPlantInput.fac_ipfscid" label="附件IPFSCID：">
+              <el-link type="success" @click="GetIPFSFile(props.row.processingPlantInput.fac_ipfscid,props.row.processingPlantInput.fac_ipfsfilename)">{{ props.row.beeFarmInput.fac_ipfscid }}</el-link>
             </el-form-item>
             <el-form-item label="区块链交易ID：">
-              <span>{{ props.row.factory_input.fac_txid }}</span>
+              <span>{{ props.row.processingPlantInput.processingPlantTxid }}</span>
             </el-form-item>
             <el-form-item label="区块链交易时间：">
-              <span>{{ props.row.factory_input.fac_timestamp }}</span>
+              <span>{{ props.row.processingPlantInput.processingPlantTimestamp }}</span>
             </el-form-item>
             <div><span class="trace-text" style="color: #E6A23C;">物流轨迹信息</span></div>
             <el-form-item label="姓名：">
-              <span>{{ props.row.driver_input.dr_name }}</span>
+              <span>{{ props.row.wholesalerInput.warehouseName }}</span>
             </el-form-item>
             <el-form-item label="年龄：">
-              <span>{{ props.row.driver_input.dr_age }}</span>
+              <span>{{ props.row.wholesalerInput.warehouseLocation }}</span>
             </el-form-item>
             <el-form-item label="联系电话：">
-              <span>{{ props.row.driver_input.dr_phone }}</span>
+              <span>{{ props.row.wholesalerInput.wholesalerBatchId }}</span>
             </el-form-item>
             <el-form-item label="车牌号：">
-              <span>{{ props.row.driver_input.dr_carNumber }}</span>
+              <span>{{ props.row.wholesalerInput.transportationMethod }}</span>
             </el-form-item>
             <el-form-item label="运输记录：">
-              <span>{{ props.row.driver_input.dr_transport }}</span>
+              <span>{{ props.row.wholesalerInput.transportMode }}</span>
             </el-form-item>
-            <el-form-item v-show="props.row.driver_input.dr_ipfscid" label="附件IPFSCID：">
-              <el-link type="success" @click="GetIPFSFile(props.row.driver_input.dr_ipfscid,props.row.driver_input.dr_ipfsfilename)">{{ props.row.driver_input.dr_ipfscid }}</el-link>
+            <el-form-item v-show="props.row.wholesalerInput.dr_ipfscid" label="附件IPFSCID：">
+              <el-link type="success" @click="GetIPFSFile(props.row.wholesalerInput.dr_ipfscid,props.row.wholesalerInput.dr_ipfsfilename)">{{ props.row.wholesalerInput.dr_ipfscid }}</el-link>
             </el-form-item>
             <el-form-item label="区块链交易ID：">
-              <span>{{ props.row.driver_input.dr_txid }}</span>
+              <span>{{ props.row.wholesalerInput.wholesalerTxid }}</span>
             </el-form-item>
             <el-form-item label="区块链交易时间：">
-              <span>{{ props.row.driver_input.dr_timestamp }}</span>
+              <span>{{ props.row.wholesalerInput.wholesalerTimestamp }}</span>
             </el-form-item>
             <div><span class="trace-text" style="color: #909399;">商店信息</span></div>
             <el-form-item label="入库时间：">
-              <span>{{ props.row.shop_input.sh_storeTime }}</span>
+              <span>{{ props.row.retailerInput.storeName }}</span>
             </el-form-item>
             <el-form-item label="销售时间：">
-              <span>{{ props.row.shop_input.sh_sellTime }}</span>
+              <span>{{ props.row.retailerInput.storeLocation }}</span>
             </el-form-item>
             <el-form-item label="商店名称：">
-              <span>{{ props.row.shop_input.sh_shopName }}</span>
+              <span>{{ props.row.retailerInput.retailerBatchId }}</span>
             </el-form-item>
             <el-form-item label="商店位置：">
-              <span>{{ props.row.shop_input.sh_shopAddress }}</span>
+              <span>{{ props.row.retailerInput.salesChannel }}</span>
             </el-form-item>
             <el-form-item label="商店电话：">
-              <span>{{ props.row.shop_input.sh_shopPhone }}</span>
+              <span>{{ props.row.retailerInput.salesPrice }}</span>
             </el-form-item>
-            <el-form-item v-show="props.row.shop_input.sh_ipfscid" label="附件IPFSCID：">
-              <el-link type="success" @click="GetIPFSFile(props.row.shop_input.sh_ipfscid,props.row.shop_input.sh_ipfsfilename)">{{ props.row.shop_input.sh_ipfscid }}</el-link>
+            <el-form-item v-show="props.row.retailerInput.sh_ipfscid" label="附件IPFSCID：">
+              <el-link type="success" @click="GetIPFSFile(props.row.retailerInput.sh_ipfscid,props.row.retailerInput.sh_ipfsfilename)">{{ props.row.retailerInput.sh_ipfscid }}</el-link>
             </el-form-item>
             <el-form-item label="区块链交易ID：">
-              <span>{{ props.row.shop_input.sh_txid }}</span>
+              <span>{{ props.row.retailerInput.retailerTxid }}</span>
             </el-form-item>
             <el-form-item label="区块链交易时间：">
-              <span>{{ props.row.shop_input.sh_timestamp }}</span>
+              <span>{{ props.row.retailerInput.retailerTimestamp }}</span>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
       <el-table-column
         label="溯源码"
-        prop="traceability_code"
+        prop="traceabilityCode"
       />
       <el-table-column
         label="农产品名称"
-        prop="farmer_input.fa_fruitName"
+        prop="beeFarmInput.beeFarmName"
       />
       <el-table-column
         label="农产品采摘时间"
-        prop="farmer_input.fa_pickingTime"
+        prop="beeFarmInput.honeyVariety"
       />
     </el-table>
   </div>
@@ -132,7 +132,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getFruitInfo, getFruitList, getAllFruitInfo, getFruitHistory, ipfsDownload } from '@/api/trace'
+import { getProductInfo, getProductList, getAllProductInfo, getProductHistory, ipfsDownload } from '@/api/trace'
 
 export default {
   name: 'Trace',
@@ -150,8 +150,8 @@ export default {
     ])
   },
   created() {
-    getFruitList().then(res => {
-      this.tracedata = JSON.parse(res.data).filter(item => item.traceability_code !== '')
+    getProductList().then(res => {
+      this.tracedata = JSON.parse(res.data).filter(item => item.traceabilityCode !== '')
     })
   },
   methods: {
@@ -163,15 +163,15 @@ export default {
         window.open('http://43.156.142.179:9090/download?filename=' + res.data)
       })
     },
-    AllFruitInfo() {
-      getAllFruitInfo().then(res => {
-        this.tracedata = JSON.parse(res.data).filter(item => item.traceability_code !== '')
+    AllProductInfo() {
+      getAllProductInfo().then(res => {
+        this.tracedata = JSON.parse(res.data).filter(item => item.traceabilityCode !== '')
       })
     },
-    FruitInfo() {
+    ProductInfo() {
       var formData = new FormData()
-      formData.append('traceability_code', this.input)
-      getFruitInfo(formData).then(res => {
+      formData.append('traceabilityCode', this.input)
+      getProductInfo(formData).then(res => {
         if (res.code === 200) {
           this.tracedata = []
           this.tracedata[0] = JSON.parse(res.data)
