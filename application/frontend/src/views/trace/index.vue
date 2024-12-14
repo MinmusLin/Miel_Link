@@ -12,19 +12,19 @@
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
             <div><span class="trace-text" style="color: #67C23A;">农产品信息</span></div>
-            <el-form-item label="农产品名称：">
+            <el-form-item label="养蜂场名称：">
               <span>{{ props.row.beeFarmInput.beeFarmName }}</span>
             </el-form-item>
-            <el-form-item label="产地：">
+            <el-form-item label="养蜂场地点：">
               <span>{{ props.row.beeFarmInput.beeFarmLocation }}</span>
             </el-form-item>
-            <el-form-item label="种植时间：">
+            <el-form-item label="养蜂箱编号：">
               <span>{{ props.row.beeFarmInput.beeBoxId }}</span>
             </el-form-item>
-            <el-form-item label="采摘时间：">
+            <el-form-item label="蜂蜜种类：">
               <span>{{ props.row.beeFarmInput.honeyVariety }}</span>
             </el-form-item>
-            <el-form-item label="养蜂场名称：">
+            <el-form-item label="花卉种类：">
               <span>{{ props.row.beeFarmInput.flowerVariety }}</span>
             </el-form-item>
             <el-form-item v-show="props.row.beeFarmInput.beeFarmIPFSCID" label="附件IPFSCID：">
@@ -119,11 +119,11 @@
         prop="traceabilityCode"
       />
       <el-table-column
-        label="农产品名称"
+        label="养蜂场名称"
         prop="beeFarmInput.beeFarmName"
       />
       <el-table-column
-        label="农产品采摘时间"
+        label="农产品蜂蜜种类"
         prop="beeFarmInput.honeyVariety"
       />
     </el-table>

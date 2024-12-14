@@ -11,19 +11,19 @@
           <el-input v-model="tracedata.traceabilityCode" />
         </el-form-item>
         <div v-show="userType==='养蜂场'">
-          <el-form-item label="农产品名称:" style="width: 300px" label-width="120px">
+          <el-form-item label="养蜂场名称:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.BeeFarmInput.BeeFarmName" />
           </el-form-item>
-          <el-form-item label="产地:" style="width: 300px" label-width="120px">
+          <el-form-item label="养蜂场地点:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.BeeFarmInput.BeeFarmLocation" />
           </el-form-item>
-          <el-form-item label="种植时间:" style="width: 300px" label-width="120px">
+          <el-form-item label="养蜂箱编号:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.BeeFarmInput.BeeBoxId" />
           </el-form-item>
-          <el-form-item label="采摘时间:" style="width: 300px" label-width="120px">
+          <el-form-item label="蜂蜜种类:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.BeeFarmInput.HoneyVariety" />
           </el-form-item>
-          <el-form-item label="养蜂场名称:" style="width: 300px" label-width="120px">
+          <el-form-item label="花卉种类:" style="width: 300px" label-width="120px">
             <el-input v-model="tracedata.BeeFarmInput.FlowerVariety" />
           </el-form-item>
         </div>
