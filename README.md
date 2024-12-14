@@ -79,7 +79,7 @@ python --version
 克隆 GitHub 仓库：
 
 ```bash
-git clone MinmusLin/Miel_Link
+git clone https://github.com/MinmusLin/Miel_Link
 ```
 
 配置 Docker：
