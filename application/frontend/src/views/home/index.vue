@@ -1,31 +1,28 @@
-<!--suppress HtmlUnknownTag-->
 <template>
   <div class='page-container'>
     <div class='background'>
-      <img src='/images/homeBackground.png' alt='Home background image'>
-      <img src='/images/logo.png' alt='Website logo'>
-      <img src='/images/title.png' alt='Page title'>
-      <img src='/images/honey.png' alt='Honey icon'>
-      <div class="login">
-        <button @click="goToPage('/login')" class='login-button'>登陆</button>
-        <button @click="goToPage('/login')" class='signup-button'>注册</button>
+      <img src='/images/background.png' alt='background'>
+      <img src='/images/logo.png' alt='logo'>
+      <img src='/images/title.png' alt='title'>
+      <img src='/images/honey.png' alt='honey'>
+      <div class='login'>
+        <button @click="goToPage('/login')" class='login-button'>登陆 / 注册</button>
       </div>
     </div>
-
     <div class='selection'>
-      <div @click="goToPage('/uplink')" class='selectionCard'>
-        <img src='/images/selectionContainer.png' alt='Data entry selection background'>
-        <img src='/images/selection1.png' alt='Data entry icon'>
+      <div @click="goToPage('/uplink')" class='selection-card'>
+        <img src='/images/container.png' alt='container'>
+        <img src='/images/selection1.png' alt='selection1'>
         <button class='selection-button'>信息录入</button>
       </div>
-      <div @click="goToPage('/trace')" class="selectionCard">
-        <img src='/images/selectionContainer.png' alt='Trace query selection background'>
-        <img src='/images/selection2.png' alt='Trace query icon'>
+      <div @click="goToPage('/trace')" class='selection-card'>
+        <img src='/images/container.png' alt='container'>
+        <img src='/images/selection2.png' alt='selection2'>
         <button class='selection-button'>溯源查询</button>
       </div>
-      <div @click="openExternalLink('http://43.156.142.179:8080')" class='selectionCard'>
-        <img src='/images/selectionContainer.png' alt='Hyperledger browser selection background'>
-        <img src='/images/selection3.png' alt='Hyperledger browser icon'>
+      <div @click="openExternalLink('http://43.156.142.179:8080')" class='selection-card'>
+        <img src='/images/container.png' alt='container'>
+        <img src='/images/selection3.png' alt='selection3'>
         <button class='selection-button'>Hyperledger 浏览器</button>
       </div>
     </div>
@@ -70,8 +67,8 @@ export default {
 
     img:nth-of-type(2) {
       position: absolute;
-      top: 1%;
-      left: 1%;
+      top: 2%;
+      left: 2%;
       width: 25%;
       height: auto;
       z-index: 2;
@@ -106,18 +103,14 @@ export default {
       z-index: 5;
     }
 
-    .login-button,
-    .signup-button {
+    .login-button {
       padding: 10px 20px;
       font-size: 14px;
       border: none;
       cursor: pointer;
-    }
-
-    .login-button {
       background-color: #B16400;
-      color: #FFF;
-      border-radius: 20px 0 0 20px;
+      color: white;
+      border-radius: 18px;
 
       &:hover {
         background-color: #A35C00;
@@ -125,20 +118,6 @@ export default {
 
       &:active {
         background-color: #6F3C00;
-      }
-    }
-
-    .signup-button {
-      background-color: #FAFAFA;
-      color: #8F5100;
-      border-radius: 0 20px 20px 0;
-
-      &:hover {
-        background-color: #FFFFFF;
-      }
-
-      &:active {
-        background-color: #EDEDED;
       }
     }
   }
@@ -154,7 +133,7 @@ export default {
     background: #FFF6EB;
     cursor: pointer;
 
-    .selectionCard {
+    .selection-card {
       position: relative;
       width: 100%;
       max-width: 300px;
@@ -198,10 +177,11 @@ export default {
         width: 78%;
         padding: 10px 20px;
         font-size: 20px;
-        color: #FFF;
+        color: white;
         background-color: #8A4B00;
         border: none;
-        border-radius: 20px;
+        border-radius: 22px;
+        font-weight: bold;
       }
     }
   }

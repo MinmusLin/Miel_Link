@@ -412,10 +412,8 @@ export default {
           return '/images/wholesaler.png';
         case '零售商':
           return '/images/retailer.png';
-        case '消费者':
-          return '/images/consumer.png';
         default:
-          return '/images/default.png';
+          return '/images/consumer.png';
       }
     }
   }
