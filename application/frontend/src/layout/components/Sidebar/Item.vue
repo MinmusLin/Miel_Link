@@ -1,6 +1,6 @@
+<!--suppress HtmlUnknownAttribute-->
 <script>
 export default {
-  name: 'MenuItem',
   functional: true,
   props: {
     icon: {
@@ -17,10 +17,7 @@ export default {
     const vnodes = []
     if (icon) {
       if (icon.includes('el-icon')) {
-
-        vnodes.push(
-            <i class={[icon, 'sub-el-icon']}/>
-        )
+        vnodes.push(<i class={[icon, 'sub-el-icon']}/>)
       }
     }
     if (title) {
@@ -32,7 +29,6 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-/* noinspection CssUnusedSymbol */
 .sub-el-icon {
   color: currentColor;
   width: 1em;

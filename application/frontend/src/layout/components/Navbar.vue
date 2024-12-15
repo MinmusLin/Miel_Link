@@ -1,10 +1,11 @@
 <template>
-  <div class="navbar">
-    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar"/>
-    <breadcrumb class="breadcrumb-container"/>
-    <div class="right-menu">
+  <div class='navbar'>
+    <hamburger :is-active='sidebar.opened' class='hamburger-container' @toggleClick='toggleSideBar'/>
+    <breadcrumb class='breadcrumb-container'/>
+    <div class='right-menu'>
       <span style='display:block' @click='logout'>
-        <el-icon class='el-icon-switch-button logout-icon'></el-icon>
+        <!--suppress HtmlUnknownTag-->
+        <el-icon class='el-icon-switch-button logout-icon'/>
       </span>
     </div>
   </div>
@@ -47,7 +48,6 @@ export default {
   height: 50px;
   overflow: hidden;
   position: relative;
-  background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 
   .hamburger-container {
