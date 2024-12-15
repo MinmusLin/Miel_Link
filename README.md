@@ -6,9 +6,9 @@ Miel_Link
 
 ## 项目简介
 
-MielLink: Honey product supply chain traceability system based on Hyperledger Fabric.
+Miel Link: Honey product supply chain traceability system based on Hyperledger Fabric.
 
-MielLink：基于 Hyperledger Fabric 的蜂蜜产品供应链溯源系统。
+Miel Link：基于 Hyperledger Fabric 的蜂蜜产品供应链溯源系统。
 
 ![](assets/Logo.png)
 
