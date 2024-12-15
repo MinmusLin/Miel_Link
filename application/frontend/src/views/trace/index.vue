@@ -2,11 +2,11 @@
 <!--suppress JSUnresolvedReference-->
 <template>
   <div class='trace-container'>
-    <div>
-      <el-input v-model='input' placeholder='请输入溯源码查询' style='width: 300px'/>
+    <div style='margin-top: 10px; margin-left: 10px'>
+      <el-input v-model='input' placeholder='请输入溯源码查询' style='width: 500px; margin-right: 10px'/>
       <el-button type='primary' plain @click='ProductInfo'>查询</el-button>
     </div>
-    <el-table :data='tracedata'>
+    <el-table :data='tracedata' v-if="tracedata.length!==1 || tracedata[0].traceabilityCode!==''">
       <el-table-column type='expand'>
         <!--suppress HtmlDeprecatedAttribute-->
         <template slot-scope='props'>
@@ -167,7 +167,7 @@
                         <div v-if="slotProps.item.name === '消费者'">
                           <p>通过我们的溯源系统，您可以轻松查看每一瓶蜂蜜的来源，享受透明、安全的购物体验。</p>
                           <p>每一步都经过严格监控，从生产到销售，确保您购买的每一份产品都是高质量的。</p>
-                          <p>我们承诺100%可追溯，确保每一位消费者都能享受健康、安全的产品。</p>
+                          <p>我们承诺 100% 可追溯，确保每一位消费者都能享受健康、安全的产品。</p>
                           <img src='/images/logo.png' alt='logo' style='transform: translateY(16px); width: 250px'/>
                         </div>
                       </template>
@@ -212,6 +212,14 @@
           </span>
         </template>
       </el-table-column>
+    </el-table>
+    <el-table v-else>
+      <el-table-column type='expand'/>
+      <el-table-column label='溯源码'/>
+      <el-table-column label='养蜂场'/>
+      <el-table-column label='加工厂'/>
+      <el-table-column label='批发商'/>
+      <el-table-column label='零售商'/>
     </el-table>
   </div>
 </template>
@@ -358,14 +366,18 @@ export default {
       })
     },
     ProductInfo() {
-      const formData = new FormData()
-      formData.append('traceabilityCode', this.input)
-      getProductInfo(formData).then(res => {
-        if (res.code === 200) {
-          this.tracedata = []
-          this.tracedata[0] = JSON.parse(res.data)
-        }
-      })
+      if (this.input) {
+        const formData = new FormData()
+        formData.append('traceabilityCode', this.input)
+        getProductInfo(formData).then(res => {
+          if (res.code === 200) {
+            this.tracedata = []
+            this.tracedata[0] = JSON.parse(res.data)
+          }
+        })
+      } else {
+        this.AllProductInfo()
+      }
     }
   }
 }
