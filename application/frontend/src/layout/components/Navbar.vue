@@ -3,7 +3,9 @@
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar"/>
     <breadcrumb class="breadcrumb-container"/>
     <div class="right-menu">
-      <span style="display:block" @click="logout">登出</span>
+      <span style='display:block' @click='logout'>
+        <el-icon class='el-icon-switch-button logout-icon'></el-icon>
+      </span>
     </div>
   </div>
 </template>
@@ -69,6 +71,16 @@ export default {
     float: right;
     height: 100%;
     line-height: 50px;
+
+    .logout-icon {
+      font-size: 22px;
+      color: #666;
+      margin-right: 20px;
+    }
+
+    &:hover .logout-icon {
+      color: #e2a130;
+    }
 
     &:focus {
       outline: none;
