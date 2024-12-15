@@ -88,7 +88,6 @@
             class="upload-demo"
           >
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">提示：将上传至IPFS网络</div>
           </el-upload>
         </el-form-item>
       </el-form>
@@ -104,7 +103,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { uplink, ipfsUpload } from '@/api/trace'
+import { uplink, ipfsUpload } from '@/api'
 
 export default {
   name: 'Uplink',

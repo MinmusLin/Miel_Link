@@ -15,7 +15,6 @@ module.exports = {
     publicPath: '/',
     outputDir: 'dist',
     assetsDir: 'static',
-    lintOnSave: process.env.NODE_ENV === 'development',
     productionSourceMap: false,
     devServer: {
         port: port,
@@ -23,8 +22,7 @@ module.exports = {
         overlay: {
             warnings: false,
             errors: true
-        },
-        before: require('./mock/mock-server.js')
+        }
     },
     configureWebpack: {
         name: name,
@@ -41,29 +39,8 @@ module.exports = {
             include: 'initial'
         }])
         config.plugins.delete('prefetch')
-        config.module
-            .rule('svg')
-            .exclude.add(resolve('src/icons'))
-            .end()
-        config.module
-            .rule('icons')
-            .test(/\.svg$/)
-            .include.add(resolve('src/icons'))
-            .end()
-            .use('svg-sprite-loader')
-            .loader('svg-sprite-loader')
-            .options({
-                symbolId: 'icon-[name]'
-            })
-            .end()
         config.when(process.env.NODE_ENV !== 'development',
             config => {
-                config.plugin('ScriptExtHtmlWebpackPlugin')
-                    .after('html')
-                    .use('script-ext-html-webpack-plugin', [{
-                        inline: /runtime\..*\.js$/
-                    }])
-                    .end()
                 config.optimization.splitChunks({
                     chunks: 'all',
                     cacheGroups: {

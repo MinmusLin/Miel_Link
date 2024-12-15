@@ -12,7 +12,9 @@
 </template>
 
 <script>
-import {Navbar, Sidebar, AppMain} from './components'
+import Navbar from './components/Navbar'
+import Sidebar from './components/Sidebar'
+import AppMain from './components/AppMain'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {

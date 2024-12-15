@@ -12,7 +12,6 @@
 import {mapGetters} from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
-import logo from '@/layout/components/Sidebar/Logo.vue'
 
 export default {
   components: {
@@ -20,9 +19,6 @@ export default {
     Hamburger
   },
   computed: {
-    logo() {
-      return logo
-    },
     ...mapGetters([
       'sidebar',
       'avatar'
