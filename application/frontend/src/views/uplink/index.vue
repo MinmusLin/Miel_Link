@@ -7,92 +7,94 @@
     </div>
     <div>
       <el-form ref="form" :model="tracedata" label-width="80px" size="mini" style="">
-        <el-form-item v-show="userType!=='养蜂场'&userType!=='消费者'" label="溯源码:" style="width: 300px" label-width="120px">
-          <el-input v-model="tracedata.traceabilityCode" />
+        <el-form-item v-show="userType!=='养蜂场'&userType!=='消费者'" label="溯源码:" style="width: 300px"
+                      label-width="120px">
+          <el-input v-model="tracedata.traceabilityCode"/>
         </el-form-item>
         <div v-show="userType==='养蜂场'">
           <el-form-item label="养蜂场名称:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.BeeFarmInput.BeeFarmName" />
+            <el-input v-model="tracedata.BeeFarmInput.BeeFarmName"/>
           </el-form-item>
           <el-form-item label="养蜂场地点:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.BeeFarmInput.BeeFarmLocation" />
+            <el-input v-model="tracedata.BeeFarmInput.BeeFarmLocation"/>
           </el-form-item>
           <el-form-item label="养蜂箱编号:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.BeeFarmInput.BeeBoxId" />
+            <el-input v-model="tracedata.BeeFarmInput.BeeBoxId"/>
           </el-form-item>
           <el-form-item label="蜂蜜种类:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.BeeFarmInput.HoneyVariety" />
+            <el-input v-model="tracedata.BeeFarmInput.HoneyVariety"/>
           </el-form-item>
           <el-form-item label="花卉种类:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.BeeFarmInput.FlowerVariety" />
+            <el-input v-model="tracedata.BeeFarmInput.FlowerVariety"/>
           </el-form-item>
         </div>
         <div v-show="userType==='加工厂'">
           <el-form-item label="加工厂名称:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.ProcessingPlantInput.ProcessingPlantName" />
+            <el-input v-model="tracedata.ProcessingPlantInput.ProcessingPlantName"/>
           </el-form-item>
           <el-form-item label="加工厂地点:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.ProcessingPlantInput.ProcessingPlantLocation" />
+            <el-input v-model="tracedata.ProcessingPlantInput.ProcessingPlantLocation"/>
           </el-form-item>
           <el-form-item label="加工批次:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.ProcessingPlantInput.ProcessingBatchId" />
+            <el-input v-model="tracedata.ProcessingPlantInput.ProcessingBatchId"/>
           </el-form-item>
           <el-form-item label="包装规格:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.ProcessingPlantInput.PackagingSpecification" />
+            <el-input v-model="tracedata.ProcessingPlantInput.PackagingSpecification"/>
           </el-form-item>
           <el-form-item label="保质期:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.ProcessingPlantInput.ShelfLife" />
+            <el-input v-model="tracedata.ProcessingPlantInput.ShelfLife"/>
           </el-form-item>
         </div>
         <div v-show="userType==='批发商'">
           <el-form-item label="仓库名称:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.WholesalerInput.WarehouseName" />
+            <el-input v-model="tracedata.WholesalerInput.WarehouseName"/>
           </el-form-item>
           <el-form-item label="仓库地点:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.WholesalerInput.WarehouseLocation" />
+            <el-input v-model="tracedata.WholesalerInput.WarehouseLocation"/>
           </el-form-item>
           <el-form-item label="进货批次:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.WholesalerInput.WholesalerBatchId" />
+            <el-input v-model="tracedata.WholesalerInput.WholesalerBatchId"/>
           </el-form-item>
           <el-form-item label="运输方式:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.WholesalerInput.TransportationMethod" />
+            <el-input v-model="tracedata.WholesalerInput.TransportationMethod"/>
           </el-form-item>
           <el-form-item label="交通方式:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.WholesalerInput.TransportMode" />
+            <el-input v-model="tracedata.WholesalerInput.TransportMode"/>
           </el-form-item>
         </div>
         <div v-show="userType==='零售商'">
           <el-form-item label="商店名称:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.RetailerInput.StoreName" />
+            <el-input v-model="tracedata.RetailerInput.StoreName"/>
           </el-form-item>
           <el-form-item label="商店地点:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.RetailerInput.StoreLocation" />
+            <el-input v-model="tracedata.RetailerInput.StoreLocation"/>
           </el-form-item>
           <el-form-item label="采购批次:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.RetailerInput.RetailerBatchId" />
+            <el-input v-model="tracedata.RetailerInput.RetailerBatchId"/>
           </el-form-item>
           <el-form-item label="销售渠道:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.RetailerInput.SalesChannel" />
+            <el-input v-model="tracedata.RetailerInput.SalesChannel"/>
           </el-form-item>
           <el-form-item label="销售价格:" style="width: 300px" label-width="120px">
-            <el-input v-model="tracedata.RetailerInput.SalesPrice" />
+            <el-input v-model="tracedata.RetailerInput.SalesPrice"/>
           </el-form-item>
         </div>
       </el-form>
       <el-form>
         <el-form-item label="IPFS数据:" style="width: 300px" label-width="120px">
           <el-upload
-            ref="upload"
-            action="#"
-            :auto-upload="false"
-            class="upload-demo"
+              ref="upload"
+              action="#"
+              :auto-upload="false"
+              class="upload-demo"
           >
             <el-button size="small" type="primary">点击上传</el-button>
           </el-upload>
         </el-form-item>
       </el-form>
       <span slot="footer" style="color: gray;" class="dialog-footer">
-        <el-button v-show="userType !== '消费者'" type="primary" plain style="margin-left: 220px;" @click="submittracedata()">提 交</el-button>
+        <el-button v-show="userType !== '消费者'" type="primary" plain style="margin-left: 220px;"
+                   @click="submittracedata()">提 交</el-button>
       </span>
       <span v-show="userType === '消费者'" slot="footer" style="color: gray;" class="dialog-footer">
         消费者没有权限录入！请使用溯源功能!
@@ -102,8 +104,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { uplink, ipfsUpload } from '@/api'
+import {mapGetters} from 'vuex'
+import {uplink, ipfsUpload} from '@/api'
 
 export default {
   name: 'Uplink',
@@ -252,6 +254,7 @@ export default {
   &-container {
     margin: 30px;
   }
+
   &-text {
     font-size: 30px;
     line-height: 46px;

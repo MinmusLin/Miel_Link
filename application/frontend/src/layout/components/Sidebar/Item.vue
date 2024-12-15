@@ -15,13 +15,14 @@ export default {
   render(h, context) {
     const {icon, title} = context.props
     const vnodes = []
-
     if (icon) {
       if (icon.includes('el-icon')) {
-        vnodes.push(<i class={[icon, 'sub-el-icon']}/>)
+
+        vnodes.push(
+            <i class={[icon, 'sub-el-icon']}/>
+        )
       }
     }
-
     if (title) {
       vnodes.push(<span slot='title'>{(title)}</span>)
     }
@@ -31,6 +32,7 @@ export default {
 </script>
 
 <style scoped>
+/* noinspection CssUnusedSymbol */
 .sub-el-icon {
   color: currentColor;
   width: 1em;

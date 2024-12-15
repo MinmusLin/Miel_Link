@@ -104,14 +104,3 @@ export function getAllProductInfo(data) {
         data
     })
 }
-
-export function getProductHistory(data) {
-    return request({
-        url: '/getProductHistory',
-        method: 'post',
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        },
-        data
-    })
-}
