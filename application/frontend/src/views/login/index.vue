@@ -56,7 +56,7 @@
             </el-form-item>
             <div class='form-item-title'>角色</div>
             <el-form-item prop='userType'>
-              <el-radio-group v-model='registerForm.userType' style="width: 100%;">
+              <el-radio-group v-model='registerForm.userType' style='width: 100%'>
                 <el-radio-button label='养蜂场'>养蜂场</el-radio-button>
                 <el-radio-button label='加工厂'>加工厂</el-radio-button>
                 <el-radio-button label='批发商'>批发商</el-radio-button>
@@ -252,7 +252,7 @@ export default {
 
       .form-item-title {
         font-size: 24px;
-        color: #333;
+        color: #333333;
         font-weight: bold;
         margin-bottom: 12px;
       }

@@ -10,6 +10,8 @@ MielLink: Honey product supply chain traceability system based on Hyperledger Fa
 
 MielLink：基于 Hyperledger Fabric 的蜂蜜产品供应链溯源系统。
 
+![](assets/Logo.png)
+
 > ***Relevant course***
 > * Introduction to Blockchain 2024 (2024年同济大学区块链导论)
 
