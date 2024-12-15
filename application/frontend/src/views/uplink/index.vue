@@ -223,30 +223,30 @@
             </div>
           </el-form>
           <div class="ipfs-container">
-          <el-form>
-            <el-form-item style="width: 500px; margin-left:80px;">
-              <div>
-                <div class="bee-label">IPFS数据:<span style="color: red; font-size: 16px;"> * </span></div>
-                <div style="text-align: left;">
-                  <el-upload
-                      ref="upload"
-                      action="#"
-                      :auto-upload="false"
-                      class="upload-demo"
-                  >
-                    <el-button size="small" type="primary">点击上传</el-button>
-                  </el-upload>
+            <el-form>
+              <el-form-item style="width: 500px; margin-left:80px;">
+                <div>
+                  <div class="bee-label">IPFS数据:<span style="color: red; font-size: 16px;"> * </span></div>
+                  <div style="text-align: left;">
+                    <el-upload
+                        ref="upload"
+                        action="#"
+                        :auto-upload="false"
+                        class="upload-demo"
+                    >
+                      <el-button size="small" type="primary">点击上传</el-button>
+                    </el-upload>
+                  </div>
                 </div>
-              </div>
-            </el-form-item>
-          </el-form>
+              </el-form-item>
+            </el-form>
           </div>
           <div class="consumer-container">
           <span slot="footer" style="color: gray;" class="dialog-footer">
            <el-button v-show="userType !== '消费者'" type="primary" plain
                       @click="submittracedata()">提 交</el-button>
           </span>
-          <span v-show="userType === '消费者'" slot="footer" style="color: gray; margin-top: 10px; font-size: 18px;" >
+            <span v-show="userType === '消费者'" slot="footer" style="color: gray; margin-top: 10px; font-size: 18px;">
              消费者没有权限录入！请使用溯源功能!
           </span>
           </div>
@@ -419,7 +419,7 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 
 .container {
   width: 100%;
@@ -509,12 +509,12 @@ export default {
   font-size: 16px;
 }
 
-.ipfs-container{
+.ipfs-container {
   display: flex;
   justify-content: center;
 }
 
-.consumer-container{
+.consumer-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -550,3 +550,4 @@ export default {
   outline: none;
 }
 </style>
+
