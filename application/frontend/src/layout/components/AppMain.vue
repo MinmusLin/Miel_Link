@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 .app-main {
   min-height: calc(100vh - 50px);
   width: 100%;
@@ -30,7 +30,7 @@ export default {
 }
 </style>
 
-<style lang="scss">
+<style lang='scss'>
 .el-popup-parent--hidden {
   .fixed-header {
     padding-right: 15px;

@@ -31,7 +31,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 /* noinspection CssUnusedSymbol */
 .sub-el-icon {
   color: currentColor;
