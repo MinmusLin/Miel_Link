@@ -1,261 +1,240 @@
+<!--suppress JSUnresolvedReference-->
 <!--suppress HtmlUnknownTag-->
 <template>
-  <div class="uplink-container">
-    <div class="container">
-      <!-- 头部区域 -->
-      <div class="header">
-        <div class="avatar-container">
-          <img class="avatar"
-               :src="getAvatarImage(userType)"
-               alt="头像">
+  <div class='container'>
+    <div class='header'>
+      <div class='avatar-container'>
+        <img class='avatar' :src='getAvatarImage(userType)' alt='头像'>
+      </div>
+      <div class='user-info'>
+        <div class='user-column'>
+          <span>当前用户</span>
+          <div class='user-type'>{{ name }}</div>
         </div>
-        <div class="user-info">
-          <div class="user-column">
-            <span class="left-info">当前用户：</span>
-            <div class="user-type">{{ name }}</div>
-          </div>
-          <div class="user-column">
-            <span class="right-info">用户角色：</span>
-            <div class="user-type">{{ userType }}</div>
-          </div>
-          <div class="user-column">
-            <span class="right-info">用户职责：</span>
-            <div v-if="userType === '养蜂场'" class="user-type">蜜蜂养殖与蜂蜜生产</div>
-            <div v-else-if="userType === '加工厂'" class="user-type">蜂蜜加工与产品包装</div>
-            <div v-else-if="userType === '批发商'" class="user-type">蜂蜜批量采购与分销</div>
-            <div v-else-if="userType === '零售商'" class="user-type">蜂蜜零售与市场推广</div>
-            <div v-else-if="userType === '消费者'" class="user-type">购买和使用蜂蜜产品</div>
-          </div>
+        <div class='user-column'>
+          <span>用户角色</span>
+          <div class='user-type'>{{ userType }}</div>
+        </div>
+        <div class='user-column'>
+          <span>用户职责</span>
+          <div v-if="userType === '养蜂场'" class='user-type'>蜜蜂养殖与蜂蜜生产</div>
+          <div v-else-if="userType === '加工厂'" class='user-type'>蜂蜜加工与产品包装</div>
+          <div v-else-if="userType === '批发商'" class='user-type'>蜂蜜批量采购与分销</div>
+          <div v-else-if="userType === '零售商'" class='user-type'>蜂蜜零售与市场推广</div>
+          <div v-else-if="userType === '消费者'" class='user-type'>购买和使用蜂蜜产品</div>
         </div>
       </div>
-      <!-- 表单区域 -->
-      <div class="bee-form-container">
-        <form class="bee-form">
-          <el-form ref="form" :model="tracedata" label-width="80px" size="medium" style="">
-            <el-form-item v-show="userType !== '养蜂场' && userType !== '消费者'" style="width: 500px">
+    </div>
+    <div class='bee-form-container'>
+      <form>
+        <el-form ref='form' :model='tracedata' label-width='80px' size='medium' style=''>
+          <el-form-item v-show="userType !== '养蜂场' && userType !== '消费者'" style='width: 500px'>
+            <div>
+              <div class='bee-label'>溯源码<span style='color: red; font-size: 16px'> * </span></div>
+              <div style='text-align: left'>
+                <el-input v-model='tracedata.traceabilityCode'/>
+              </div>
+            </div>
+          </el-form-item>
+          <div v-show="userType==='养蜂场'">
+            <el-form-item style='width: 500px'>
               <div>
-                <div class="bee-label">
-                  溯源码:<span style="color: red; font-size: 16px;"> * </span>
-                </div>
-                <div style="text-align: left;">
-                  <el-input v-model="tracedata.traceabilityCode"/>
+                <div class='bee-label'>养蜂场名称<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.BeeFarmInput.BeeFarmName'/>
                 </div>
               </div>
             </el-form-item>
-            <div v-show="userType==='养蜂场'">
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">养蜂场名称:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.BeeFarmInput.BeeFarmName"/>
-                  </div>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>养蜂场地点<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.BeeFarmInput.BeeFarmLocation'/>
                 </div>
-              </el-form-item>
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">养蜂场地点:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.BeeFarmInput.BeeFarmLocation"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>养蜂箱编号<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.BeeFarmInput.BeeBoxId'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">养蜂箱编号:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.BeeFarmInput.BeeBoxId"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>蜂蜜种类<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.BeeFarmInput.HoneyVariety'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">蜂蜜种类:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.BeeFarmInput.HoneyVariety"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>花卉种类<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.BeeFarmInput.FlowerVariety'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">花卉种类:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.BeeFarmInput.FlowerVariety"/>
-                  </div>
+              </div>
+            </el-form-item>
+          </div>
+          <div v-show="userType==='加工厂'">
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>加工厂名称<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.ProcessingPlantInput.ProcessingPlantName'/>
                 </div>
-              </el-form-item>
-            </div>
-            <div v-show="userType==='加工厂'">
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">加工厂名称:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.ProcessingPlantInput.ProcessingPlantName"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>加工厂地点<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.ProcessingPlantInput.ProcessingPlantLocation'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">加工厂地点:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.ProcessingPlantInput.ProcessingPlantLocation"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>加工批次<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.ProcessingPlantInput.ProcessingBatchId'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">加工批次:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.ProcessingPlantInput.ProcessingBatchId"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>包装规格<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.ProcessingPlantInput.PackagingSpecification'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">包装规格:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.ProcessingPlantInput.PackagingSpecification"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>保质期<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.ProcessingPlantInput.ShelfLife'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">保质期:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.ProcessingPlantInput.ShelfLife"/>
-                  </div>
+              </div>
+            </el-form-item>
+          </div>
+          <div v-show="userType==='批发商'">
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>仓库名称<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.WholesalerInput.WarehouseName'/>
                 </div>
-              </el-form-item>
-            </div>
-            <div v-show="userType==='批发商'">
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">仓库名称:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.WholesalerInput.WarehouseName"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>仓库地点<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.WholesalerInput.WarehouseLocation'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">仓库地点:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.WholesalerInput.WarehouseLocation"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>进货批次<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.WholesalerInput.WholesalerBatchId'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">进货批次:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.WholesalerInput.WholesalerBatchId"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>运输方式<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.WholesalerInput.TransportationMethod'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">运输方式:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.WholesalerInput.TransportationMethod"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>交通方式<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.WholesalerInput.TransportMode'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">交通方式:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.WholesalerInput.TransportMode"/>
-                  </div>
+              </div>
+            </el-form-item>
+          </div>
+          <div v-show="userType==='零售商'">
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>商店名称<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.RetailerInput.StoreName'/>
                 </div>
-              </el-form-item>
-            </div>
-            <div v-show="userType==='零售商'">
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">商店名称:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.RetailerInput.StoreName"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>商店地点<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.RetailerInput.StoreLocation'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">商店地点:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.RetailerInput.StoreLocation"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>采购批次<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.RetailerInput.RetailerBatchId'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">采购批次:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.RetailerInput.RetailerBatchId"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>销售渠道<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.RetailerInput.SalesChannel'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">销售渠道:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.RetailerInput.SalesChannel"/>
-                  </div>
+              </div>
+            </el-form-item>
+            <el-form-item style='width: 500px'>
+              <div>
+                <div class='bee-label'>销售价格<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-input v-model='tracedata.RetailerInput.SalesPrice'/>
                 </div>
-              </el-form-item>
-
-              <el-form-item style="width: 500px">
-                <div>
-                  <div class="bee-label">销售价格:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-input v-model="tracedata.RetailerInput.SalesPrice"/>
-                  </div>
+              </div>
+            </el-form-item>
+          </div>
+        </el-form>
+        <div class='ipfs-container' v-show="userType !== '消费者'">
+          <el-form>
+            <el-form-item style='width: 420px; margin-left: 80px; margin-right: 80px'>
+              <div>
+                <div class='bee-label'>质检报告<span style='color: red; font-size: 16px'> * </span></div>
+                <div style='text-align: left'>
+                  <el-upload ref='upload' action='#' :auto-upload='false'>
+                    <el-button type='warning' plain>
+                      点击上传
+                    </el-button>
+                  </el-upload>
                 </div>
-              </el-form-item>
-            </div>
+              </div>
+            </el-form-item>
           </el-form>
-          <div class="ipfs-container">
-            <el-form>
-              <el-form-item style="width: 500px; margin-left:80px;">
-                <div>
-                  <div class="bee-label">IPFS数据:<span style="color: red; font-size: 16px;"> * </span></div>
-                  <div style="text-align: left;">
-                    <el-upload
-                        ref="upload"
-                        action="#"
-                        :auto-upload="false"
-                        class="upload-demo"
-                    >
-                      <el-button size="small" type="primary">点击上传</el-button>
-                    </el-upload>
-                  </div>
-                </div>
-              </el-form-item>
-            </el-form>
-          </div>
-          <div class="consumer-container">
-          <span slot="footer" style="color: gray;" class="dialog-footer">
-           <el-button v-show="userType !== '消费者'" type="primary" plain
-                      @click="submittracedata()">提 交</el-button>
+        </div>
+        <div class='consumer-container'>
+          <span slot='footer' style='color: gray'>
+           <el-button v-show="userType !== '消费者'"
+                      type='warning'
+                      @click='submitTracedata()'
+                      style='width: 420px; margin-top: 30px'>
+             提交
+           </el-button>
           </span>
-            <span v-show="userType === '消费者'" slot="footer" style="color: gray; margin-top: 10px; font-size: 18px;">
-             消费者没有权限录入！请使用溯源功能!
+          <span v-show="userType === '消费者'" slot='footer' style='margin-top: 50px; font-size: 18px'>
+            消费者没有信息录入权限
           </span>
-          </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -313,36 +292,39 @@ export default {
   methods: {
     uploadIPFSFile() {
       return new Promise((resolve, reject) => {
-        var formData = new FormData()
+        const formData = new FormData()
         formData.append('file', this.$refs.upload._data.uploadFiles[0].raw)
         ipfsUpload(formData).then(res => {
           if (res.code === 200) {
             this.tracedata.ipfsFileCID = res.cid
             resolve()
           } else {
-            reject('IPFS文件上传失败')
+            reject('Upload IPFS file failed')
           }
-        }).catch(err => {
-          reject('IPFS文件上传失败')
+        }).catch(() => {
+          reject('Upload IPFS file failed')
         })
       })
     },
-
-    submittracedata() {
+    submitTracedata() {
+      /*
+       * This section currently lacks input validation for user submissions, which compromises data security.
+       * Additionally, there is no verification to ensure the traceability code exists, which may lead to potential
+       * issues. The quality inspection report upload does not restrict users to a single file, but according to IPFS
+       * requirements, only a single file should be uploaded. We aim to make the project more robust and complete. Feel
+       * free to open an issue or submit a pull request! :)
+       */
       if (this.$refs.upload._data.uploadFiles.length !== 0) {
         this.uploadIPFSFile().then(() => {
           this.tracedata.ipfsFileName = this.$refs.upload._data.uploadFiles[0].name
-
           const loading = this.$loading({
             lock: true,
             text: '数据上链中...',
             spinner: 'el-icon-loading',
             background: 'rgba(0, 0, 0, 0.7)'
           })
-
-          var formData = new FormData()
+          const formData = new FormData()
           formData.append('traceabilityCode', this.tracedata.traceabilityCode)
-          // 根据不同的用户给arg1、arg2、arg3..赋值,
           switch (this.userType) {
             case '养蜂场':
               formData.append('arg1', this.tracedata.BeeFarmInput.BeeFarmName)
@@ -373,52 +355,39 @@ export default {
               formData.append('arg5', this.tracedata.RetailerInput.SalesPrice)
               break
           }
-
           formData.append('arg6', this.tracedata.ipfsFileCID)
           formData.append('arg7', this.tracedata.ipfsFileName)
-
           uplink(formData).then(res => {
             if (res.code === 200) {
               loading.close()
-              this.$message({
-                message: '上链成功，交易ID：' + res.txid + '\n溯源码：' + res.traceabilityCode,
-                type: 'success'
-              })
             } else {
               loading.close()
-              this.$message({
-                message: '上链失败',
-                type: 'error'
-              })
+              this.$message.error('数据上链失败，请检查网络连接情况。')
             }
           }).catch(() => {
+            this.$message.error('数据上链失败，请检查网络连接情况。')
           })
-        }).catch(error => {
-          this.$message({
-            message: error,
-            type: 'error'
-          })
+        }).catch(() => {
+          this.$message.error('数据上链失败，请检查网络连接情况。')
         })
       }
     },
-
     getAvatarImage(userType) {
       switch (userType) {
         case '养蜂场':
-          return '/images/apiary.png';
+          return '/images/apiary.png'
         case '加工厂':
-          return '/images/factory.png';
+          return '/images/factory.png'
         case '批发商':
-          return '/images/wholesaler.png';
+          return '/images/wholesaler.png'
         case '零售商':
-          return '/images/retailer.png';
+          return '/images/retailer.png'
         default:
-          return '/images/consumer.png';
+          return '/images/consumer.png'
       }
     }
   }
 }
-
 </script>
 
 <style scoped lang='scss'>
@@ -428,13 +397,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fffcf0;
+  background-color: #FFFCF0;
   font-family: Arial, sans-serif;
 }
 
 .header {
   width: 100%;
-  background-color: #f8e99b;
+  background-color: #F8E99B;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -452,12 +421,12 @@ export default {
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background-color: #d9d9d9;
+  background-color: #D9D9D9;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  color: #555;
+  color: #555555;
   margin-bottom: 20px;
 }
 
@@ -468,7 +437,7 @@ export default {
   padding: 0 30px;
   box-sizing: border-box;
   font-size: 24px;
-  color: #333;
+  color: #333333;
 }
 
 .user-info .user-column {
@@ -483,8 +452,8 @@ export default {
 }
 
 .el-form-item {
-  display: block; /* 强制标题和输入框分行显示 */
-  text-align: left; /* 左对齐 */
+  display: block;
+  text-align: left;
   margin-bottom: 20px;
 }
 
@@ -520,35 +489,5 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.el-button {
-  font-size: 16px;
-  background-color: #F7CD43;
-  color: #fff;
-  border: 1px solid #F5D467;
-  font-weight: bold;
-}
-
-.el-button:hover {
-  background-color: #FAC411;
-  border-color: #F5D467;
-}
-
-.el-button:active {
-  background-color: #F5D467;
-  border-color: #F5D467;
-}
-
-.el-button:disabled {
-  background-color: #F5D467;
-  border-color: #F5D467;
-  color: #fff;
-}
-
-.el-button:focus {
-  background-color: #F5D467;
-  border-color: #F5D467;
-  outline: none;
 }
 </style>
