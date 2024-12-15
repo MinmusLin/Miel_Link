@@ -9,11 +9,6 @@ import store from './store'
 import router from './router'
 import '@/permission'
 
-if (process.env.NODE_ENV === 'production') {
-    const {mockXHR} = require('../mock')
-    mockXHR()
-}
-
 Vue.use(ElementUI, {locale})
 
 Vue.config.productionTip = false
