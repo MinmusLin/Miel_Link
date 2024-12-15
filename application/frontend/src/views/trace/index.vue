@@ -101,7 +101,7 @@
       <el-table-column label='养蜂场' prop='beeFarmInput.beeFarmTxid'>
         <!--suppress HtmlDeprecatedAttribute-->
         <template slot-scope='scope'>
-          <span :class="getStatus(scope.row, ' beeFarm', 1).class">
+          <span :class="getStatus(scope.row, 'beeFarm', 1).class">
             {{ getStatus(scope.row, 'beeFarm', 1).status }}
           </span>
         </template>
@@ -109,7 +109,7 @@
       <el-table-column label='加工厂' prop='processingPlantInput.processingPlantTxid'>
         <!--suppress HtmlDeprecatedAttribute-->
         <template slot-scope='scope'>
-          <span :class="getStatus(scope.row, ' processingPlant', 2).class">
+          <span :class="getStatus(scope.row, 'processingPlant', 2).class">
             {{ getStatus(scope.row, 'processingPlant', 2).status }}
           </span>
         </template>
@@ -117,7 +117,7 @@
       <el-table-column label='批发商' prop='wholesalerInput.wholesalerTxid'>
         <!--suppress HtmlDeprecatedAttribute-->
         <template slot-scope='scope'>
-          <span :class="getStatus(scope.row, ' wholesaler', 3).class">
+          <span :class="getStatus(scope.row, 'wholesaler', 3).class">
             {{ getStatus(scope.row, 'wholesaler', 3).status }}
           </span>
         </template>
@@ -125,7 +125,7 @@
       <el-table-column label='零售商' prop='retailerInput.retailerTxid'>
         <!--suppress HtmlDeprecatedAttribute-->
         <template slot-scope='scope'>
-          <span :class="getStatus(scope.row, ' retailer', 4).class">
+          <span :class="getStatus(scope.row, 'retailer', 4).class">
             {{ getStatus(scope.row, 'retailer', 4).status }}
           </span>
         </template>
@@ -173,7 +173,7 @@ export default {
       events.push({
         name: '养蜂场',
         icon: 'pi pi-building-columns',
-        color: '#673AB7',
+        color: this.getStatus(row, 'beeFarm', 1).color,
         time: row.beeFarmInput.beeFarmTimestamp || '',
         id: row.beeFarmInput.beeFarmTxid || '',
         beeFarmName: row.beeFarmInput.beeFarmName || '',
@@ -187,7 +187,7 @@ export default {
       events.push({
         name: '加工厂',
         icon: 'pi pi-warehouse',
-        color: '#673AB7',
+        color: this.getStatus(row, 'processingPlant', 2).color,
         time: row.processingPlantInput.processingPlantTimestamp || '',
         id: row.processingPlantInput.processingPlantTxid || '',
         processingPlantName: row.processingPlantInput.processingPlantName || '',
@@ -201,7 +201,7 @@ export default {
       events.push({
         name: '批发商',
         icon: 'pi pi-truck',
-        color: '#673AB7',
+        color: this.getStatus(row, 'wholesaler', 3).color,
         time: row.wholesalerInput.wholesalerTimestamp || '',
         id: row.wholesalerInput.wholesalerTxid || '',
         warehouseName: row.wholesalerInput.warehouseName || '',
@@ -215,7 +215,7 @@ export default {
       events.push({
         name: '零售商',
         icon: 'pi pi-shop',
-        color: '#673AB7',
+        color: this.getStatus(row, 'retailer', 4).color,
         time: row.retailerInput.retailerTimestamp || '',
         id: row.retailerInput.retailerTxid || '',
         storeName: row.retailerInput.storeName || '',
@@ -229,7 +229,7 @@ export default {
       events.push({
         name: '消费者',
         icon: 'pi pi-shopping-bag',
-        color: '#673AB7',
+        color: this.getStatus(row, 'retailer', 4).status === '进行中' ? '#FFC000' : this.getStatus(row, 'retailer', 4).color,
       })
       return events
     },
@@ -244,14 +244,14 @@ export default {
         }
       }
       if (firstMissingIndex === null) {
-        return {status: '已完成', class: 'completed'}
+        return {status: '已完成', class: 'completed', color: '#92D050'}
       }
       if (index === firstMissingIndex) {
-        return {status: '进行中', class: 'in-progress'}
+        return {status: '进行中', class: 'in-progress', color: '#5B9BD5'}
       } else if (index < firstMissingIndex) {
-        return {status: '已完成', class: 'completed'}
+        return {status: '已完成', class: 'completed', color: '#92D050'}
       } else {
-        return {status: '未开始', class: 'pending'}
+        return {status: '未开始', class: 'pending', color: '#FFC000'}
       }
     },
     GetIPFSFile(cid, filename) {
