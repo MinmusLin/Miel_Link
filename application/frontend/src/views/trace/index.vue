@@ -2,220 +2,150 @@
 <!--suppress JSUnresolvedReference-->
 <template>
   <div class='trace-container'>
-    <div style="display: flex; justify-content: flex-end; margin-right:30px; align-items: center;">
-      <el-input v-model='input' placeholder='请输入溯源码查询' style='width: 300px;'/>
+    <div>
+      <el-input v-model='input' placeholder='请输入溯源码查询' style='width: 300px'/>
       <el-button type='primary' plain @click='ProductInfo'>查询</el-button>
     </div>
-
-    <!--<el-button type='success' plain @click='AllProductInfo'>获取所有产品信息</el-button>-->
-    <el-table :data='tracedata' style='width: 100%'>
+    <el-table :data='tracedata'>
       <el-table-column type='expand'>
+        <!--suppress HtmlDeprecatedAttribute-->
         <template slot-scope='props'>
-          <el-form label-position='left' inline class='demo-table-expand'>
-            <div class="container">
-
-              <div class="card-container-left">
-                <div>
-                  <span class="trace-text">养蜂场信息</span>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="养蜂场名称">
-                    <span>{{ props.row.beeFarmInput.beeFarmName }}</span>
-                  </el-form-item>
-                  <el-form-item label="养蜂场地点">
-                    <span>{{ props.row.beeFarmInput.beeFarmLocation }}</span>
-                  </el-form-item>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="养蜂箱编号">
-                    <span>{{ props.row.beeFarmInput.beeBoxId }}</span>
-                  </el-form-item>
-                  <el-form-item label="蜂蜜种类">
-                    <span>{{ props.row.beeFarmInput.honeyVariety }}</span>
-                  </el-form-item>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="花卉种类">
-                    <span>{{ props.row.beeFarmInput.flowerVariety }}</span>
-                  </el-form-item>
-                </div>
-                <el-form-item v-show="props.row.beeFarmInput.beeFarmIPFSCID" label="附件">
-                  <el-link type="primary" @click="GetIPFSFile(props.row.beeFarmInput.beeFarmIPFSCID, props.row.beeFarmInput.beeFarmIPFSFileName)">
-                    {{ props.row.beeFarmInput.beeFarmIPFSCID }}
-                  </el-link>
-                </el-form-item>
-                <el-form-item label="区块链交易 ID">
-                  <span>{{ props.row.beeFarmInput.beeFarmTxid }}</span>
-                </el-form-item>
-                <el-form-item label="区块链交易时间">
-                  <span>{{ props.row.beeFarmInput.beeFarmTimestamp }}</span>
-                </el-form-item>
-              </div>
-
-
-              <div class="card-container-right">
-                <div>
-                  <span class="trace-text">加工厂信息</span>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="加工厂名称">
-                    <span>{{ props.row.processingPlantInput.processingPlantName }}</span>
-                  </el-form-item>
-                  <el-form-item label="加工厂地点">
-                    <span>{{ props.row.processingPlantInput.processingPlantLocation }}</span>
-                  </el-form-item>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="加工批次">
-                    <span>{{ props.row.processingPlantInput.processingBatchId }}</span>
-                  </el-form-item>
-                  <el-form-item label="包装规格">
-                    <span>{{ props.row.processingPlantInput.packagingSpecification }}</span>
-                  </el-form-item>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="保质期">
-                    <span>{{ props.row.processingPlantInput.shelfLife }}</span>
-                  </el-form-item>
-                </div>
-                <el-form-item v-show="props.row.processingPlantInput.processingPlantIPFSCID" label="附件">
-                  <el-link type="primary" @click="GetIPFSFile(props.row.processingPlantInput.processingPlantIPFSCID, props.row.processingPlantInput.processingPlantIPFSFileName)">
-                    {{ props.row.processingPlantInput.processingPlantIPFSCID }}
-                  </el-link>
-                </el-form-item>
-                <el-form-item label="区块链交易 ID">
-                  <span>{{ props.row.processingPlantInput.processingPlantTxid }}</span>
-                </el-form-item>
-                <el-form-item label="区块链交易时间">
-                  <span>{{ props.row.processingPlantInput.processingPlantTimestamp }}</span>
-                </el-form-item>
-              </div>
-
-              <div class="divider"></div>
-
-              <div class="card-container-left">
-                <div>
-                  <span class="trace-text">批发商信息</span>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="仓库名称">
-                    <span>{{ props.row.wholesalerInput.warehouseName }}</span>
-                  </el-form-item>
-                  <el-form-item label="仓库地点">
-                    <span>{{ props.row.wholesalerInput.warehouseLocation }}</span>
-                  </el-form-item>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="进货批次">
-                    <span>{{ props.row.wholesalerInput.wholesalerBatchId }}</span>
-                  </el-form-item>
-                  <el-form-item label="运输方式">
-                    <span>{{ props.row.wholesalerInput.transportationMethod }}</span>
-                  </el-form-item>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="交通方式">
-                    <span>{{ props.row.wholesalerInput.transportMode }}</span>
-                  </el-form-item>
-                </div>
-                <el-form-item v-show="props.row.wholesalerInput.wholesalerIPFSCID" label="附件">
-                  <el-link type="primary" @click="GetIPFSFile(props.row.wholesalerInput.wholesalerIPFSCID, props.row.wholesalerInput.wholesalerIPFSFileName)">
-                    {{ props.row.wholesalerInput.wholesalerIPFSCID }}
-                  </el-link>
-                </el-form-item>
-                <el-form-item label="区块链交易 ID">
-                  <span>{{ props.row.wholesalerInput.wholesalerTxid }}</span>
-                </el-form-item>
-                <el-form-item label="区块链交易时间">
-                  <span>{{ props.row.wholesalerInput.wholesalerTimestamp }}</span>
-                </el-form-item>
-              </div>
-
-              <div class="card-container-right">
-                <div>
-                  <span class="trace-text">零售商信息</span>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="商店名称">
-                    <span>{{ props.row.retailerInput.storeName }}</span>
-                  </el-form-item>
-                  <el-form-item label="商店地点">
-                    <span>{{ props.row.retailerInput.storeLocation }}</span>
-                  </el-form-item>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="采购批次">
-                    <span>{{ props.row.retailerInput.retailerBatchId }}</span>
-                  </el-form-item>
-                  <el-form-item label="销售渠道">
-                    <span>{{ props.row.retailerInput.salesChannel }}</span>
-                  </el-form-item>
-                </div>
-                <div class="info-line">
-                  <el-form-item label="销售价格">
-                    <span>{{ props.row.retailerInput.salesPrice }}</span>
-                  </el-form-item>
-                </div>
-                <el-form-item v-show="props.row.retailerInput.retailerIPFSCID" label="附件">
-                  <el-link type="primary" @click="GetIPFSFile(props.row.retailerInput.retailerIPFSCID, props.row.retailerInput.retailerIPFSFileName)">
-                    {{ props.row.retailerInput.retailerIPFSCID }}
-                  </el-link>
-                </el-form-item>
-                <el-form-item label="区块链交易 ID">
-                  <span>{{ props.row.retailerInput.retailerTxid }}</span>
-                </el-form-item>
-                <el-form-item label="区块链交易时间">
-                  <span>{{ props.row.retailerInput.retailerTimestamp }}</span>
-                </el-form-item>
+          <el-form label-position='left' inline>
+            <div class='container'>
+              <div class='card'>
+                <!--suppress HtmlDeprecatedAttribute-->
+                <Timeline :value='generateEventsFromRow(props.row)' align='alternate'>
+                  <template #marker='slotProps'>
+                    <span class='custom-marker' :style='{ backgroundColor: slotProps.item.color }'>
+                      <i :class='slotProps.item.icon' style='font-size: 22px'/>
+                    </span>
+                  </template>
+                  <template #content='slotProps'>
+                    <Card>
+                      <template #title>
+                        {{ slotProps.item.name }}
+                      </template>
+                      <template #subtitle>
+                        {{ slotProps.item.time }}
+                      </template>
+                      <template #content>
+                        <div v-if="slotProps.item.name === '养蜂场'">
+                          <div>养蜂场名称: {{ slotProps.item.beeFarmName }}</div>
+                          <div>养蜂场地点: {{ slotProps.item.beeFarmLocation }}</div>
+                          <div>养蜂箱编号: {{ slotProps.item.beeBoxId }}</div>
+                          <div>蜂蜜种类: {{ slotProps.item.honeyVariety }}</div>
+                          <div>花卉种类: {{ slotProps.item.flowerVariety }}</div>
+                          <div v-if='slotProps.item.fileid'>
+                            附件:
+                            <el-link @click='GetIPFSFile(slotProps.item.fileid, slotProps.item.filename)'
+                                     type='primary'>
+                              {{ slotProps.item.filename }}
+                            </el-link>
+                          </div>
+                        </div>
+                        <div v-if="slotProps.item.name === '加工厂'">
+                          <div>加工厂名称: {{ slotProps.item.processingPlantName }}</div>
+                          <div>加工厂地点: {{ slotProps.item.processingPlantLocation }}</div>
+                          <div>加工批次: {{ slotProps.item.processingBatchId }}</div>
+                          <div>包装规格: {{ slotProps.item.packagingSpecification }}</div>
+                          <div>保质期: {{ slotProps.item.shelfLife }}</div>
+                          <div v-if='slotProps.item.fileid'>
+                            附件:
+                            <el-link @click='GetIPFSFile(slotProps.item.fileid, slotProps.item.filename)'
+                                     type='primary'>
+                              {{ slotProps.item.filename }}
+                            </el-link>
+                          </div>
+                        </div>
+                        <div v-if="slotProps.item.name === '批发商'">
+                          <div>仓库名称: {{ slotProps.item.warehouseName }}</div>
+                          <div>仓库地点: {{ slotProps.item.warehouseLocation }}</div>
+                          <div>进货批次: {{ slotProps.item.wholesalerBatchId }}</div>
+                          <div>运输方式: {{ slotProps.item.transportationMethod }}</div>
+                          <div>交通方式: {{ slotProps.item.transportMode }}</div>
+                          <div v-if='slotProps.item.fileid'>
+                            附件:
+                            <el-link @click='GetIPFSFile(slotProps.item.fileid, slotProps.item.filename)'
+                                     type='primary'>
+                              {{ slotProps.item.filename }}
+                            </el-link>
+                          </div>
+                        </div>
+                        <div v-if="slotProps.item.name === '零售商'">
+                          <div>商店名称: {{ slotProps.item['商店名称'] }}</div>
+                          <div>商店地点: {{ slotProps.item['商店地点'] }}</div>
+                          <div>采购批次: {{ slotProps.item['采购批次'] }}</div>
+                          <div>销售渠道: {{ slotProps.item['销售渠道'] }}</div>
+                          <div>销售价格: {{ slotProps.item['销售价格'] }}</div>
+                          <div v-if='slotProps.item.fileid'>
+                            附件:
+                            <el-link @click='GetIPFSFile(slotProps.item.fileid, slotProps.item.filename)'
+                                     type='primary'>
+                              {{ slotProps.item.filename }}
+                            </el-link>
+                          </div>
+                          <div v-if="slotProps.item.name === '消费者'">
+                            <p>消费者</p>
+                          </div>
+                        </div>
+                      </template>
+                    </Card>
+                  </template>
+                </Timeline>
               </div>
             </div>
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="溯源码" prop="traceabilityCode"/>
-
-      <el-table-column label="养蜂场" prop="beeFarmInput.beeFarmTxid">
-        <template slot-scope="scope">
-    <span :class="getStatus(scope.row, 'beeFarm', 1).class">
-      {{ getStatus(scope.row, 'beeFarm', 1).status }}
-    </span>
+      <el-table-column label='溯源码' prop='traceabilityCode'/>
+      <el-table-column label='养蜂场' prop='beeFarmInput.beeFarmTxid'>
+        <!--suppress HtmlDeprecatedAttribute-->
+        <template slot-scope='scope'>
+          <span :class="getStatus(scope.row, ' beeFarm', 1).class">
+            {{ getStatus(scope.row, 'beeFarm', 1).status }}
+          </span>
         </template>
       </el-table-column>
-
-      <el-table-column label="加工厂" prop="processingPlantInput.processingPlantTxid">
-        <template slot-scope="scope">
-    <span :class="getStatus(scope.row, 'processingPlant', 2).class">
-      {{ getStatus(scope.row, 'processingPlant', 2).status }}
-    </span>
+      <el-table-column label='加工厂' prop='processingPlantInput.processingPlantTxid'>
+        <!--suppress HtmlDeprecatedAttribute-->
+        <template slot-scope='scope'>
+          <span :class="getStatus(scope.row, ' processingPlant', 2).class">
+            {{ getStatus(scope.row, 'processingPlant', 2).status }}
+          </span>
         </template>
       </el-table-column>
-
-      <el-table-column label="批发商" prop="wholesalerInput.wholesalerTxid">
-        <template slot-scope="scope">
-    <span :class="getStatus(scope.row, 'wholesaler', 3).class">
-      {{ getStatus(scope.row, 'wholesaler', 3).status }}
-    </span>
+      <el-table-column label='批发商' prop='wholesalerInput.wholesalerTxid'>
+        <!--suppress HtmlDeprecatedAttribute-->
+        <template slot-scope='scope'>
+          <span :class="getStatus(scope.row, ' wholesaler', 3).class">
+            {{ getStatus(scope.row, 'wholesaler', 3).status }}
+          </span>
         </template>
       </el-table-column>
-
-      <el-table-column label="零售商" prop="retailerInput.retailerTxid">
-        <template slot-scope="scope">
-    <span :class="getStatus(scope.row, 'retailer', 4).class">
-      {{ getStatus(scope.row, 'retailer', 4).status }}
-    </span>
+      <el-table-column label='零售商' prop='retailerInput.retailerTxid'>
+        <!--suppress HtmlDeprecatedAttribute-->
+        <template slot-scope='scope'>
+          <span :class="getStatus(scope.row, ' retailer', 4).class">
+            {{ getStatus(scope.row, 'retailer', 4).status }}
+          </span>
         </template>
       </el-table-column>
-
     </el-table>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+import Timeline from 'primevue/timeline'
+import Card from 'primevue/card'
 import {getProductInfo, getProductList, getAllProductInfo, ipfsDownload} from '@/api'
 
 export default {
   name: 'Trace',
+  components: {
+    Timeline,
+    Card
+  },
   data() {
     return {
       tracedata: [],
@@ -238,26 +168,90 @@ export default {
     this.AllProductInfo()
   },
   methods: {
+    generateEventsFromRow(row) {
+      let events = []
+      events.push({
+        name: '养蜂场',
+        icon: 'pi pi-building-columns',
+        color: '#673AB7',
+        time: row.beeFarmInput.beeFarmTimestamp || '',
+        id: row.beeFarmInput.beeFarmTxid || '',
+        beeFarmName: row.beeFarmInput.beeFarmName || '',
+        beeFarmLocation: row.beeFarmInput.beeFarmLocation || '',
+        beeBoxId: row.beeFarmInput.beeBoxId || '',
+        honeyVariety: row.beeFarmInput.honeyVariety || '',
+        flowerVariety: row.beeFarmInput.flowerVariety || '',
+        fileid: row.beeFarmInput.beeFarmIPFSCID || '',
+        filename: row.beeFarmInput.beeFarmIPFSFileName || ''
+      })
+      events.push({
+        name: '加工厂',
+        icon: 'pi pi-warehouse',
+        color: '#673AB7',
+        time: row.processingPlantInput.processingPlantTimestamp || '',
+        id: row.processingPlantInput.processingPlantTxid || '',
+        processingPlantName: row.processingPlantInput.processingPlantName || '',
+        processingPlantLocation: row.processingPlantInput.processingPlantLocation || '',
+        processingBatchId: row.processingPlantInput.processingBatchId || '',
+        packagingSpecification: row.processingPlantInput.packagingSpecification || '',
+        shelfLife: row.processingPlantInput.shelfLife || '',
+        fileid: row.processingPlantInput.processingPlantIPFSCID || '',
+        filename: row.processingPlantInput.processingPlantIPFSFileName || ''
+      })
+      events.push({
+        name: '批发商',
+        icon: 'pi pi-truck',
+        color: '#673AB7',
+        time: row.wholesalerInput.wholesalerTimestamp || '',
+        id: row.wholesalerInput.wholesalerTxid || '',
+        warehouseName: row.wholesalerInput.warehouseName || '',
+        warehouseLocation: row.wholesalerInput.warehouseLocation || '',
+        wholesalerBatchId: row.wholesalerInput.wholesalerBatchId || '',
+        transportationMethod: row.wholesalerInput.transportationMethod || '',
+        transportMode: row.wholesalerInput.transportMode || '',
+        fileid: row.wholesalerInput.wholesalerIPFSCID || '',
+        filename: row.wholesalerInput.wholesalerIPFSFileName || ''
+      })
+      events.push({
+        name: '零售商',
+        icon: 'pi pi-shop',
+        color: '#673AB7',
+        time: row.retailerInput.retailerTimestamp || '',
+        id: row.retailerInput.retailerTxid || '',
+        storeName: row.retailerInput.storeName || '',
+        storeLocation: row.retailerInput.storeLocation || '',
+        retailerBatchId: row.retailerInput.retailerBatchId || '',
+        salesChannel: row.retailerInput.salesChannel || '',
+        salesPrice: row.retailerInput.salesPrice || '',
+        fileid: row.retailerInput.retailerIPFSCID || '',
+        filename: row.retailerInput.retailerIPFSFileName || ''
+      })
+      events.push({
+        name: '消费者',
+        icon: 'pi pi-shopping-bag',
+        color: '#673AB7',
+      })
+      return events
+    },
     getStatus(row, stage, index) {
-      const stages = ["beeFarm", "processingPlant", "wholesaler", "retailer"];
-      let firstMissingIndex = null;
+      const stages = ['beeFarm', 'processingPlant', 'wholesaler', 'retailer']
+      let firstMissingIndex = null
       for (let i = 0; i < stages.length; i++) {
-        const txid = row[`${stages[i]}Input`][`${stages[i]}Txid`];
+        const txid = row[`${stages[i]}Input`][`${stages[i]}Txid`]
         if (!txid) {
-          firstMissingIndex = i + 1;
-          break;
+          firstMissingIndex = i + 1
+          break
         }
       }
-
       if (firstMissingIndex === null) {
-        return {status: "已完成", class: "completed"};
+        return {status: '已完成', class: 'completed'}
       }
       if (index === firstMissingIndex) {
-        return {status: "进行中", class: "in-progress"};
+        return {status: '进行中', class: 'in-progress'}
       } else if (index < firstMissingIndex) {
-        return {status: "已完成", class: "completed"};
+        return {status: '已完成', class: 'completed'}
       } else {
-        return {status: "等待中", class: "pending"};
+        return {status: '未开始', class: 'pending'}
       }
     },
     GetIPFSFile(cid, filename) {
@@ -287,7 +281,7 @@ export default {
 }
 </script>
 
-<style scoped lang='scss' >
+<style scoped lang='scss'>
 .container {
   display: flex;
   flex-direction: column;
@@ -296,115 +290,41 @@ export default {
   position: relative;
 }
 
-.divider {
-  height: 100%;
-  width: 4px;
-  border-left: 4px dashed #e0e0e0;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.card-container-left {
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  background: #f0f8ff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: -180px;
-  width: 49%;
-  margin-right: auto;
-}
-
-.card-container-right {
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  background: #fffce8;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 5px;
-  width: 49%;
-  margin-left: auto;
-}
-
-.trace-text {
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.el-form-item {
-  margin-bottom: 8px;
-}
-
-.el-form-item label {
-  font-weight: 500;
-}
-
-.el-form-item span {
-  display: block;
-  font-size: 14px;
-  color: #606266;
-}
-.demo-table-expand {
-  font-size: 0;
-}
-
-.demo-table-expand label {
-  width: 90px;
-  color: #99A9BF;
-}
-
-.demo-table-expand .el-form-item {
-  margin-right: 0;
-  margin-bottom: 0;
-  width: 50%;
-}
-
-.trace {
-  &-container {
-    margin: 30px;
-  }
-
-  &-text {
-    font-size: 20px;
-    line-height: 46px;
-  }
-}
-
 .completed {
-  background-color: #3d906c;
-  padding: 4px 20px;
-  border-radius: 20px;
-  font-size: 14px;
+  background-color: #92D050;
+  padding: 2px 28px;
   display: inline-block;
-  color: #fff;
-  margin-left: -10px;
+  border-radius: 14px;
+  font-size: 14px;
+  color: white;
 }
 
 .in-progress {
-  background-color: #4475ff;
-  padding: 4px 20px;
-  border-radius: 20px;
-  font-size: 14px;
+  background-color: #5B9BD5;
+  padding: 2px 28px;
   display: inline-block;
-  color: #fff;
-  margin-left: -10px;
+  border-radius: 14px;
+  font-size: 14px;
+  color: white;
 }
 
 .pending {
-  background-color: #eed84c;
-  padding: 4px 20px;
-  border-radius: 20px;
-  font-size: 14px;
+  background-color: #FFC000;
+  padding: 2px 28px;
   display: inline-block;
-  color: #fff;
-  margin-left: -10px;
+  border-radius: 14px;
+  font-size: 14px;
+  color: white;
 }
 
-.info-line {
+.custom-marker {
   display: flex;
-  justify-content: space-between;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 50%;
+  z-index: 1;
 }
 </style>
