@@ -4,9 +4,8 @@ echo "Starting the blockchain network..."
 
 ./stop.sh
 
-docker run --name miellink-mysql -p 3337:3306 -e MYSQL_ROOT_PASSWORD=miellink -d mysql:8
-
 image_versions=("2.5.6")
+
 images=("hyperledger/fabric-tools" "hyperledger/fabric-peer" "hyperledger/fabric-orderer" "hyperledger/fabric-ccenv" "hyperledger/fabric-baseos")
 
 for image in "${images[@]}"; do
@@ -23,8 +22,10 @@ done
 
 cp -r organizations explorer/
 
-docker compose -f explorer/docker-compose.yaml up -d
+docker run --name miellink-mysql -p 3337:3306 -e MYSQL_ROOT_PASSWORD=miellink -d mysql:8
 
 docker compose -f ipfs.yaml up -d
+
+docker compose -f explorer/docker-compose.yaml up -d
 
 echo "The blockchain network is now running."

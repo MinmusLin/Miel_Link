@@ -33,7 +33,7 @@ func ChaincodeQuery(fcn string, arg string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("failed to evaluate transaction: %w", err)
 	}
-	fmt.Printf("*** evaluateResult:%s\n", evaluateResult)
+	fmt.Printf("Result: %s\n", evaluateResult)
 	return string(evaluateResult), nil
 }
 
@@ -47,14 +47,13 @@ func ChaincodeInvoke(fcn string, args []string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("failed to submit transaction asynchronously: %w", err)
 	}
-	fmt.Printf("*** Successfully submitted transaction :%v", string(submitResult))
-	fmt.Println("*** Waiting for transaction commit.")
+	fmt.Printf("\nSuccessfully submitted transaction: %v", string(submitResult))
 	if commitStatus, err := commit.Status(); err != nil {
 		return "", fmt.Errorf("failed to get commit status: %w", err)
 	} else if !commitStatus.Successful {
 		return "", fmt.Errorf("transaction %s failed to commit with status: %d", commitStatus.TransactionID, int32(commitStatus.Code))
 	}
-	fmt.Printf("*** Transaction committed successfully\n")
+	fmt.Printf("Transaction committed successfully\n")
 	return commit.TransactionID(), nil
 }
 
