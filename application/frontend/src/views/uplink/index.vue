@@ -20,7 +20,11 @@
           </div>
           <div class="user-column">
             <span class="right-info">用户职责：</span>
-            <div class="user-type">责任描述</div> <!-- 填写用户职责内容 -->
+            <div v-if="userType === '养蜂场'" class="user-type">蜜蜂养殖与蜂蜜生产</div>
+            <div v-else-if="userType === '加工厂'" class="user-type">蜂蜜加工与产品包装</div>
+            <div v-else-if="userType === '批发商'" class="user-type">蜂蜜批量采购与分销</div>
+            <div v-else-if="userType === '零售商'" class="user-type">蜂蜜零售与市场推广</div>
+            <div v-else-if="userType === '消费者'" class="user-type">购买和使用蜂蜜产品</div>
           </div>
         </div>
       </div>
@@ -223,30 +227,30 @@
             </div>
           </el-form>
           <div class="ipfs-container">
-          <el-form>
-            <el-form-item style="width: 500px; margin-left:80px;">
-              <div>
-                <div class="bee-label">IPFS数据:<span style="color: red; font-size: 16px;"> * </span></div>
-                <div style="text-align: left;">
-                  <el-upload
-                      ref="upload"
-                      action="#"
-                      :auto-upload="false"
-                      class="upload-demo"
-                  >
-                    <el-button size="small" type="primary">点击上传</el-button>
-                  </el-upload>
+            <el-form>
+              <el-form-item style="width: 500px; margin-left:80px;">
+                <div>
+                  <div class="bee-label">IPFS数据:<span style="color: red; font-size: 16px;"> * </span></div>
+                  <div style="text-align: left;">
+                    <el-upload
+                        ref="upload"
+                        action="#"
+                        :auto-upload="false"
+                        class="upload-demo"
+                    >
+                      <el-button size="small" type="primary">点击上传</el-button>
+                    </el-upload>
+                  </div>
                 </div>
-              </div>
-            </el-form-item>
-          </el-form>
+              </el-form-item>
+            </el-form>
           </div>
           <div class="consumer-container">
           <span slot="footer" style="color: gray;" class="dialog-footer">
            <el-button v-show="userType !== '消费者'" type="primary" plain
                       @click="submittracedata()">提 交</el-button>
           </span>
-          <span v-show="userType === '消费者'" slot="footer" style="color: gray; margin-top: 10px; font-size: 18px;" >
+            <span v-show="userType === '消费者'" slot="footer" style="color: gray; margin-top: 10px; font-size: 18px;">
              消费者没有权限录入！请使用溯源功能!
           </span>
           </div>
@@ -422,10 +426,11 @@ export default {
 <style scoped lang='scss'>
 .container {
   width: 100%;
+  height: calc(100vh - 50px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f5f5f5;
+  background-color: #fffcf0;
   font-family: Arial, sans-serif;
 }
 
@@ -508,12 +513,12 @@ export default {
   font-size: 16px;
 }
 
-.ipfs-container{
+.ipfs-container {
   display: flex;
   justify-content: center;
 }
 
-.consumer-container{
+.consumer-container {
   display: flex;
   justify-content: center;
   align-items: center;
