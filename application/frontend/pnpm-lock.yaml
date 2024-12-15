@@ -29,6 +29,12 @@ importers:
       path-to-regexp:
         specifier: 2.4.0
         version: 2.4.0
+      primeicons:
+        specifier: ^7.0.0
+        version: 7.0.0
+      primevue:
+        specifier: ^2
+        version: 2.10.4(primeicons@7.0.0)(vue@2.6.10)
       vue:
         specifier: 2.6.10
         version: 2.6.10
@@ -3689,6 +3695,15 @@ packages:
 
   pretty-error@2.1.2:
     resolution: {integrity: sha512-EY5oDzmsX5wvuynAByrmY0P0hcp+QpnAKbJng2A2MPjVKXCxrDSUkzghVJ4ZGPIv+JC4gX8fPUWscC0RtjsWGw==}
+
+  primeicons@7.0.0:
+    resolution: {integrity: sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==}
+
+  primevue@2.10.4:
+    resolution: {integrity: sha512-lJWtocP4l6C6K8VzMo58xPhyWERtWWhd+OTCoXHuQDKLI9o+YZKbLqAw42EdyGcA05eXLSvXXz1ESEMnIxBB7A==}
+    peerDependencies:
+      primeicons: ^5.0.0 || ^6.0.0
+      vue: ^2.6.0
 
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
@@ -9075,6 +9090,13 @@ snapshots:
     dependencies:
       lodash: 4.17.21
       renderkid: 2.0.7
+
+  primeicons@7.0.0: {}
+
+  primevue@2.10.4(primeicons@7.0.0)(vue@2.6.10):
+    dependencies:
+      primeicons: 7.0.0
+      vue: 2.6.10
 
   process-nextick-args@2.0.1: {}
 

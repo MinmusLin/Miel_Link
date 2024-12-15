@@ -8,8 +8,13 @@ import App from './App'
 import store from './store'
 import router from './router'
 import '@/permission'
+import PrimeVue from 'primevue/config'
+import 'primevue/resources/themes/saga-blue/theme.css'
+import 'primevue/resources/primevue.min.css'
+import 'primeicons/primeicons.css'
 
 Vue.use(ElementUI, {locale})
+Vue.use(PrimeVue)
 
 Vue.config.productionTip = false
 
