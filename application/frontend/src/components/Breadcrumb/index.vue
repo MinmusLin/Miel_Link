@@ -34,7 +34,7 @@ export default {
       let matched = this.$route.matched.filter(item => item.meta && item.meta.title)
       const first = matched[0]
       if (!this.isUplink(first)) {
-        matched = [{path: '/home', meta: {title: 'MielLink'}}].concat(matched)
+        matched = [{path: '/home', meta: {title: 'Miel Link'}}].concat(matched)
       }
       this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
     },

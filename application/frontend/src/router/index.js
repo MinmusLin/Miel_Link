@@ -15,7 +15,7 @@ export const constantRoutes = [
         path: '/home',
         component: () => import('@/views/home/index'),
         meta: {
-            title: '主页',
+            title: 'Miel Link 主页',
             icon: 'el-icon-s-home'
         }
     },

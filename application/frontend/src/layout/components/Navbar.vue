@@ -3,9 +3,10 @@
     <hamburger :is-active='sidebar.opened' class='hamburger-container' @toggleClick='toggleSideBar'/>
     <breadcrumb class='breadcrumb-container'/>
     <div class='right-menu'>
-      <span style='display:block' @click='logout'>
+      <span style='display:block' @click='logout' class='logout-icon'>
+        <span>注销</span>
         <!--suppress HtmlUnknownTag-->
-        <el-icon class='el-icon-switch-button logout-icon'/>
+        <el-icon class='el-icon-switch-button' style='font-size: 19px; margin-left: 4px; transform: translateY(2px)'/>
       </span>
     </div>
   </div>
@@ -73,13 +74,15 @@ export default {
     line-height: 50px;
 
     .logout-icon {
-      font-size: 22px;
-      color: #666;
-      margin-right: 20px;
+      font-size: 14px;
+      color: #666666;
+      margin-right: 16px;
+      font-weight: bold;
     }
 
     &:hover .logout-icon {
-      color: #e2a130;
+      color: #E2A130;
+      cursor: pointer;
     }
 
     &:focus {
@@ -91,7 +94,7 @@ export default {
       padding: 0 8px;
       height: 100%;
       font-size: 18px;
-      color: #5a5e66;
+      color: #5A5E66;
       vertical-align: text-bottom;
 
       &.hover-effect {

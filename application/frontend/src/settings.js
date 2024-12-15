@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'MielLink',
+    title: 'Miel Link',
     fixedHeader: false,
     sidebarLogo: false
 }

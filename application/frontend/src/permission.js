@@ -12,6 +12,7 @@ NProgress.configure({showSpinner: false})
 const whiteList = ['/login']
 
 router.beforeEach(async (to, from, next) => {
+    document.title = 'Miel Link'
     // noinspection JSUnresolvedReference
     NProgress.start()
     if (to.path === '/home') {
@@ -23,6 +24,7 @@ router.beforeEach(async (to, from, next) => {
     if (hasToken) {
         if (to.path === '/login') {
             next({path: '/home'})
+            document.title = 'Miel Link'
             // noinspection JSUnresolvedReference
             NProgress.done()
         } else {
