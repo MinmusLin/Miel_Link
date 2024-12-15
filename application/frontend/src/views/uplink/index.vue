@@ -399,6 +399,7 @@ export default {
   align-items: center;
   background-color: #FFFCF0;
   font-family: Arial, sans-serif;
+  overflow-y: auto;
 }
 
 .header {
