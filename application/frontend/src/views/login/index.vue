@@ -56,7 +56,7 @@
             </el-form-item>
             <div class='form-item-title'>角色</div>
             <el-form-item prop='userType'>
-              <el-radio-group v-model='registerForm.userType' style='width: 100%'>
+              <el-radio-group v-model='registerForm.userType'>
                 <el-radio-button label='养蜂场'>养蜂场</el-radio-button>
                 <el-radio-button label='加工厂'>加工厂</el-radio-button>
                 <el-radio-button label='批发商'>批发商</el-radio-button>
@@ -244,22 +244,19 @@ export default {
 
     .login {
       position: absolute;
-      top: 50%;
+      top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 50%;
-      padding: 20px;
+      width: 416px;
 
       .form-item-title {
-        font-size: 24px;
+        font-size: 20px;
         color: #333333;
         font-weight: bold;
         margin-bottom: 12px;
       }
 
       ::v-deep .el-radio-button {
-        margin-right: 6%;
-
         &.is-active {
           .el-radio-button__inner {
             background-color: #E2A130 !important;
@@ -270,7 +267,6 @@ export default {
         }
 
         .el-radio-button__inner {
-          width: 142%;
           color: #E2A130 !important;
         }
       }
@@ -283,7 +279,7 @@ export default {
 
         .register-button {
           display: block;
-          margin-top: 10px;
+          margin-top: 20px;
           font-size: 14px;
           color: #B16400;
         }
