@@ -4,6 +4,14 @@
 @import './element-ui.scss';
 @import './sidebar.scss';
 
+* {
+  user-select: none;
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
