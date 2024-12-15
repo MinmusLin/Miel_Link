@@ -215,8 +215,9 @@ export default {
 
     .center-img {
       position: absolute;
-      left: 8%;
-      top: 15%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       width: 70%;
       height: auto;
       z-index: 1;
