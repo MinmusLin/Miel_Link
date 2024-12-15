@@ -15,11 +15,11 @@
                       placeholder='请输入密码'
                       name='password'/>
           </el-form-item>
-          <el-button type='text' @click='isLoginPage=!isLoginPage'>
-            注册
-          </el-button>
-          <el-button :loading='loading' type='warning' @click='handleLogin'>
+          <el-button :loading='loading' type='warning' @click='handleLogin' style='width: 100%'>
             登录
+          </el-button>
+          <el-button type='text' @click='changePage'>
+            没有账号？前往注册
           </el-button>
         </div>
       </el-form>
@@ -51,11 +51,11 @@
               <el-radio-button label='消费者'>消费者</el-radio-button>
             </el-radio-group>
           </el-form-item>
-          <el-button :loading='loading' type='text' @click='isLoginPage=!isLoginPage'>
-            登录
-          </el-button>
-          <el-button :loading='loading' type='warning' @click='handleRegister'>
+          <el-button :loading='loading' type='warning' @click='handleRegister' style='width: 100%'>
             注册
+          </el-button>
+          <el-button :loading='loading' type='text' @click='changePage'>
+            已有账号？前往登录
           </el-button>
         </div>
       </el-form>
@@ -74,10 +74,14 @@ export default {
       },
       loginRules: {
         username: [{
-          required: true
+          required: true,
+          message: '用户名不能为空',
+          trigger: 'blur'
         }],
         password: [{
-          required: true
+          required: true,
+          message: '密码不能为空',
+          trigger: 'blur'
         }]
       },
       loading: false,
@@ -87,20 +91,28 @@ export default {
         username: '',
         password: '',
         password2: '',
-        userType: ''
+        userType: '消费者'
       },
       registerRules: {
         username: [{
-          required: true
+          required: true,
+          message: '用户名不能为空',
+          trigger: 'blur'
         }],
         password: [{
-          required: true
+          required: true,
+          message: '密码不能为空',
+          trigger: 'blur'
         }],
         password2: [{
-          required: true
+          required: true,
+          message: '请确认密码',
+          trigger: 'blur'
         }],
         userType: [{
-          required: true
+          required: true,
+          message: '请选择用户类型',
+          trigger: 'change'
         }]
       }
     }
@@ -115,6 +127,10 @@ export default {
   },
   methods: {
     handleLogin() {
+      if (!this.loginForm.username || !this.loginForm.password) {
+        this.$message.warning('请输入用户名和密码')
+        return
+      }
       this.loading = true
       this.$store.dispatch('user/login', this.loginForm).then(() => {
         this.$router.push({path: this.redirect || '/home'})
@@ -124,8 +140,12 @@ export default {
       })
     },
     handleRegister() {
+      if (!this.registerForm.username || !this.registerForm.password || !this.registerForm.password2) {
+        this.$message.warning('请输入用户名和密码')
+        return
+      }
       if (this.registerForm.password !== this.registerForm.password2) {
-        this.$message.error('两次密码不一致')
+        this.$message.warning('密码不一致')
         return
       }
       const loading = this.$loading({
@@ -142,6 +162,18 @@ export default {
       }).catch(() => {
         loading.close()
       })
+    },
+    changePage() {
+      this.isLoginPage = !this.isLoginPage
+      if (this.isLoginPage) {
+        this.loginForm.username = ''
+        this.loginForm.password = ''
+      } else {
+        this.registerForm.username = ''
+        this.registerForm.password = ''
+        this.registerForm.password2 = ''
+        this.registerForm.userType = '消费者'
+      }
     }
   }
 }
@@ -170,6 +202,6 @@ export default {
 .content {
   position: relative;
   z-index: 1;
-  padding: 20px;
+  width: 416px;
 }
 </style>
