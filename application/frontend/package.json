@@ -15,6 +15,7 @@
     "path-to-regexp": "2.4.0",
     "primeicons": "^7.0.0",
     "primevue": "^2",
+    "qrcode": "^1.5.4",
     "vue": "2.6.10",
     "vue-router": "3.0.6",
     "vuex": "3.1.0"

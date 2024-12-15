@@ -168,6 +168,14 @@
                           <p>通过我们的溯源系统，您可以轻松查看每一瓶蜂蜜的来源，享受透明、安全的购物体验。</p>
                           <p>每一步都经过严格监控，从生产到销售，确保您购买的每一份产品都是高质量的。</p>
                           <p>我们承诺 100% 可追溯，确保每一位消费者都能享受健康、安全的产品。</p>
+                          <div v-if="slotProps.item.color==='#92D050'">
+                            <el-button type='success' plain @click='generateQRCode(props.row)'>
+                              生成二维码分享溯源报告
+                            </el-button>
+                            <div v-if='qrCodeDataUrl'>
+                              <img :src='qrCodeDataUrl' alt='qrCode' style='width: 600px; transform: translateY(10px)'/>
+                            </div>
+                          </div>
                           <img src='/images/logo.png' alt='logo' style='transform: translateY(16px); width: 250px'/>
                         </div>
                       </template>
@@ -229,6 +237,7 @@ import {mapGetters} from 'vuex'
 import Timeline from 'primevue/timeline'
 import Card from 'primevue/card'
 import {getProductInfo, getProductList, getAllProductInfo, ipfsDownload} from '@/api'
+import QRCode from 'qrcode'
 
 export default {
   name: 'Trace',
@@ -240,7 +249,8 @@ export default {
     return {
       tracedata: [],
       loading: false,
-      input: ''
+      input: '',
+      qrCodeDataUrl: ''
     }
   },
   computed: {
@@ -258,6 +268,32 @@ export default {
     this.AllProductInfo()
   },
   methods: {
+    generateQRCode(data) {
+      const formatData = (obj, indent = 0) => {
+        let formattedString = ''
+        for (const key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            const value = obj[key]
+            const indentSpace = '    '.repeat(indent)
+            if (typeof value === 'object' && value !== null) {
+              formattedString += `${indentSpace}${key}:\n` + formatData(value, indent + 1)
+            } else {
+              formattedString += `${indentSpace}${key}: ${value}\n`
+            }
+          }
+        }
+        return formattedString
+      }
+      let dataString = 'Miel Link 溯源报告\n\n'
+      const currentTime = new Date().toLocaleString()
+      dataString += `${currentTime} 生成\n\n`
+      dataString += formatData(data)
+      QRCode.toDataURL(dataString).then(url => {
+        this.qrCodeDataUrl = url
+      }).catch(() => {
+        this.$message.error('二维码生成失败，请检查网络连接情况。')
+      })
+    },
     generateEventsFromRow(row) {
       let events = []
       events.push({
