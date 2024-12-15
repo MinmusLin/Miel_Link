@@ -164,11 +164,11 @@
                                width='150px'
                                style='transform: translateY(20px)'/>
                         </div>
-                        <div v-if="slotProps.item.name === '消费者'" class='two-column-layout'>
-                          <div class='item'>
-                            <span class='item-label'>消费者</span>
-                            <span>消费者</span>
-                          </div>
+                        <div v-if="slotProps.item.name === '消费者'">
+                          <p>通过我们的溯源系统，您可以轻松查看每一瓶蜂蜜的来源，享受透明、安全的购物体验。</p>
+                          <p>每一步都经过严格监控，从生产到销售，确保您购买的每一份产品都是高质量的。</p>
+                          <p>我们承诺100%可追溯，确保每一位消费者都能享受健康、安全的产品。</p>
+                          <img src='/images/logo.png' alt='logo' style='transform: translateY(16px); width: 250px'/>
                         </div>
                       </template>
                     </Card>
