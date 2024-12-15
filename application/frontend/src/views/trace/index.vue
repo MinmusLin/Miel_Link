@@ -233,7 +233,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style scoped lang='scss'>
 .demo-table-expand {
   font-size: 0;
 }

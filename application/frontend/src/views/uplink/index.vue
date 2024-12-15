@@ -249,7 +249,7 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang='scss'>
 .uplink {
   &-container {
     margin: 30px;
