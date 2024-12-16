@@ -210,12 +210,18 @@
             <el-form-item style='width: 420px; margin-left: 80px; margin-right: 80px'>
               <div>
                 <div class='bee-label'>质检报告<span style='color: red; font-size: 16px'> * </span></div>
-                <div style='text-align: left'>
+                <div style='text-align: left; position: relative'>
                   <el-upload ref='upload' action='#' :auto-upload='false'>
                     <el-button type='warning' plain>
-                      点击上传
+                      上传质检报告
                     </el-button>
                   </el-upload>
+                  <el-button type='danger'
+                             class='recall-button'
+                             v-show="userType !== '养蜂场'"
+                             @click="goToPage('/trace?recall=true')">
+                    紧急召回
+                  </el-button>
                 </div>
               </div>
             </el-form-item>
@@ -290,22 +296,6 @@ export default {
     ])
   },
   methods: {
-    uploadIPFSFile() {
-      return new Promise((resolve, reject) => {
-        const formData = new FormData()
-        formData.append('file', this.$refs.upload._data.uploadFiles[0].raw)
-        ipfsUpload(formData).then(res => {
-          if (res.code === 200) {
-            this.tracedata.ipfsFileCID = res.cid
-            resolve()
-          } else {
-            reject('Upload IPFS file failed')
-          }
-        }).catch(() => {
-          reject('Upload IPFS file failed')
-        })
-      })
-    },
     submitTracedata() {
       /*
        * This section currently lacks input validation for user submissions, which compromises data security.
@@ -371,6 +361,25 @@ export default {
           this.$message.error('数据上链失败，请检查网络连接情况。')
         })
       }
+    },
+    goToPage(path) {
+      this.$router.push(path)
+    },
+    uploadIPFSFile() {
+      return new Promise((resolve, reject) => {
+        const formData = new FormData()
+        formData.append('file', this.$refs.upload._data.uploadFiles[0].raw)
+        ipfsUpload(formData).then(res => {
+          if (res.code === 200) {
+            this.tracedata.ipfsFileCID = res.cid
+            resolve()
+          } else {
+            reject('Upload IPFS file failed')
+          }
+        }).catch(() => {
+          reject('Upload IPFS file failed')
+        })
+      })
     },
     getAvatarImage(userType) {
       switch (userType) {
@@ -490,5 +499,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.recall-button {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>

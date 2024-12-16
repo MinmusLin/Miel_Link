@@ -250,7 +250,8 @@ export default {
       tracedata: [],
       loading: false,
       input: '',
-      qrCodeDataUrl: ''
+      qrCodeDataUrl: '',
+      recall: false
     }
   },
   computed: {
@@ -260,12 +261,20 @@ export default {
     ])
   },
   created() {
+    this.recall = this.$route.query.recall === 'true'
     getProductList().then(res => {
       this.tracedata = JSON.parse(res.data).filter(item => item.traceabilityCode !== '')
     })
+
+    console.log(this.recall)
   },
   mounted() {
     this.AllProductInfo()
+  },
+  watch: {
+    '$route.query.recall'(newVal) {
+      this.recall = newVal === 'true'
+    }
   },
   methods: {
     generateQRCode(data) {
