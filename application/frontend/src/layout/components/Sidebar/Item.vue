@@ -29,6 +29,10 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+* {
+  user-select: none;
+}
+
 .sub-el-icon {
   color: currentColor;
   width: 1em;

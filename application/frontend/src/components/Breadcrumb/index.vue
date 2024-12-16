@@ -63,6 +63,10 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+* {
+  user-select: none;
+}
+
 .app-breadcrumb.el-breadcrumb {
   display: inline-block;
   font-size: 14px;

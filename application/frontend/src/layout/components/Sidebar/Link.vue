@@ -41,3 +41,9 @@ export default {
   }
 }
 </script>
+
+<style scoped lang='scss'>
+* {
+  user-select: none;
+}
+</style>

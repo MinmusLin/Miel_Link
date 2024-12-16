@@ -350,6 +350,7 @@ export default {
           uplink(formData).then(res => {
             if (res.code === 200) {
               loading.close()
+              this.$router.push('/trace')
             } else {
               loading.close()
               this.$message.error('数据上链失败，请检查网络连接情况。')
@@ -505,5 +506,9 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+* {
+  user-select: none;
 }
 </style>

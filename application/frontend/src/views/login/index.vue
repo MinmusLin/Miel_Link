@@ -305,4 +305,8 @@ export default {
   background: linear-gradient(100deg, #FFF2E4 50%, transparent 50%);
   z-index: 0;
 }
+
+* {
+  user-select: none;
+}
 </style>

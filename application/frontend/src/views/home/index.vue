@@ -43,6 +43,10 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+* {
+  user-select: none;
+}
+
 .page-container {
   display: flex;
   flex-direction: column;

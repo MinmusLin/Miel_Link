@@ -29,6 +29,10 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+* {
+  user-select: none;
+}
+
 .hamburger {
   display: inline-block;
   vertical-align: middle;
