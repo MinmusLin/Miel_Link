@@ -327,7 +327,7 @@ export default {
       let events = []
       events.push({
         name: '养蜂场',
-        icon: 'pi pi-building-columns',
+        icon: 'pi pi-table',
         status: this.getStatus(row, 'beeFarm', 1, index).status,
         color: this.getStatus(row, 'beeFarm', 1, index).color,
         image: this.getStatus(row, 'beeFarm', 1, index).image,
@@ -343,7 +343,7 @@ export default {
       })
       events.push({
         name: '加工厂',
-        icon: 'pi pi-warehouse',
+        icon: 'pi pi-home',
         status: this.getStatus(row, 'processingPlant', 2, index).status,
         color: this.getStatus(row, 'processingPlant', 2, index).color,
         image: this.getStatus(row, 'processingPlant', 2, index).image,
@@ -375,7 +375,7 @@ export default {
       })
       events.push({
         name: '零售商',
-        icon: 'pi pi-shop',
+        icon: 'pi pi-shopping-bag',
         status: this.getStatus(row, 'retailer', 4, index).status,
         color: this.getStatus(row, 'retailer', 4, index).color,
         image: this.getStatus(row, 'retailer', 4, index).image,
@@ -391,7 +391,7 @@ export default {
       })
       events.push({
         name: '消费者',
-        icon: 'pi pi-shopping-bag',
+        icon: 'pi pi-wallet',
         color: this.getStatus(row, 'retailer', 4, index).status === '进行中' ? '#FFC000' : this.getStatus(row, 'retailer', 4, index).color,
       })
       return events
