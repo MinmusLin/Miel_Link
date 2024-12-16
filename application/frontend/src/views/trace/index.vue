@@ -120,12 +120,12 @@
                               </el-link>
                             </div>
                           </div>
-                          <div class='two-column-layout'
+                          <div style='display: flex; flex-direction: column; align-items: flex-start'
                                v-if="slotProps.item.name === '批发商' && !slotProps.item.id && slotProps.item.status === '进行中'">
                             <el-button plain type='primary' @click='showLocation = true'>
                               获取定位
                             </el-button>
-                            <img :src='locationImageUrl' alt='locationImage' v-show='showLocation'>
+                            <img :src='locationImageUrl' alt='locationImage' v-show='showLocation' style='margin-top: 16px'>
                           </div>
                           <div v-if="slotProps.item.name === '零售商' && slotProps.item.id" class='two-column-layout'>
                             <div class='item'>
