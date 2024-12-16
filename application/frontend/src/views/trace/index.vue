@@ -14,7 +14,7 @@
             <div class='container'>
               <div class='card'>
                 <!--suppress HtmlDeprecatedAttribute-->
-                <Timeline :value='generateEventsFromRow(props.row)' align='alternate'>
+                <Timeline :value='generateEventsFromRow(props.row, props.$index)' align='alternate'>
                   <template #marker='slotProps'>
                     <span class='custom-marker' :style='{ backgroundColor: slotProps.item.color }'>
                       <i :class='slotProps.item.icon' style='font-size: 22px'/>
@@ -397,26 +397,26 @@ export default {
         }
       }
       if (firstMissingIndex === null) {
-        if (this.recall && (this.randomIndexes.includes(_index) || _index == null)) {
+        if (this.recall && ((_index != null && this.randomIndexes.includes(_index)) || _index == null)) {
           return {status: '召回中', class: 'in-recall', color: '#EE8944', image: 'inrecall.png'}
         } else {
           return {status: '已完成', class: 'completed', color: '#92D050', image: 'completed.png'}
         }
       }
       if (index === firstMissingIndex) {
-        if (this.recall && (this.randomIndexes.includes(_index) || _index == null)) {
+        if (this.recall && ((_index != null && this.randomIndexes.includes(_index)) || _index == null)) {
           return {status: '已终止', class: 'terminated', color: '#C00000', image: 'terminated.png'}
         } else {
           return {status: '进行中', class: 'in-progress', color: '#5B9BD5', image: 'inprogress.png'}
         }
       } else if (index < firstMissingIndex) {
-        if (this.recall && (this.randomIndexes.includes(_index) || _index == null)) {
+        if (this.recall && ((_index != null && this.randomIndexes.includes(_index)) || _index == null)) {
           return {status: '召回中', class: 'in-recall', color: '#EE8944', image: 'inrecall.png'}
         } else {
           return {status: '已完成', class: 'completed', color: '#92D050', image: 'completed.png'}
         }
       } else {
-        if (this.recall && (this.randomIndexes.includes(_index) || _index == null)) {
+        if (this.recall && ((_index != null && this.randomIndexes.includes(_index)) || _index == null)) {
           return {status: '已终止', class: 'terminated', color: '#C00000', image: 'terminated.png'}
         } else {
           return {status: '未开始', class: 'pending', color: '#FFC000', image: 'notstarted.png'}
