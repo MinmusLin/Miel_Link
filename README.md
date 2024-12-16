@@ -52,6 +52,12 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 * `/scripts`
 脚本文件
 
+* `Demonstration.mp4`
+项目演示视频
+
+* `Presentation.pptx`
+项目汇报 PPT
+
 ## 环境配置
 
 <details>
