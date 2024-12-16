@@ -191,32 +191,32 @@
       <el-table-column label='养蜂场' prop='beeFarmInput.beeFarmTxid'>
         <!--suppress HtmlDeprecatedAttribute-->
         <template slot-scope='scope'>
-          <span :class="getStatus(scope.row, 'beeFarm', 1).class">
-            {{ getStatus(scope.row, 'beeFarm', 1).status }}
+          <span :class="getStatus(scope.row, 'beeFarm', 1, scope.$index).class">
+            {{ getStatus(scope.row, 'beeFarm', 1, scope.$index).status }}
           </span>
         </template>
       </el-table-column>
       <el-table-column label='加工厂' prop='processingPlantInput.processingPlantTxid'>
         <!--suppress HtmlDeprecatedAttribute-->
         <template slot-scope='scope'>
-          <span :class="getStatus(scope.row, 'processingPlant', 2).class">
-            {{ getStatus(scope.row, 'processingPlant', 2).status }}
+          <span :class="getStatus(scope.row, 'processingPlant', 2, scope.$index).class">
+            {{ getStatus(scope.row, 'processingPlant', 2, scope.$index).status }}
           </span>
         </template>
       </el-table-column>
       <el-table-column label='批发商' prop='wholesalerInput.wholesalerTxid'>
         <!--suppress HtmlDeprecatedAttribute-->
         <template slot-scope='scope'>
-          <span :class="getStatus(scope.row, 'wholesaler', 3).class">
-            {{ getStatus(scope.row, 'wholesaler', 3).status }}
+          <span :class="getStatus(scope.row, 'wholesaler', 3, scope.$index).class">
+            {{ getStatus(scope.row, 'wholesaler', 3, scope.$index).status }}
           </span>
         </template>
       </el-table-column>
       <el-table-column label='零售商' prop='retailerInput.retailerTxid'>
         <!--suppress HtmlDeprecatedAttribute-->
         <template slot-scope='scope'>
-          <span :class="getStatus(scope.row, 'retailer', 4).class">
-            {{ getStatus(scope.row, 'retailer', 4).status }}
+          <span :class="getStatus(scope.row, 'retailer', 4, scope.$index).class">
+            {{ getStatus(scope.row, 'retailer', 4, scope.$index).status }}
           </span>
         </template>
       </el-table-column>
@@ -236,7 +236,7 @@
 import {mapGetters} from 'vuex'
 import Timeline from 'primevue/timeline'
 import Card from 'primevue/card'
-import {getProductInfo, getProductList, getAllProductInfo, ipfsDownload} from '@/api'
+import {getAllProductInfo, getProductInfo, getProductList, ipfsDownload} from '@/api'
 import QRCode from 'qrcode'
 
 export default {
@@ -251,7 +251,8 @@ export default {
       loading: false,
       input: '',
       qrCodeDataUrl: '',
-      recall: false
+      recall: false,
+      randomIndexes: []
     }
   },
   computed: {
@@ -264,9 +265,11 @@ export default {
     this.recall = this.$route.query.recall === 'true'
     getProductList().then(res => {
       this.tracedata = JSON.parse(res.data).filter(item => item.traceabilityCode !== '')
+      if (this.recall && this.tracedata.length >= 2) {
+        this.randomIndexes = this.generateTwoUniqueRandomIndexes(this.tracedata.length)
+        console.log('生成的随机索引:', this.randomIndexes)
+      }
     })
-
-    console.log(this.recall)
   },
   mounted() {
     this.AllProductInfo()
@@ -277,6 +280,14 @@ export default {
     }
   },
   methods: {
+    generateTwoUniqueRandomIndexes(max) {
+      const indexes = new Set()
+      while (indexes.size < 2) {
+        const randomIndex = Math.floor(Math.random() * max)
+        indexes.add(randomIndex)
+      }
+      return Array.from(indexes)
+    },
     generateQRCode(data) {
       const formatData = (obj, indent = 0) => {
         let formattedString = ''
@@ -303,14 +314,14 @@ export default {
         this.$message.error('二维码生成失败，请检查网络连接情况。')
       })
     },
-    generateEventsFromRow(row) {
+    generateEventsFromRow(row, index = null) {
       let events = []
       events.push({
         name: '养蜂场',
         icon: 'pi pi-building-columns',
-        status: this.getStatus(row, 'beeFarm', 1).status,
-        color: this.getStatus(row, 'beeFarm', 1).color,
-        image: this.getStatus(row, 'beeFarm', 1).image,
+        status: this.getStatus(row, 'beeFarm', 1, index).status,
+        color: this.getStatus(row, 'beeFarm', 1, index).color,
+        image: this.getStatus(row, 'beeFarm', 1, index).image,
         time: row.beeFarmInput.beeFarmTimestamp || '',
         id: row.beeFarmInput.beeFarmTxid || '',
         beeFarmName: row.beeFarmInput.beeFarmName || '',
@@ -324,9 +335,9 @@ export default {
       events.push({
         name: '加工厂',
         icon: 'pi pi-warehouse',
-        status: this.getStatus(row, 'processingPlant', 2).status,
-        color: this.getStatus(row, 'processingPlant', 2).color,
-        image: this.getStatus(row, 'processingPlant', 2).image,
+        status: this.getStatus(row, 'processingPlant', 2, index).status,
+        color: this.getStatus(row, 'processingPlant', 2, index).color,
+        image: this.getStatus(row, 'processingPlant', 2, index).image,
         time: row.processingPlantInput.processingPlantTimestamp || '',
         id: row.processingPlantInput.processingPlantTxid || '',
         processingPlantName: row.processingPlantInput.processingPlantName || '',
@@ -340,9 +351,9 @@ export default {
       events.push({
         name: '批发商',
         icon: 'pi pi-truck',
-        status: this.getStatus(row, 'wholesaler', 3).status,
-        color: this.getStatus(row, 'wholesaler', 3).color,
-        image: this.getStatus(row, 'wholesaler', 3).image,
+        status: this.getStatus(row, 'wholesaler', 3, index).status,
+        color: this.getStatus(row, 'wholesaler', 3, index).color,
+        image: this.getStatus(row, 'wholesaler', 3, index).image,
         time: row.wholesalerInput.wholesalerTimestamp || '',
         id: row.wholesalerInput.wholesalerTxid || '',
         warehouseName: row.wholesalerInput.warehouseName || '',
@@ -356,9 +367,9 @@ export default {
       events.push({
         name: '零售商',
         icon: 'pi pi-shop',
-        status: this.getStatus(row, 'retailer', 4).status,
-        color: this.getStatus(row, 'retailer', 4).color,
-        image: this.getStatus(row, 'retailer', 4).image,
+        status: this.getStatus(row, 'retailer', 4, index).status,
+        color: this.getStatus(row, 'retailer', 4, index).color,
+        image: this.getStatus(row, 'retailer', 4, index).image,
         time: row.retailerInput.retailerTimestamp || '',
         id: row.retailerInput.retailerTxid || '',
         storeName: row.retailerInput.storeName || '',
@@ -372,11 +383,12 @@ export default {
       events.push({
         name: '消费者',
         icon: 'pi pi-shopping-bag',
-        color: this.getStatus(row, 'retailer', 4).status === '进行中' ? '#FFC000' : this.getStatus(row, 'retailer', 4).color,
+        color: this.getStatus(row, 'retailer', 4, index).status === '进行中' ? '#FFC000' : this.getStatus(row, 'retailer', 4, index).color,
       })
       return events
     },
-    getStatus(row, stage, index) {
+    getStatus(row, stage, index, _index = null) {
+      console.log(_index)
       const stages = ['beeFarm', 'processingPlant', 'wholesaler', 'retailer']
       let firstMissingIndex = null
       for (let i = 0; i < stages.length; i++) {
@@ -387,14 +399,30 @@ export default {
         }
       }
       if (firstMissingIndex === null) {
-        return {status: '已完成', class: 'completed', color: '#92D050', image: 'completed.png'}
+        if (this.recall && (this.randomIndexes.includes(_index) || _index == null)) {
+          return {status: '召回中', class: 'in-recall', color: '#EE8944', image: 'inrecall.png'}
+        } else {
+          return {status: '已完成', class: 'completed', color: '#92D050', image: 'completed.png'}
+        }
       }
       if (index === firstMissingIndex) {
-        return {status: '进行中', class: 'in-progress', color: '#5B9BD5', image: 'inprogress.png'}
+        if (this.recall && (this.randomIndexes.includes(_index) || _index == null)) {
+          return {status: '已终止', class: 'terminated', color: '#C00000', image: 'terminated.png'}
+        } else {
+          return {status: '进行中', class: 'in-progress', color: '#5B9BD5', image: 'inprogress.png'}
+        }
       } else if (index < firstMissingIndex) {
-        return {status: '已完成', class: 'completed', color: '#92D050', image: 'completed.png'}
+        if (this.recall && (this.randomIndexes.includes(_index) || _index == null)) {
+          return {status: '召回中', class: 'in-recall', color: '#EE8944', image: 'inrecall.png'}
+        } else {
+          return {status: '已完成', class: 'completed', color: '#92D050', image: 'completed.png'}
+        }
       } else {
-        return {status: '未开始', class: 'pending', color: '#FFC000', image: 'notstarted.png'}
+        if (this.recall && (this.randomIndexes.includes(_index) || _index == null)) {
+          return {status: '已终止', class: 'terminated', color: '#C00000', image: 'terminated.png'}
+        } else {
+          return {status: '未开始', class: 'pending', color: '#FFC000', image: 'notstarted.png'}
+        }
       }
     },
     GetIPFSFile(cid, filename) {
@@ -457,6 +485,24 @@ export default {
 
 .pending {
   background-color: #FFC000;
+  padding: 2px 28px;
+  display: inline-block;
+  border-radius: 14px;
+  font-size: 14px;
+  color: white;
+}
+
+.in-recall {
+  background-color: #EE8944;
+  padding: 2px 28px;
+  display: inline-block;
+  border-radius: 14px;
+  font-size: 14px;
+  color: white;
+}
+
+.terminated {
+  background-color: #C00000;
   padding: 2px 28px;
   display: inline-block;
   border-radius: 14px;
