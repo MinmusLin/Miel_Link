@@ -90,7 +90,8 @@
                               </el-link>
                             </div>
                           </div>
-                          <div v-if="slotProps.item.name === '批发商' && slotProps.item.id" class='two-column-layout'>
+                          <div class='two-column-layout'
+                               v-if="slotProps.item.name === '批发商' && slotProps.item.id && slotProps.item.status !== '进行中'">
                             <div class='item'>
                               <span class='item-label'>仓库名称</span>
                               <span>{{ slotProps.item.warehouseName }}</span>
@@ -118,6 +119,13 @@
                                 {{ slotProps.item.filename }}
                               </el-link>
                             </div>
+                          </div>
+                          <div class='two-column-layout'
+                               v-if="slotProps.item.name === '批发商' && !slotProps.item.id && slotProps.item.status === '进行中'">
+                            <el-button plain type='primary' @click='showLocation = true'>
+                              获取定位
+                            </el-button>
+                            <img :src='locationImageUrl' alt='locationImage' v-show='showLocation'>
                           </div>
                           <div v-if="slotProps.item.name === '零售商' && slotProps.item.id" class='two-column-layout'>
                             <div class='item'>
@@ -173,7 +181,7 @@
                               生成二维码分享溯源报告
                             </el-button>
                             <div v-if='qrCodeDataUrl'>
-                              <img :src='qrCodeDataUrl' alt='qrCode' style='width: 600px; transform: translateY(10px)'/>
+                              <img :src='qrCodeDataUrl' alt='qrCode' style='width: 500px; transform: translateY(10px)'/>
                             </div>
                           </div>
                           <img src='/images/logo.png' alt='logo' style='transform: translateY(16px); width: 250px'/>
@@ -252,7 +260,9 @@ export default {
       input: '',
       qrCodeDataUrl: '',
       recall: false,
-      randomIndexes: []
+      randomIndexes: [],
+      showLocation: false,
+      locationImageUrl: 'https://restapi.amap.com/v3/staticmap?location=121.21,31.28&zoom=10&size=500*300&markers=mid,,A:121.21,31.28&key=ee95e52bf08006f63fd29bcfbcf21df0'
     }
   },
   computed: {
