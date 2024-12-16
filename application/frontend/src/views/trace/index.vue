@@ -267,7 +267,6 @@ export default {
       this.tracedata = JSON.parse(res.data).filter(item => item.traceabilityCode !== '')
       if (this.recall && this.tracedata.length >= 2) {
         this.randomIndexes = this.generateTwoUniqueRandomIndexes(this.tracedata.length)
-        console.log('生成的随机索引:', this.randomIndexes)
       }
     })
   },
@@ -388,7 +387,6 @@ export default {
       return events
     },
     getStatus(row, stage, index, _index = null) {
-      console.log(_index)
       const stages = ['beeFarm', 'processingPlant', 'wholesaler', 'retailer']
       let firstMissingIndex = null
       for (let i = 0; i < stages.length; i++) {
