@@ -55,6 +55,9 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 * `Demonstration.mp4`
 项目演示视频
 
+* `Documentation.pdf`
+项目说明文档
+
 * `Presentation.pptx`
 项目汇报 PPT
 
