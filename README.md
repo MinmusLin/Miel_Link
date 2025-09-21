@@ -16,7 +16,7 @@ Miel Link：基于 Hyperledger Fabric 的蜂蜜产品供应链溯源系统。
 > ***Relevant course***
 > * Introduction to Blockchain 2024 (2024 年同济大学区块链导论)
 
-## 项目组成
+## 仓库组成
 
 * [Application](application)
 应用程序
